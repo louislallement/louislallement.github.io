@@ -1,9 +1,9 @@
-// 🌗 Changement de thème clair/sombre
+// Dark/Light mode toggle
 document.getElementById("toggle-theme").addEventListener("click", () => {
   document.body.classList.toggle("dark");
 });
 
-// 📊 Compteur global avec countapi.xyz
+// Compteur de visites global via countapi.xyz
 document.addEventListener("DOMContentLoaded", () => {
   const countEl = document.getElementById("visitor-count");
   const lastVisit = localStorage.getItem("lastVisit");
