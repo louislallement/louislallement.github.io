@@ -8,15 +8,19 @@
 </head>
 <body>
   <header>
-    <h1>Louis Lallement</h1>
-    <p>
-      <span class="lang fr">journaliste <span class="bar">|</span> photographe</span>
-      <span class="lang en" style="display:none;">journalist <span class="bar">|</span> photographer</span>
-    </p>
-    <button id="toggle-theme" aria-label="Changer thème">🌙</button>
-    <button id="lang-toggle" aria-label="Changer langue" title="Switch language" style="margin-left:1rem; font-size:1.2rem; background:none; border:none; cursor:pointer;">
-      🇫🇷
-    </button>
+    <div id="header-text">
+      <h1>Louis Lallement</h1>
+      <p>
+        <span class="lang fr">journaliste <span class="bar">|</span> photographe</span>
+        <span class="lang en" style="display:none;">journalist <span class="bar">|</span> photographer</span>
+      </p>
+    </div>
+    <div id="header-buttons">
+      <button id="toggle-theme" aria-label="Changer thème">🌙</button>
+      <button id="lang-toggle" aria-label="Changer langue" title="Switch language">
+        <img src="https://flagcdn.com/w20/fr.png" alt="Français" id="flag-icon" />
+      </button>
+    </div>
   </header>
 
   <section class="tuile" id="bonjour">
