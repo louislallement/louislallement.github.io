@@ -3,68 +3,65 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Louis Lallement — Journaliste | Photographe</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Louis Lallement | Journaliste | Photographe</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
   <header>
     <h1>Louis Lallement</h1>
-    <h2>journaliste&nbsp;|&nbsp;photographe</h2>
+    <p>journaliste | photographe</p>
   </header>
 
-  <!-- Contrôles : drapeaux + thème -->
-  <div class="controls">
-    <img src="assets/fr-32.png" alt="Français" id="fr-btn" class="flag" />
-    <img src="assets/uk-32.png" alt="Anglais" id="en-btn" class="flag" />
-    <button id="theme-toggle">🌙</button>
+  <div class="top-controls">
+    <img src="assets/france-32.png" alt="Français" id="lang-fr" />
+    <img src="assets/uk-32.png" alt="English" id="lang-en" />
+    <button id="mode-toggle">🌙</button>
   </div>
 
-  <!-- Tuile "Bonjour" -->
-  <section class="tile tile-wide">
-    <h3>Bonjour</h3>
-    <p>Bienvenue sur mon site portfolio. Vous trouverez ici mes travaux journalistiques et photographiques.</p>
-  </section>
-
-  <!-- Tuiles principales -->
   <main>
-    <section class="tile">
-      <h3>Portfolio Vidéo</h3>
-      <p>Intégration de mes vidéos CNEWS et autres formats courts.</p>
+    <section class="tile large centered" id="bonjour">
+      <h2>Bonjour</h2>
+      <p>Bienvenue sur mon portfolio.</p>
     </section>
 
-    <section class="tile">
-      <h3>Portfolio Écrit</h3>
-      <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank">
-        <img src="assets/figaro-logo.png" alt="Figaro" class="logo" />
-      </a>
+    <section class="tile-row">
+      <section class="tile" id="video">
+        <h2>Portfolio Vidéo</h2>
+        <iframe src="https://www.instagram.com/reel/REEL_ID/embed" frameborder="0"></iframe>
+      </section>
+
+      <section class="tile" id="ecrit">
+        <h2>Portfolio Écrit</h2>
+        <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank">
+          <img src="assets/figaro-logo.jpg" alt="Figaro" />
+        </a>
+      </section>
+
+      <section class="tile" id="photo">
+        <div class="photo-background">
+          <h2>Photographie</h2>
+          <p>Suivez-moi sur Instagram</p>
+        </div>
+      </section>
     </section>
 
-    <section class="tile photography-tile">
-      <div class="photo-overlay">
-        <p>Suivez-moi sur Instagram</p>
-      </div>
+    <section class="tile large centered" id="contact">
+      <h2>Contact</h2>
+      <form>
+        <input type="text" placeholder="Votre nom" required/>
+        <input type="email" placeholder="Votre email" required/>
+        <textarea placeholder="Votre message" required></textarea>
+        <button type="submit">Envoyer</button>
+      </form>
     </section>
   </main>
 
-  <!-- Tuile contact -->
-  <section class="tile tile-wide">
-    <h3>Contact</h3>
-    <form action="#" method="post">
-      <input type="text" placeholder="Votre nom" required />
-      <input type="email" placeholder="Votre e-mail" required />
-      <textarea placeholder="Votre message..." required></textarea>
-      <button type="submit">Envoyer</button>
-    </form>
-  </section>
-
-  <!-- Footer -->
   <footer>
-    <a href="https://twitter.com/louislallement" target="_blank">
-      <img src="assets/twitter-32.png" alt="Twitter" class="icon" />
-    </a>
-    <a href="https://linkedin.com/in/louislallement" target="_blank">
-      <img src="assets/linkedin-32.png" alt="LinkedIn" class="icon" />
-    </a>
+    <p>&copy; 2025 Louis Lallement</p>
+    <div class="socials">
+      <a href="https://twitter.com/TON_PROFIL"><img src="assets/twitter-32.png" alt="Twitter"/></a>
+      <a href="https://linkedin.com/in/TON_PROFIL"><img src="assets/linkedin-32.png" alt="LinkedIn"/></a>
+    </div>
   </footer>
 
   <script src="script.js"></script>
