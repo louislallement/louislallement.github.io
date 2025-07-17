@@ -1,57 +1,55 @@
-// Mode jour/nuit
-const themeToggle = document.getElementById('theme-toggle');
-const body = document.body;
+// Gestion thème jour/nuit et stockage local
+const toggleThemeBtn = document.getElementById('toggle-theme');
+const themeIcon = document.getElementById('theme-icon');
 
 function setTheme(theme) {
   if (theme === 'dark') {
-    body.classList.add('dark');
-    themeToggle.textContent = '☀️';
+    document.body.classList.add('dark');
+    themeIcon.textContent = '🌙';
   } else {
-    body.classList.remove('dark');
-    themeToggle.textContent = '🌙';
+    document.body.classList.remove('dark');
+    themeIcon.textContent = '🌞';
   }
   localStorage.setItem('theme', theme);
 }
 
-// Initialisation
-const savedTheme = localStorage.getItem('theme') || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-setTheme(savedTheme);
+function toggleTheme() {
+  const current = localStorage.getItem('theme') || 'light';
+  if (current === 'light') {
+    setTheme('dark');
+  } else {
+    setTheme('light');
+  }
+}
 
-themeToggle.addEventListener('click', () => {
-  const newTheme = body.classList.contains('dark') ? 'light' : 'dark';
-  setTheme(newTheme);
-});
+toggleThemeBtn.addEventListener('click', toggleTheme);
 
-// Langues (simple bascule FR/EN)
-const langFlags = document.querySelectorAll('.lang-flag');
-langFlags.forEach(flag => {
-  flag.addEventListener('click', () => {
-    langFlags.forEach(f => f.classList.remove('selected'));
-    flag.classList.add('selected');
-    const lang = flag.id;
-    // Ici tu pourras ajouter la logique pour changer le texte en fonction de la langue
-    // Pour l'instant on affiche juste une alerte
-    alert(lang === 'fr' ? 'Version française activée' : 'English version activated');
-  });
-});
+// Charger le thème sauvegardé ou par défaut
+document.addEventListener('DOMContentLoaded', () => {
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  setTheme(savedTheme);
+  // Langue
+  const btnFr = document.getElementById('btn-fr');
+  const btnEn = document.getElementById('btn-en');
 
-// Effet léger sur tuiles au survol
-const tuiles = document.querySelectorAll('.tuile');
-tuiles.forEach(tuile => {
-  tuile.addEventListener('mousemove', e => {
-    const rect = tuile.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
+  function setLanguage(lang) {
+    const elements = document.querySelectorAll('[data-fr]');
+    elements.forEach(el => {
+      el.textContent = el.getAttribute(`data-${lang}`);
+    });
+    localStorage.setItem('lang', lang);
+    if(lang === 'fr'){
+      btnFr.classList.add('active');
+      btnEn.classList.remove('active');
+    } else {
+      btnFr.classList.remove('active');
+      btnEn.classList.add('active');
+    }
+  }
 
-    const rotateX = ((y - centerY) / centerY) * 5; // angle plus faible
-    const rotateY = ((x - centerX) / centerX) * 5;
+  btnFr.addEventListener('click', () => setLanguage('fr'));
+  btnEn.addEventListener('click', () => setLanguage('en'));
 
-    tuile.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
-  });
-
-  tuile.addEventListener('mouseleave', () => {
-    tuile.style.transform = 'translateY(0)';
-  });
+  const savedLang = localStorage.getItem('lang') || 'fr';
+  setLanguage(savedLang);
 });
