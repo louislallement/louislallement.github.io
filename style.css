@@ -1,4 +1,4 @@
-/* Reset et basiques */
+/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -6,37 +6,80 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Corps de page */
 body {
-  background-color: #e5e9f0; /* clair par défaut */
+  background-color: #e5e9f0; /* gris clair */
   color: #2f3e4d;
   min-height: 100vh;
-  padding: 20px;
+  padding: 40px 20px 60px;
   transition: background-color 0.4s ease, color 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-h1 {
-  font-size: 3rem;
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+  max-width: 900px;
+  width: 100%;
+}
+
+.header h1 {
+  font-size: 3.2rem;
   font-weight: 900;
-  margin-bottom: 0.2em;
+  color: #394150;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #5a6470;
+}
+
+/* Toggle mode jour/nuit */
+#mode-toggle {
+  position: fixed;
+  top: 18px;
+  right: 15px;
+  font-size: 1.8rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
+  transition: color 0.4s ease;
   color: #394150;
 }
 
-h2 {
-  font-size: 1.8rem;
-  margin-bottom: 0.5em;
-  color: #5a6470;
-  transition: color 0.4s ease;
+/* Container principal */
+.container {
+  max-width: 900px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
 }
 
+/* Tuiles */
 .tile {
   background: #f8fafd;
   border-radius: 20px;
-  padding: 20px 30px;
-  margin-bottom: 30px;
+  padding: 30px 40px;
   box-shadow:
     6px 6px 10px rgba(174, 190, 212, 0.3),
     -6px -6px 10px rgba(255, 255, 255, 0.7);
   transition: box-shadow 0.4s ease, background 0.4s ease;
+  color: #2f3e4d;
+}
+
+.tile h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #5a6470;
+  transition: color 0.4s ease;
 }
 
 /* Vidéos Instagram en grille */
@@ -54,10 +97,41 @@ h2 {
   border-radius: 15px;
   box-shadow: 2px 4px 15px rgba(0,0,0,0.15);
   transition: transform 0.3s ease;
+  border: none;
 }
 
 .video-grid iframe:hover {
   transform: scale(1.05);
+}
+
+/* Portfolio écrit */
+#portfolio-ecrit a {
+  display: inline-block;
+  max-width: 140px;
+  transition: transform 0.3s ease;
+}
+
+#portfolio-ecrit a:hover {
+  transform: scale(1.1);
+}
+
+#portfolio-ecrit img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  box-shadow: 2px 4px 15px rgba(0,0,0,0.15);
+}
+
+/* Photographie */
+#photographie p a {
+  color: #5a94f3;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+#photographie p a:hover {
+  text-decoration: underline;
 }
 
 /* Formulaire */
@@ -122,20 +196,6 @@ button[type="submit"]:hover {
   filter: drop-shadow(0 0 5px #5a94f3);
 }
 
-/* Toggle mode jour/nuit */
-#mode-toggle {
-  position: fixed;
-  top: 18px; /* décallé un peu plus bas */
-  right: 15px;
-  font-size: 1.8rem;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  z-index: 1000;
-  transition: color 0.4s ease;
-  color: #394150;
-}
-
 /* Mode sombre */
 body.dark {
   background-color: #102a53; /* bleu foncé */
@@ -150,11 +210,16 @@ body.dark h2 {
   color: #a0b8da;
 }
 
+body.dark .subtitle {
+  color: #acc9ff;
+}
+
 body.dark .tile {
   background: #193f72;
   box-shadow:
     6px 6px 10px rgba(27, 56, 99, 0.8),
     -6px -6px 10px rgba(47, 91, 153, 0.5);
+  color: #a9c9ff;
 }
 
 body.dark input[type="text"],
@@ -184,32 +249,23 @@ body.dark #mode-toggle {
   color: #acc9ff;
 }
 
-/* Animations tuiles fade-in et superposition */
-
-.tile {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
-}
-
-.tile.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 /* Responsive */
 
 @media (max-width: 768px) {
   body {
-    padding: 15px 10px;
+    padding: 20px 15px 40px;
   }
 
-  h1 {
+  .header h1 {
     font-size: 2.4rem;
   }
 
-  h2 {
-    font-size: 1.4rem;
+  .subtitle {
+    font-size: 1.3rem;
+  }
+
+  .tile h2 {
+    font-size: 1.6rem;
   }
 
   .video-grid iframe {
@@ -222,5 +278,9 @@ body.dark #mode-toggle {
     top: 14px;
     right: 12px;
     font-size: 1.6rem;
+  }
+
+  .container {
+    padding: 0 10px;
   }
 }
