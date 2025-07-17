@@ -1,4 +1,3 @@
-// Toggle mode jour/nuit avec sauvegarde dans localStorage
 const toggleBtn = document.getElementById('mode-toggle');
 const body = document.body;
 
@@ -14,20 +13,10 @@ function setMode(dark) {
 }
 
 toggleBtn.addEventListener('click', () => {
-  const isDark = body.classList.contains('dark');
-  setMode(!isDark);
+  setMode(!body.classList.contains('dark'));
 });
 
-// Au chargement, on applique le mode sauvegardé ou par défaut jour
 window.addEventListener('DOMContentLoaded', () => {
-  const darkModeStored = localStorage.getItem('darkMode');
-  setMode(darkModeStored === 'true');
-
-  // Animation fade-in des tuiles
-  const tiles = document.querySelectorAll('.tile[data-anim]');
-  tiles.forEach((tile, i) => {
-    setTimeout(() => {
-      tile.classList.add('visible');
-    }, i * 250);
-  });
+  const saved = localStorage.getItem('darkMode');
+  setMode(saved === 'true');
 });
