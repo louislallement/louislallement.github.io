@@ -1,254 +1,219 @@
-/* Reset basique */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* Variables couleurs jour */
+:root {
+  --bg-color: #f2f4f8;
+  --text-color: #222;
+  --accent-color: #0077cc;
+  --link-color: #004a99;
+  --shadow-color: rgba(0, 0, 0, 0.15);
+  --barre-color: #888;
 }
 
-/* Variables couleurs */
-:root {
-  --blue-dark: #0a1e3f;
-  --blue-light: #3a6ea5;
-  --gray-light: #f5f7fa;
-  --blue-sky: #c1d9f8;
-  --text-dark: #222;
-  --text-light: #eee;
-  --shadow-light: rgba(0,0,0,0.1);
-  --shadow-dark: rgba(0,0,0,0.5);
+/* Variables couleurs nuit */
+body.dark {
+  --bg-color: #0b2340;
+  --text-color: #cbd6f0;
+  --accent-color: #4da6ff;
+  --link-color: #b3d1ff;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --barre-color: #a0b5d4;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
-  background-color: var(--gray-light);
-  color: var(--text-dark);
-  line-height: 1.5;
-  padding: 20px;
-  transition: background-color 0.4s ease, color 0.4s ease;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0 1rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Conteneur principal pour limiter la largeur */
-body > * {
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 15px;
-}
-
-/* Header */
 header {
   text-align: center;
-  margin-bottom: 30px;
+  margin: 2rem 0 1rem 0;
 }
 
 header h1 {
   font-size: 3rem;
-  font-weight: 900;
-  color: var(--blue-dark);
-  margin-bottom: 8px;
+  margin: 0;
 }
 
-header p {
-  font-size: 1.5rem;
-  color: var(--blue-light);
-  letter-spacing: 2px;
+header h2 {
+  font-size: 1.25rem;
+  margin-top: 0.25rem;
+  font-weight: 400;
+  color: var(--accent-color);
 }
 
-/* Sections */
+.barre {
+  margin: 0 0.5rem;
+  color: var(--barre-color);
+}
+
+main {
+  flex-grow: 1;
+  max-width: 900px;
+  margin: 0 auto 3rem auto;
+}
+
 section {
-  margin-bottom: 40px;
-  background: var(--gray-light);
-  border-radius: 18px;
-  padding: 20px 25px;
-  box-shadow: 0 6px 14px var(--shadow-light);
-  transition: background-color 0.4s ease, box-shadow 0.4s ease;
-}
-
-/* Titres de section en gris foncé */
-section h2 {
-  font-size: 2rem;
-  margin-bottom: 15px;
-  color: #555555;
-}
-
-/* Bonjour & localisation */
-#bonjour p {
-  font-size: 1.2rem;
-  color: var(--blue-dark);
-  font-weight: 600;
-}
-
-/* Portfolio Vidéo - Instagram Reels */
-.instagram-reels {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
-
-.instagram-reels iframe {
-  border-radius: 18px;
-  box-shadow: 0 8px 20px var(--shadow-light);
-  width: 100%;
-  max-width: 320px;
-  height: 480px;
-  transition: transform 0.3s ease;
-}
-
-.instagram-reels iframe:hover {
-  transform: scale(1.05);
-}
-
-/* Portfolio écrit */
-#portfolio-ecrit a img {
-  max-height: 50px;
-  border-radius: 12px;
-  box-shadow: 0 5px 15px var(--shadow-light);
-  transition: transform 0.3s ease;
-}
-
-#portfolio-ecrit a:hover img {
-  transform: scale(1.1);
-}
-
-/* Photographie */
-#photographie p {
-  font-size: 1.2rem;
-  font-weight: 600;
-  text-align: center;
-  color: var(--blue-dark);
-}
-
-/* Contact */
-form {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-label {
-  font-weight: 600;
-  color: var(--blue-dark);
-}
-
-input[type="text"],
-input[type="email"],
-textarea {
-  width: 100%;
-  padding: 12px 14px;
-  margin-top: 6px;
-  margin-bottom: 20px;
-  border-radius: 14px;
-  border: 1.5px solid var(--blue-light);
-  font-size: 1rem;
-  transition: border-color 0.3s ease;
-}
-
-input[type="text"]:focus,
-input[type="email"]:focus,
-textarea:focus {
-  border-color: var(--blue-dark);
-  outline: none;
-}
-
-button {
-  display: block;
-  background-color: var(--blue-dark);
-  color: var(--text-light);
-  border: none;
-  padding: 15px 30px;
-  font-size: 1.2rem;
-  border-radius: 18px;
-  cursor: pointer;
-  margin: 0 auto;
+  background: var(--bg-color);
+  padding: 1rem 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 14px var(--shadow-color);
   transition: background-color 0.3s ease;
 }
 
-button:hover {
-  background-color: var(--blue-light);
+h2 {
+  margin-top: 0;
+  color: var(--text-color);
 }
 
-/* Réseaux sociaux */
-#social-links {
-  text-align: center;
-  margin-top: 25px;
+a {
+  color: var(--link-color);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
 }
 
-#social-links a {
-  display: inline-block;
-  margin: 0 15px;
-  transition: transform 0.3s ease;
+a:hover,
+a:focus {
+  color: var(--accent-color);
+  outline: none;
 }
 
-#social-links a:hover {
-  transform: scale(1.2);
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
 }
 
-#social-links img {
+.video-grid iframe {
+  width: 100%;
+  height: 480px;
+  border-radius: 16px;
+  border: none;
+}
+
+.logo-small {
+  height: 48px;
+  width: auto;
+  filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.2));
+  transition: filter 0.3s ease;
+}
+
+.logo-small:hover {
+  filter: drop-shadow(0 0 6px var(--accent-color));
+}
+
+#photographie p {
+  font-size: 1.1rem;
+}
+
+.instagram-link {
+  font-weight: 700;
+  color: var(--accent-color);
+}
+
+.instagram-link:hover,
+.instagram-link:focus {
+  color: var(--link-color);
+  text-decoration: underline;
+  outline: none;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form input,
+form textarea {
+  font-size: 1rem;
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  border: 1.5px solid #ccc;
+  border-radius: 10px;
+  transition: border-color 0.3s ease;
+  resize: vertical;
+}
+
+form input:focus,
+form textarea:focus {
+  border-color: var(--accent-color);
+  outline: none;
+}
+
+button[type="submit"] {
+  background-color: var(--accent-color);
+  color: white;
+  font-weight: 700;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover,
+button[type="submit"]:focus {
+  background-color: var(--link-color);
+  outline: none;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  align-items: center;
+  padding-bottom: 1.5rem;
+}
+
+.icon-footer {
   height: 32px;
   width: 32px;
-  border-radius: 8px;
-  filter: drop-shadow(0 0 2px var(--shadow-light));
+  filter: drop-shadow(0 0 1px rgba(0,0,0,0.3));
+  transition: filter 0.3s ease;
+}
+
+.icon-footer:hover,
+.icon-footer:focus {
+  filter: drop-shadow(0 0 6px var(--accent-color));
+  outline: none;
+}
+
+#mode-toggle {
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+  color: var(--accent-color);
+  transition: color 0.3s ease;
+}
+
+#mode-toggle:hover,
+#mode-toggle:focus {
+  color: var(--link-color);
+  outline: none;
 }
 
 /* Responsive */
-@media (max-width: 720px) {
-  .instagram-reels {
-    flex-direction: column;
-    align-items: center;
+
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 2.2rem;
   }
-}
-
-/* Dark mode */
-body.dark {
-  background-color: var(--blue-dark);
-  color: var(--text-light);
-}
-
-body.dark section {
-  background-color: #0f234b;
-  box-shadow: 0 6px 18px var(--shadow-dark);
-}
-
-body.dark header h1 {
-  color: var(--blue-light);
-}
-
-body.dark header p {
-  color: #a4c6f9;
-}
-
-body.dark section h2 {
-  color: #a3b1d1;
-}
-
-body.dark #bonjour p,
-body.dark #photographie p,
-body.dark label {
-  color: #9db8e0;
-}
-
-body.dark input[type="text"],
-body.dark input[type="email"],
-body.dark textarea {
-  background-color: #1a2a58;
-  border-color: #4a6fa7;
-  color: var(--text-light);
-}
-
-body.dark input[type="text"]:focus,
-body.dark input[type="email"]:focus,
-body.dark textarea:focus {
-  border-color: #a6bdf2;
-}
-
-body.dark button {
-  background-color: var(--blue-light);
-  color: var(--blue-dark);
-}
-
-body.dark button:hover {
-  background-color: #5489d5;
-}
-
-body.dark #social-links img {
-  filter: drop-shadow(0 0 4px #9db8e0);
+  header h2 {
+    font-size: 1rem;
+  }
+  .video-grid iframe {
+    height: 280px;
+  }
 }
