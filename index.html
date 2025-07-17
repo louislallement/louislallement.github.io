@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Louis Lallement - CV en ligne</title>
+  <title>Louis Lallement - CV</title>
   <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
 </head>
 <body>
   <header>
@@ -12,73 +13,68 @@
     <p>Journaliste vidéo | Photographe | Vidéaste</p>
   </header>
 
-  <section id="presentation">
-    <h2>Présentation</h2>
-    <p>Actuellement à Paris. Bienvenue sur mon CV en ligne moderne, responsive et animé.</p>
-  </section>
+  <main>
+    <section id="presentation" class="fade-in">
+      <h2>Présentation</h2>
+      <p>Bienvenue sur mon CV en ligne moderne avec vidéos et animations.<br>Actuellement à Paris.</p>
+    </section>
 
-  <section id="portfolio">
-    <h2>Portfolio Vidéo</h2>
-    <div class="reels-container">
-      <iframe src="https://www.instagram.com/reel/CyCA2-hMr-y/embed" 
-              width="320" height="560" frameborder="0" allowfullscreen></iframe>
-      <iframe src="https://www.instagram.com/reel/CyOqZ8QrNeJ/embed" 
-              width="320" height="560" frameborder="0" allowfullscreen></iframe>
-      <iframe src="https://www.instagram.com/reel/CzRJOBDsZo4/embed" 
-              width="320" height="560" frameborder="0" allowfullscreen></iframe>
-    </div>
-  </section>
+    <section id="portfolio" class="fade-in">
+      <h2>Portfolio Vidéo</h2>
+      <div class="insta-reels">
+        <iframe src="https://www.instagram.com/reel/CyCA2-hMr-y/embed" frameborder="0" allowfullscreen></iframe>
+        <iframe src="https://www.instagram.com/reel/CyOqZ8QrNeJ/embed" frameborder="0" allowfullscreen></iframe>
+        <iframe src="https://www.instagram.com/reel/CzRJOBDsZo4/embed" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </section>
 
-  <section id="experiences">
-    <h2>Expériences professionnelles</h2>
-    <ul class="experiences">
-      <li>
-        <img src="https://upload.wikimedia.org/wikipedia/fr/thumb/2/2d/CNews_Logo_2017.svg/512px-CNews_Logo_2017.svg.png" 
-             alt="Logo CNews" class="logo" />
-        Journaliste vidéo à CNEWS (2021 - 2024)
-      </li>
-      <li>
-        <a href="https://www.lefigaro.fr/" target="_blank">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/5/50/Le_Figaro_logo.svg" 
-               alt="Logo Le Figaro" class="logo" />
+    <section id="experiences" class="fade-in">
+      <h2>Expériences professionnelles</h2>
+      <ul>
+        <li>
+          <img src="https://upload.wikimedia.org/wikipedia/fr/thumb/7/73/CNEWS_Logo_2017.svg/1200px-CNEWS_Logo_2017.svg.png" alt="CNEWS" class="logo" />
+          Journaliste vidéo à CNEWS (2021 - 2024)
+        </li>
+        <li>
+          <a href="https://etudiant.lefigaro.fr/author/louis-lallement/" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/fr/6/69/Le_Figaro_logo.png" alt="Le Figaro" class="logo" />
+          </a>
+          Stagiaire au Figaro Étudiant
+        </li>
+      </ul>
+    </section>
+
+    <section id="contact" class="fade-in">
+      <h2>Contact</h2>
+      <form action="https://formsubmit.co/louis.lallement@outlook.fr" method="POST">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="merci.html">
+        <input type="hidden" name="_subject" value="Nouveau message depuis ton CV">
+
+        <label for="nom">Nom :</label>
+        <input type="text" id="nom" name="nom" required placeholder="Nom">
+
+        <label for="prenom">Prénom :</label>
+        <input type="text" id="prenom" name="prenom" required placeholder="Prénom">
+
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="email" required placeholder="Email">
+
+        <label for="message">Message :</label>
+        <textarea id="message" name="message" rows="5" required placeholder="Écris ton message ici..."></textarea>
+
+        <button type="submit">Envoyer</button>
+      </form>
+
+      <div id="social-links">
+        <a href="https://x.com/louislall" target="_blank" aria-label="Twitter">
+          <img src="https://cdn-icons-png.flaticon.com/32/733/733579.png" alt="Twitter" />
         </a>
-        Stagiaire au Figaro Étudiant
-      </li>
-    </ul>
-  </section>
-
-  <section id="contact">
-    <h2>Contact</h2>
-    <form action="https://formsubmit.co/louis.lallement@outlook.fr" method="POST">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_next" value="https://louislallement.github.io/merci.html">
-      <input type="hidden" name="_subject" value="Nouveau message depuis ton site CV !">
-
-      <label for="nom">Nom :</label>
-      <input type="text" id="nom" name="nom" required placeholder="Ton nom">
-
-      <label for="prenom">Prénom :</label>
-      <input type="text" id="prenom" name="prenom" required placeholder="Ton prénom">
-
-      <label for="email">Email :</label>
-      <input type="email" id="email" name="email" required placeholder="Ton adresse email">
-
-      <label for="message">Message :</label>
-      <textarea id="message" name="message" required placeholder="Ton message..." rows="5"></textarea>
-
-      <button type="submit">Envoyer</button>
-    </form>
-
-    <div id="social-links">
-      <a href="https://x.com/louislall" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/32/733/733579.png" alt="Twitter">
-      </a>
-      <a href="https://linkedin.com/in/louisslallement" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/32/174/174857.png" alt="LinkedIn">
-      </a>
-    </div>
-  </section>
-
-  <script src="script.js"></script>
+        <a href="https://linkedin.com/in/louisslallement" target="_blank" aria-label="LinkedIn">
+          <img src="https://cdn-icons-png.flaticon.com/32/174/174857.png" alt="LinkedIn" />
+        </a>
+      </div>
+    </section>
+  </main>
 </body>
 </html>
