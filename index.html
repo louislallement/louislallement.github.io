@@ -8,27 +8,27 @@
 </head>
 <body>
   <header>
-    <div class="header-content">
-      <h1>Louis Lallement</h1>
-      <p>journaliste <span class="bar">|</span> photographe</p>
-    </div>
-    <div class="header-controls">
-      <button id="toggle-theme" aria-label="Changer thème" title="Changer thème">🌙</button>
-      <div id="language-switcher" aria-label="Changer langue">
-        <img src="assets/france-32.png" alt="Français" id="fr-flag" class="flag active" tabindex="0" />
-        <img src="assets/uk-32.png" alt="English" id="en-flag" class="flag" tabindex="0" />
-      </div>
+    <h1>Louis Lallement</h1>
+    <p>journaliste <span class="bar">|</span> photographe</p>
+    <div id="controls">
+      <button id="toggle-theme" aria-label="Changer thème">🌙</button>
+      <button id="lang-fr" aria-label="Français" class="lang-button selected">
+        <img src="assets/france-32.png" alt="FR" />
+      </button>
+      <button id="lang-en" aria-label="English" class="lang-button">
+        <img src="assets/uk-32.png" alt="EN" />
+      </button>
     </div>
   </header>
 
   <section class="tuile tuile-bonjour">
-    <h2 id="bonjour-title">Bonjour</h2>
-    <p id="bonjour-text">Actuellement à Paris et alentours</p>
+    <h2>Bonjour</h2>
+    <p>Actuellement à Paris et alentours</p>
   </section>
 
   <section class="tuiles-row">
     <section class="tuile" id="portfolio-video">
-      <h2 id="portfolio-video-title">Portfolio Vidéo</h2>
+      <h2>Portfolio Vidéo</h2>
       <div class="videos-container">
         <iframe src="https://www.instagram.com/p/CzRJOBDsZo4/embed" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>
         <iframe src="https://www.instagram.com/p/CyOqZ8QrNeJ/embed" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>
@@ -37,35 +37,36 @@
     </section>
 
     <section class="tuile" id="portfolio-ecrit">
-      <h2 id="portfolio-ecrit-title">Portfolio Écrit</h2>
+      <h2>Portfolio Écrit</h2>
       <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank" rel="noopener noreferrer" class="figaro-link" aria-label="Profil auteur Figaro">
         <img src="assets/figaro-logo.jpg" alt="Logo Le Figaro" />
       </a>
     </section>
 
-    <section class="tuile" id="photographie">
-      <h2 id="photographie-title">Photographie</h2>
-      <div class="photo-background">
-        <div class="photo-overlay"></div>
-        <p class="instagram-text">Suivez-moi sur <a href="https://www.instagram.com/louis.l.photographie/" target="_blank" rel="noopener noreferrer" id="instagram-link">Instagram</a></p>
-      </div>
+    <section class="tuile tuile-photographie" id="photographie">
+      <h2>Photographie</h2>
+      <a href="https://www.instagram.com/louis.l.photographie/" target="_blank" rel="noopener noreferrer" class="insta-link">
+        <div class="insta-overlay">
+          <p>Suivez-moi sur Instagram</p>
+        </div>
+      </a>
     </section>
   </section>
 
   <section class="tuile tuile-contact">
-    <h2 id="contact-title">Contact</h2>
+    <h2>Contact</h2>
     <form action="https://formsubmit.co/louis.lallement@outlook.fr" method="POST">
       <input type="hidden" name="_captcha" value="false" />
       <input type="hidden" name="_subject" value="Nouveau message depuis ton site CV !" />
-      <label for="nom" id="label-nom">Nom :</label>
-      <input type="text" id="nom" name="nom" required placeholder="Ton nom" />
-      <label for="prenom" id="label-prenom">Prénom :</label>
-      <input type="text" id="prenom" name="prenom" required placeholder="Ton prénom" />
-      <label for="email" id="label-email">Email :</label>
-      <input type="email" id="email" name="email" required placeholder="Ton adresse mail" />
-      <label for="message" id="label-message">Message :</label>
-      <textarea id="message" name="message" required placeholder="Écris ton message ici..." rows="5"></textarea>
-      <button type="submit" id="submit-btn">Envoyer</button>
+      <label for="nom">Nom :</label><br />
+      <input type="text" id="nom" name="nom" required placeholder="Ton nom" /><br /><br />
+      <label for="prenom">Prénom :</label><br />
+      <input type="text" id="prenom" name="prenom" required placeholder="Ton prénom" /><br /><br />
+      <label for="email">Email :</label><br />
+      <input type="email" id="email" name="email" required placeholder="Ton adresse mail" /><br /><br />
+      <label for="message">Message :</label><br />
+      <textarea id="message" name="message" required placeholder="Écris ton message ici..." rows="5"></textarea><br /><br />
+      <button type="submit">Envoyer</button>
     </form>
   </section>
 
@@ -78,7 +79,7 @@
         <img src="assets/linkedin-32.png" alt="LinkedIn" />
       </a>
     </div>
-    <div id="visitor-count" aria-live="polite">Visites : 0</div>
+    <div id="visitor-count">Visites : 0</div>
     <div id="copyright">© Louis Lallement 2025</div>
   </footer>
 
