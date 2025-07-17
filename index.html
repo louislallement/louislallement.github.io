@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Louis Lallement - Journaliste & Photographe</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Louis Lallement - Journaliste & Photographe</title>
+<link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <button id="mode-toggle" aria-label="Basculer mode clair/sombre">🌙</button>
 
-  <header class="tile" data-anim>
+  <header class="header">
     <h1>Louis Lallement</h1>
-    <h2>Journaliste &amp; Photographe</h2>
+    <p class="subtitle">Journaliste &amp; Photographe</p>
   </header>
 
-  <main>
-    <section id="bonjour" class="tile" data-anim>
+  <main class="container">
+
+    <section class="tile" id="bonjour">
       <h2>Bonjour</h2>
       <p>Actuellement à Paris et ses alentours</p>
     </section>
 
-    <section id="portfolio-video" class="tile" data-anim>
+    <section class="tile" id="portfolio-video">
       <h2>Portfolio Vidéo</h2>
       <div class="video-grid">
         <iframe loading="lazy" src="https://www.instagram.com/p/CzRJOBDsZo4/embed" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
@@ -29,50 +30,35 @@
       </div>
     </section>
 
-    <section id="portfolio-ecrit" class="tile" data-anim>
+    <section class="tile" id="portfolio-ecrit">
       <h2>Portfolio Écrit</h2>
-      <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank" rel="noopener noreferrer" class="figaro-link" aria-label="Profil auteur Louis Lallement sur Le Figaro">
+      <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank" rel="noopener noreferrer" aria-label="Profil auteur Louis Lallement sur Le Figaro">
         <img src="assets/figaro-logo.png" alt="Logo Le Figaro" />
       </a>
     </section>
 
-    <section id="photographie" class="tile" data-anim>
+    <section class="tile" id="photographie">
       <h2>Photographie</h2>
       <p>Suivez-moi sur Instagram : <a href="https://www.instagram.com/louis.l.photographie/" target="_blank" rel="noopener noreferrer">@louis.l.photographie</a></p>
       <p>Contactez-moi</p>
     </section>
-  </main>
 
-  <footer class="tile" data-anim>
-    <section id="contact">
+    <section class="tile" id="contact">
       <h2>Contact</h2>
       <form action="https://formsubmit.co/louis.lallement@outlook.fr" method="POST">
         <input type="hidden" name="_captcha" value="false" />
         <input type="hidden" name="_subject" value="Nouveau message depuis ton site CV !" />
 
         <label for="prenom">Prénom :</label><br />
-        <input type="text" id="prenom" name="prenom" required placeholder="Ton prénom" /><br /><br />
+        <input type="text" id="prenom" name="prenom" required placeholder="Ton prénom" /><br />
 
         <label for="email">Email :</label><br />
-        <input type="email" id="email" name="email" required placeholder="Ton email" /><br /><br />
+        <input type="email" id="email" name="email" required placeholder="Ton email" /><br />
 
         <label for="message">Message :</label><br />
-        <textarea id="message" name="message" required placeholder="Écris ton message ici..." rows="5"></textarea><br /><br />
+        <textarea id="message" name="message" required placeholder="Écris ton message ici..." rows="5"></textarea><br />
 
         <button type="submit">Envoyer</button>
       </form>
 
-      <div id="social-links" aria-label="Liens vers réseaux sociaux">
-        <a href="https://twitter.com/louislall" target="_blank" rel="noopener noreferrer" class="icon-footer" aria-label="Twitter Louis Lallement">
-          <img src="assets/twitter.svg" alt="Logo Twitter" />
-        </a>
-        <a href="https://www.linkedin.com/in/louis-lallement-32751b159/" target="_blank" rel="noopener noreferrer" class="icon-footer" aria-label="LinkedIn Louis Lallement">
-          <img src="assets/174857.png" alt="Logo LinkedIn" />
-        </a>
-      </div>
-    </section>
-  </footer>
-
-  <script src="script.js"></script>
-</body>
-</html>
+      <div id="social-links" aria-label="Liens vers réseaux soc
