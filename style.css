@@ -75,17 +75,24 @@ main {
   transform: translateY(0);
 }
 
-/* Titres */
+/* Titres H2 en nuance de gris pour bien rester visibles */
+h2 {
+  margin-top: 0;
+  font-weight: 600;
+  color: #333333; /* gris foncé en clair */
+  transition: color 0.3s ease;
+}
+
+/* En mode sombre, gris clair */
+body.dark-mode h2 {
+  color: #cccccc;
+}
+
+/* Titres principaux */
 h1 {
   margin: 0 0 0.5rem;
   font-weight: 600;
   font-size: 2.8rem;
-}
-
-h2 {
-  margin-top: 0;
-  font-weight: 600;
-  color: #1e293b;
 }
 
 /* Présentation */
@@ -220,10 +227,6 @@ body.dark-mode .glass-card {
   background-color: var(--color-card-dark);
   box-shadow: 0 8px 32px var(--color-shadow-dark);
   border: 1px solid rgba(255 255 255 / 0.2);
-}
-
-body.dark-mode h2 {
-  color: #dbeafe;
 }
 
 body.dark-mode input, 
