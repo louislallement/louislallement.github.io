@@ -34,17 +34,30 @@ body.dark {
   color: var(--clr-text-dark);
 }
 
+/* Bouton toggle mode - fixed top right */
+
+#mode-toggle {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--clr-accent-light);
+  transition: color var(--transition-time);
+  z-index: 9999;
+}
+
+body.dark #mode-toggle {
+  color: var(--clr-accent-dark);
+}
+
 /* Header */
 
 header {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 2.5rem;
   text-align: center;
-  position: relative;
+  margin-bottom: 2rem;
 }
 
 header h1 {
@@ -74,29 +87,6 @@ body.dark header h2 {
 
 body.dark .barre {
   color: var(--clr-text-dark);
-}
-
-/* Bouton mode sombre/clair */
-
-#mode-toggle {
-  background: none;
-  border: none;
-  font-size: 1.8rem;
-  cursor: pointer;
-  color: var(--clr-accent-light);
-  transition: color var(--transition-time);
-  position: absolute;
-  right: 0;
-  top: 0.7rem;
-}
-
-body.dark #mode-toggle {
-  color: var(--clr-accent-dark);
-}
-
-#mode-toggle:focus {
-  outline: 2px solid var(--clr-accent-light);
-  outline-offset: 2px;
 }
 
 /* Main container */
