@@ -3,27 +3,26 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Louis Lallement - Journaliste & Photographe</title>
+<title>Louis Lallement - Journaliste | Photographe</title>
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <button id="mode-toggle" aria-label="Basculer mode clair/sombre">🌙</button>
 
-  <header class="header">
-    <h1>Louis Lallement</h1>
-    <p class="subtitle">Journaliste &amp; Photographe</p>
-  </header>
+<button id="mode-toggle" aria-label="Basculer mode clair/sombre">🌙</button>
 
-  <main class="container">
+<header class="header">
+  <h1>Louis Lallement</h1>
+  <p class="roles">Journaliste <span class="separator">|</span> Photographe</p>
+  <p class="subtitle">L’ouïe d’allemand</p>
+</header>
 
-    <section class="tile" id="bonjour">
-      <h2>Bonjour</h2>
-      <p>Actuellement à Paris et ses alentours</p>
-    </section>
+<main class="container">
+
+  <section class="tiles-row">
 
     <section class="tile" id="portfolio-video">
       <h2>Portfolio Vidéo</h2>
-      <div class="video-grid">
+      <div class="video-column">
         <iframe loading="lazy" src="https://www.instagram.com/p/CzRJOBDsZo4/embed" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
         <iframe loading="lazy" src="https://www.instagram.com/p/CyOqZ8QrNeJ/embed" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
         <iframe loading="lazy" src="https://www.instagram.com/p/CyCA2-hMr-y/embed" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
@@ -40,25 +39,43 @@
     <section class="tile" id="photographie">
       <h2>Photographie</h2>
       <p>Suivez-moi sur Instagram : <a href="https://www.instagram.com/louis.l.photographie/" target="_blank" rel="noopener noreferrer">@louis.l.photographie</a></p>
-      <p>Contactez-moi</p>
     </section>
 
-    <section class="tile" id="contact">
-      <h2>Contact</h2>
-      <form action="https://formsubmit.co/louis.lallement@outlook.fr" method="POST">
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_subject" value="Nouveau message depuis ton site CV !" />
+  </section>
 
-        <label for="prenom">Prénom :</label><br />
-        <input type="text" id="prenom" name="prenom" required placeholder="Ton prénom" /><br />
+  <section id="contact" class="tile contact-tile">
+    <h2>Contact</h2>
+    <form action="https://formsubmit.co/louis.lallement@outlook.fr" method="POST">
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_subject" value="Nouveau message depuis ton site CV !" />
 
-        <label for="email">Email :</label><br />
-        <input type="email" id="email" name="email" required placeholder="Ton email" /><br />
+      <label for="prenom">Prénom :</label>
+      <input type="text" id="prenom" name="prenom" required placeholder="Ton prénom" />
 
-        <label for="message">Message :</label><br />
-        <textarea id="message" name="message" required placeholder="Écris ton message ici..." rows="5"></textarea><br />
+      <label for="email">Email :</label>
+      <input type="email" id="email" name="email" required placeholder="Ton email" />
 
-        <button type="submit">Envoyer</button>
-      </form>
+      <label for="message">Message :</label>
+      <textarea id="message" name="message" required placeholder="Écris ton message ici..." rows="4"></textarea>
 
-      <div id="social-links" aria-label="Liens vers réseaux soc
+      <button type="submit">Envoyer</button>
+    </form>
+  </section>
+
+</main>
+
+<footer>
+  <div id="social-links" aria-label="Liens vers réseaux sociaux">
+    <a href="https://twitter.com/louislall" target="_blank" rel="noopener noreferrer" aria-label="Twitter Louis Lallement">
+      <img src="assets/twitter.svg" alt="Logo Twitter" />
+    </a>
+    <a href="https://www.linkedin.com/in/louis-lallement-32751b159/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Louis Lallement">
+      <img src="assets/174857.png" alt="Logo LinkedIn" />
+    </a>
+  </div>
+  <p class="copyright">© Louis Lallement 2025</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
