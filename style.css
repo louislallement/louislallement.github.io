@@ -1,48 +1,42 @@
 :root {
-  --light-bg: #f2f2f2;
-  --light-tile: #ffffff;
-  --light-text: #111;
-
-  --dark-bg: #1c1c1e;
-  --dark-tile: #2c2c2e;
-  --dark-text: #f2f2f2;
-
-  --accent: #89c2d9;
-  --transition: 0.3s;
+  --bg-light: #f4f4f4;
+  --bg-dark: #0a0a0a;
+  --text-light: #222;
+  --text-dark: #f0f0f0;
+  --tile-light: #dce9f9;
+  --tile-dark: #1e2a38;
+  --accent: #4ca3ff;
 }
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  transition: background-color var(--transition), color var(--transition);
+  font-family: 'Segoe UI', sans-serif;
+  background: var(--bg-light);
+  color: var(--text-light);
+  transition: background 0.3s, color 0.3s;
 }
 
-body.light {
-  background-color: var(--light-bg);
-  color: var(--light-text);
-}
-
-body.dark {
-  background-color: var(--dark-bg);
-  color: var(--dark-text);
+body.dark-mode {
+  background: var(--bg-dark);
+  color: var(--text-dark);
 }
 
 header {
+  padding: 2rem;
   text-align: center;
-  padding: 2rem 1rem 1rem;
 }
 
 .controls {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
+  padding: 0 1rem;
+  gap: 1rem;
 }
 
-.controls img.flag {
-  width: 24px;
-  height: auto;
+.flag {
+  width: 32px;
+  height: 32px;
   cursor: pointer;
 }
 
@@ -55,97 +49,97 @@ header {
 
 main {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
   padding: 1rem;
+  gap: 1rem;
 }
 
 .tile {
-  background-color: var(--light-tile);
-  padding: 1.5rem;
+  background: var(--tile-light);
+  padding: 2rem;
   border-radius: 20px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-  transition: transform var(--transition), background-color var(--transition);
   width: 300px;
-  max-width: 90%;
+  transition: transform 0.2s ease;
 }
 
-body.dark .tile {
-  background-color: var(--dark-tile);
+body.dark-mode .tile {
+  background: var(--tile-dark);
 }
 
 .tile:hover {
   transform: scale(1.02);
 }
 
-.large-tile {
+.tile-wide {
   width: 75%;
-  max-width: 800px;
-}
-
-.tiles {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1.5rem;
-}
-
-.video-placeholder {
-  height: 150px;
-  background-color: #ccc;
-}
-
-.logo {
-  height: 40px;
-}
-
-#photography {
-  position: relative;
-  background-image: url('assets/instagram-cover.jpg');
-  background-size: cover;
-  background-position: center;
-  filter: grayscale(50%) brightness(0.6);
-  color: white;
-}
-
-.photo-overlay {
-  position: relative;
-  z-index: 1;
+  margin: 2rem auto;
   text-align: center;
-  padding: 3rem 1rem;
 }
 
 form {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
 form input, form textarea {
-  padding: 0.75rem;
-  border: none;
+  padding: 0.8rem;
   border-radius: 10px;
-  font-size: 1rem;
-  width: 100%;
+  border: 1px solid #ccc;
 }
 
 form button {
-  background-color: var(--accent);
+  background: var(--accent);
   color: white;
   border: none;
-  padding: 0.75rem;
+  padding: 0.8rem;
   border-radius: 10px;
   cursor: pointer;
 }
 
-footer {
-  text-align: center;
-  padding: 1rem;
-  margin-top: 2rem;
+.photography-tile {
+  position: relative;
+  background: url('assets/photo-couverture.jpg') center/cover no-repeat;
+  color: white;
 }
 
-.social-icons img {
-  height: 24px;
-  margin: 0 0.5rem;
+.photography-tile::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.photo-overlay {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 3rem 1rem;
+}
+
+footer {
+  margin-top: 3rem;
+  text-align: center;
+  padding: 1rem;
+}
+
+footer .icon {
+  width: 32px;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  main {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tile-wide {
+    width: 90%;
+  }
 }
