@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   const toggle = document.getElementById("mode-toggle");
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const body = document.body;
 
-  if (prefersDark) {
+  // Activer le mode sombre si préférence utilisateur
+  if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
     body.classList.add("dark");
   }
 
@@ -11,18 +11,23 @@ document.addEventListener("DOMContentLoaded", () => {
     body.classList.toggle("dark");
   });
 
-  // Animation on scroll
-  const faders = document.querySelectorAll('.fade-in');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("appear");
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.1
-  });
+  // Animation fade-in au scroll
+  const faders = document.querySelectorAll(".fade-in");
 
-  faders.forEach(el => observer.observe(el));
+  const appearOptions = {
+    threshold: 0.1,
+    rootMargin: "0px 0px -50px 0px",
+  };
+
+  const appearOnScroll = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("appear");
+      observer.unobserve(entry.target);
+    });
+  }, appearOptions);
+
+  faders.forEach((fader) => {
+    appearOnScroll.observe(fader);
+  });
 });
