@@ -1,40 +1,37 @@
-/* Reset de base */
+/* Reset basique */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Variables couleurs jour/nuit */
+/* Variables couleurs */
 :root {
-  --color-bg-day: #f0f3f7;
-  --color-text-day: #2c3e50;
-  --color-primary-day: #4a90e2;
-  
-  --color-bg-night: #0d1b2a;
-  --color-text-night: #a9c0ff;
-  --color-primary-night: #6ba0ff;
-  
-  --border-radius: 15px;
-  --transition-speed: 0.4s;
+  --blue-dark: #0a1e3f;
+  --blue-light: #3a6ea5;
+  --gray-light: #f5f7fa;
+  --blue-sky: #c1d9f8;
+  --text-dark: #222;
+  --text-light: #eee;
+  --shadow-light: rgba(0,0,0,0.1);
+  --shadow-dark: rgba(0,0,0,0.5);
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--color-bg-day);
-  color: var(--color-text-day);
+  background-color: var(--gray-light);
+  color: var(--text-dark);
+  line-height: 1.5;
   padding: 20px;
-  transition: background-color var(--transition-speed), color var(--transition-speed);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-/* Mode nuit */
-body.night {
-  background-color: var(--color-bg-night);
-  color: var(--color-text-night);
+/* Conteneur principal pour limiter la largeur */
+body > * {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 15px;
 }
 
 /* Header */
@@ -45,199 +42,213 @@ header {
 
 header h1 {
   font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 10px;
+  font-weight: 900;
+  color: var(--blue-dark);
+  margin-bottom: 8px;
 }
 
 header p {
-  font-size: 1.3rem;
-  color: var(--color-primary-day);
-  transition: color var(--transition-speed);
-}
-
-body.night header p {
-  color: var(--color-primary-night);
+  font-size: 1.5rem;
+  color: var(--blue-light);
+  letter-spacing: 2px;
 }
 
 /* Sections */
 section {
-  width: 100%;
-  max-width: 900px;
-  background-color: white;
-  border-radius: var(--border-radius);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  padding: 25px 30px;
-  margin-bottom: 25px;
-  transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
+  margin-bottom: 40px;
+  background: var(--gray-light);
+  border-radius: 18px;
+  padding: 20px 25px;
+  box-shadow: 0 6px 14px var(--shadow-light);
+  transition: background-color 0.4s ease, box-shadow 0.4s ease;
 }
 
-body.night section {
-  background-color: #12233b;
-  box-shadow: 0 4px 20px rgba(100,140,255,0.3);
-}
-
+/* Titres de section en gris foncé */
 section h2 {
-  font-size: 1.8rem;
+  font-size: 2rem;
   margin-bottom: 15px;
   color: #555555;
-  transition: color var(--transition-speed);
 }
 
-body.night section h2 {
-  color: #aac1ff;
+/* Bonjour & localisation */
+#bonjour p {
+  font-size: 1.2rem;
+  color: var(--blue-dark);
+  font-weight: 600;
 }
 
-/* Instagram reels container */
+/* Portfolio Vidéo - Instagram Reels */
 .instagram-reels {
   display: flex;
-  justify-content: space-between;
-  gap: 15px;
   flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
 }
 
 .instagram-reels iframe {
-  flex: 1 1 30%;
-  min-width: 280px;
-  border-radius: var(--border-radius);
-  border: none;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  transition: box-shadow var(--transition-speed);
+  border-radius: 18px;
+  box-shadow: 0 8px 20px var(--shadow-light);
+  width: 100%;
+  max-width: 320px;
+  height: 480px;
+  transition: transform 0.3s ease;
 }
 
 .instagram-reels iframe:hover {
-  box-shadow: 0 6px 25px rgba(74,144,226,0.6);
+  transform: scale(1.05);
 }
 
 /* Portfolio écrit */
 #portfolio-ecrit a img {
-  display: block;
   max-height: 50px;
-  border-radius: 10px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px var(--shadow-light);
   transition: transform 0.3s ease;
 }
 
-#portfolio-ecrit a img:hover {
-  transform: scale(1.05);
+#portfolio-ecrit a:hover img {
+  transform: scale(1.1);
 }
 
 /* Photographie */
 #photographie p {
-  font-style: italic;
-  font-size: 1.1rem;
-  text-align: center;
-  color: #666666;
-  transition: color var(--transition-speed);
-}
-
-body.night #photographie p {
-  color: #a0a9c6;
-}
-
-/* Formulaire contact */
-form {
-  display: flex;
-  flex-direction: column;
-}
-
-form label {
-  margin-bottom: 5px;
+  font-size: 1.2rem;
   font-weight: 600;
+  text-align: center;
+  color: var(--blue-dark);
 }
 
-form input,
-form textarea {
-  padding: 10px;
+/* Contact */
+form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+label {
+  font-weight: 600;
+  color: var(--blue-dark);
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+  width: 100%;
+  padding: 12px 14px;
+  margin-top: 6px;
   margin-bottom: 20px;
-  border: 1.5px solid #ccc;
-  border-radius: var(--border-radius);
+  border-radius: 14px;
+  border: 1.5px solid var(--blue-light);
   font-size: 1rem;
-  transition: border-color var(--transition-speed), background-color var(--transition-speed), color var(--transition-speed);
-  background-color: white;
-  color: #222;
+  transition: border-color 0.3s ease;
 }
 
-body.night form input,
-body.night form textarea {
-  background-color: #1b2a48;
-  color: #cdd9ff;
-  border-color: #4a90e2;
-}
-
-form input:focus,
-form textarea:focus {
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+  border-color: var(--blue-dark);
   outline: none;
-  border-color: var(--color-primary-day);
 }
 
-body.night form input:focus,
-body.night form textarea:focus {
-  border-color: var(--color-primary-night);
-}
-
-form button {
-  width: 150px;
-  align-self: flex-start;
-  padding: 10px 15px;
-  background-color: var(--color-primary-day);
-  color: white;
-  font-weight: 700;
+button {
+  display: block;
+  background-color: var(--blue-dark);
+  color: var(--text-light);
   border: none;
-  border-radius: var(--border-radius);
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  border-radius: 18px;
   cursor: pointer;
+  margin: 0 auto;
   transition: background-color 0.3s ease;
 }
 
-form button:hover {
-  background-color: #3a78cc;
+button:hover {
+  background-color: var(--blue-light);
 }
 
-body.night form button {
-  background-color: var(--color-primary-night);
-}
-
-body.night form button:hover {
-  background-color: #507ee8;
-}
-
-/* Liens sociaux */
+/* Réseaux sociaux */
 #social-links {
-  margin-top: 15px;
-  display: flex;
-  justify-content: center;
+  text-align: center;
+  margin-top: 25px;
 }
 
 #social-links a {
-  margin: 0 10px;
   display: inline-block;
+  margin: 0 15px;
+  transition: transform 0.3s ease;
+}
+
+#social-links a:hover {
+  transform: scale(1.2);
 }
 
 #social-links img {
   height: 32px;
-  filter: drop-shadow(0 0 1px rgba(0,0,0,0.1));
-  transition: filter 0.3s ease;
-}
-
-#social-links a:hover img {
-  filter: drop-shadow(0 0 6px var(--color-primary-day));
-}
-
-body.night #social-links a:hover img {
-  filter: drop-shadow(0 0 6px var(--color-primary-night));
+  width: 32px;
+  border-radius: 8px;
+  filter: drop-shadow(0 0 2px var(--shadow-light));
 }
 
 /* Responsive */
-@media (max-width: 700px) {
+@media (max-width: 720px) {
   .instagram-reels {
     flex-direction: column;
+    align-items: center;
   }
+}
 
-  .instagram-reels iframe {
-    width: 100%;
-    min-width: auto;
-    height: 400px;
-  }
+/* Dark mode */
+body.dark {
+  background-color: var(--blue-dark);
+  color: var(--text-light);
+}
 
-  section {
-    padding: 20px;
-  }
+body.dark section {
+  background-color: #0f234b;
+  box-shadow: 0 6px 18px var(--shadow-dark);
+}
+
+body.dark header h1 {
+  color: var(--blue-light);
+}
+
+body.dark header p {
+  color: #a4c6f9;
+}
+
+body.dark section h2 {
+  color: #a3b1d1;
+}
+
+body.dark #bonjour p,
+body.dark #photographie p,
+body.dark label {
+  color: #9db8e0;
+}
+
+body.dark input[type="text"],
+body.dark input[type="email"],
+body.dark textarea {
+  background-color: #1a2a58;
+  border-color: #4a6fa7;
+  color: var(--text-light);
+}
+
+body.dark input[type="text"]:focus,
+body.dark input[type="email"]:focus,
+body.dark textarea:focus {
+  border-color: #a6bdf2;
+}
+
+body.dark button {
+  background-color: var(--blue-light);
+  color: var(--blue-dark);
+}
+
+body.dark button:hover {
+  background-color: #5489d5;
+}
+
+body.dark #social-links img {
+  filter: drop-shadow(0 0 4px #9db8e0);
 }
