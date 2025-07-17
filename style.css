@@ -73,11 +73,10 @@ main {
 h2 {
   margin-top: 0;
   font-weight: 600;
-  color: #333333; /* Gris foncé en clair */
+  color: #333333;
   transition: color 0.3s ease;
 }
 
-/* Dark mode title color */
 body.dark-mode h2 {
   color: #cccccc;
 }
