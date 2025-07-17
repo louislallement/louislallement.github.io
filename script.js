@@ -1,14 +1,26 @@
-// Mode sombre
-const toggleBtn = document.getElementById('toggle-darkmode');
-toggleBtn.addEventListener('click', () => {
+// Dark mode toggle
+const themeBtn = document.getElementById('toggle-theme');
+themeBtn.addEventListener('click', () => {
   document.body.classList.toggle('dark');
-  toggleBtn.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+  themeBtn.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
 });
 
-// Changement de langue (basique)
+// Language toggle (simple switch between FR and EN)
 const langBtn = document.getElementById('toggle-lang');
+const flagIcon = document.getElementById('flag-icon');
+
 langBtn.addEventListener('click', () => {
-  const lang = document.documentElement.lang;
-  document.documentElement.lang = lang === 'fr' ? 'en' : 'fr';
-  location.reload(); // ou gérer dynamiquement plus tard
+  const currentLang = document.documentElement.lang;
+  if (currentLang === 'fr') {
+    document.documentElement.lang = 'en';
+    flagIcon.src = 'assets/gb-flag.png';
+    flagIcon.alt = 'English';
+    // Ici tu peux ajouter une fonction pour changer le contenu en anglais
+    alert('Language switch to English - please reload to see changes.');
+  } else {
+    document.documentElement.lang = 'fr';
+    flagIcon.src = 'assets/fr-flag.png';
+    flagIcon.alt = 'Français';
+    alert('Changement de langue vers le français - veuillez recharger pour voir les modifications.');
+  }
 });
