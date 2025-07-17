@@ -1,4 +1,3 @@
-// Mode clair/sombre
 const toggleBtn = document.getElementById('mode-toggle');
 
 toggleBtn.addEventListener('click', () => {
@@ -10,9 +9,8 @@ function updateToggleIcon() {
   toggleBtn.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
 }
 
-updateToggleIcon(); // Init
+updateToggleIcon();
 
-// Animation tuiles au scroll
 const tiles = document.querySelectorAll('[data-anim]');
 
 function checkTilesVisibility() {
