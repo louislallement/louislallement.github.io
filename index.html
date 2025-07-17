@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Louis Lallement, journaliste vidéo basé à Paris. Découvrez son portfolio et ses expériences." />
+  <meta name="description" content="Louis Lallement, journaliste vidéo à Paris. Découvrez son portfolio et ses expériences." />
   <title>Louis Lallement - CV</title>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -11,34 +11,35 @@
   <header>
     <h1>Louis Lallement</h1>
     <p>Journaliste vidéo | Photographe | Vidéaste</p>
-    <p class="location">Localisé à Paris</p>
   </header>
 
   <section id="presentation">
     <h2>Présentation</h2>
     <p>Bienvenue sur mon CV en ligne.</p>
+    <p>Actuellement à Paris.</p>
   </section>
 
   <section id="portfolio">
     <h2>Portfolio Vidéo</h2>
-    <iframe 
-      src="https://www.instagram.com/p/CWl1Pm7Dov7/embed" 
-      width="400" height="480" frameborder="0" scrolling="no" allowtransparency="true">
-    </iframe>
+    <div class="reels-container">
+      <iframe class="reel" src="https://www.instagram.com/reel/CyCA2-hMr-y/embed" allowfullscreen></iframe>
+      <iframe class="reel" src="https://www.instagram.com/reel/CyOqZ8QrNeJ/embed" allowfullscreen></iframe>
+      <iframe class="reel" src="https://www.instagram.com/reel/CzRJOBDsZo4/embed" allowfullscreen></iframe>
+    </div>
   </section>
 
   <section id="experiences">
     <h2>Expériences professionnelles</h2>
     <ul>
       <li>
-        <img src="https://upload.wikimedia.org/wikipedia/fr/6/62/CNEWS_Logo_2017.svg" alt="Logo CNEWS" style="height: 24px; vertical-align: middle; margin-right: 8px;">
-        Journaliste vidéo à CNEWS (2021 - 2024)
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/CNEWS_Logo_2017.svg/200px-CNEWS_Logo_2017.svg.png"
+             alt="Logo CNEWS" class="logo"> Journaliste vidéo à CNEWS (2021 - 2024)
       </li>
       <li>
         <a href="https://www.lefigaro.fr" target="_blank" rel="noopener noreferrer">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Le_Figaro_logo.svg" alt="Logo Figaro" style="height: 24px; vertical-align: middle; margin-right: 8px;">
-        </a>
-        Stagiaire au Figaro Étudiant
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Le_Figaro_logo.svg/320px-Le_Figaro_logo.svg.png"
+               alt="Logo Figaro" class="logo">
+        </a> Stagiaire au Figaro Étudiant
       </li>
     </ul>
   </section>
@@ -46,36 +47,33 @@
   <section id="contact">
     <h2>Contact</h2>
     <form action="https://formsubmit.co/louis.lallement@outlook.fr" method="POST">
-      <!-- Config FormSubmit -->
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_next" value="https://louislallement.github.io/merci.html">
       <input type="hidden" name="_subject" value="Message depuis ton site CV">
 
-      <label for="nom">Nom :</label><br />
-      <input type="text" id="nom" name="nom" required placeholder="Ton nom" /><br /><br />
+      <label for="nom">Nom :</label>
+      <input type="text" id="nom" name="nom" required placeholder="Ton nom" />
 
-      <label for="prenom">Prénom :</label><br />
-      <input type="text" id="prenom" name="prenom" required placeholder="Ton prénom" /><br /><br />
+      <label for="prenom">Prénom :</label>
+      <input type="text" id="prenom" name="prenom" required placeholder="Ton prénom" />
 
-      <label for="email">Adresse mail :</label><br />
-      <input type="email" id="email" name="email" required placeholder="Ton email" /><br /><br />
+      <label for="email">Adresse mail :</label>
+      <input type="email" id="email" name="email" required placeholder="Ton email" />
 
-      <label for="message">Message :</label><br />
-      <textarea id="message" name="message" required placeholder="Écris ton message ici..." rows="5"></textarea><br /><br />
+      <label for="message">Message :</label>
+      <textarea id="message" name="message" required placeholder="Écris ton message ici..." rows="5"></textarea>
 
       <button type="submit">Envoyer</button>
     </form>
 
-    <div id="social-links" style="margin-top: 20px;">
-      <a href="https://x.com/louislall" target="_blank" rel="noopener noreferrer" style="margin-right: 15px;">
-        <img src="https://cdn-icons-png.flaticon.com/32/733/733579.png" alt="Twitter" />
+    <div id="social-links">
+      <a href="https://x.com/louislall" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn-icons-png.flaticon.com/32/733/733579.png" alt="Twitter">
       </a>
       <a href="https://linkedin.com/in/louisslallement" target="_blank" rel="noopener noreferrer">
-        <img src="https://cdn-icons-png.flaticon.com/32/174/174857.png" alt="LinkedIn" />
+        <img src="https://cdn-icons-png.flaticon.com/32/174/174857.png" alt="LinkedIn">
       </a>
     </div>
   </section>
-
-  <script src="script.js"></script>
 </body>
 </html>
