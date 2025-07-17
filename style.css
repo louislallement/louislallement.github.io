@@ -12,14 +12,16 @@ body {
   color: var(--text-color);
   transition: background 0.3s, color 0.3s;
   padding: 1rem;
+  min-height: 100vh;
 }
 
 :root {
   --primary: #007acc;
-  --bg-color: #ffffff;
-  --text-color: #000000;
-  --tile-bg: #f2f2f2;
+  --bg-color: #f9f9f9;
+  --text-color: #222222;
+  --tile-bg: #ffffff;
   --footer-bg: #e0e0e0;
+  --shadow-tile: rgba(0, 0, 0, 0.15);
 }
 
 body.dark {
@@ -27,11 +29,16 @@ body.dark {
   --text-color: #f1f5f9;
   --tile-bg: #1e293b;
   --footer-bg: #1c1c1c;
+  --shadow-tile: rgba(0, 0, 0, 0.6);
 }
 
 /* HEADER */
 header {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
   margin-bottom: 2rem;
 }
 
@@ -53,10 +60,15 @@ header .bar {
 header button {
   background: none;
   border: none;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   cursor: pointer;
   margin-top: 0.5rem;
   color: var(--primary);
+  transition: transform 0.3s ease;
+}
+
+header button:hover {
+  transform: scale(1.2);
 }
 
 /* TUILES */
@@ -65,15 +77,17 @@ header button {
   padding: 1.5rem;
   border-radius: 2rem;
   margin-bottom: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  transition: background 0.3s, transform 0.2s;
+  box-shadow: 0 8px 20px var(--shadow-tile);
+  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+  cursor: default;
 }
 
 .tuile:hover {
-  transform: translateY(-5px);
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px var(--shadow-tile);
 }
 
-/* La tuile 'Bonjour' pleine largeur */
+/* Tuile Bonjour centrée et largeur limitée */
 #bonjour {
   max-width: 600px;
   margin-left: auto;
@@ -172,4 +186,18 @@ footer {
 
 #social-links a:hover img {
   transform: scale(1.1);
+}
+
+/* LOGO FIGARO */
+#portfolio-ecrit img {
+  width: 180px;
+  height: auto;
+  display: block;
+  margin: 0.5rem auto 0;
+  filter: brightness(1);
+  transition: filter 0.3s ease;
+}
+
+body.dark #portfolio-ecrit img {
+  filter: brightness(0.8);
 }
