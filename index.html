@@ -8,28 +8,27 @@
 </head>
 <body>
   <header>
-    <h1>Louis Lallement</h1>
-    <p>journaliste <span class="bar">|</span> photographe</p>
+    <div class="header-content">
+      <h1>Louis Lallement</h1>
+      <p>journaliste <span class="bar">|</span> photographe</p>
+    </div>
+    <div class="header-controls">
+      <button id="toggle-theme" aria-label="Changer thème" title="Changer thème">🌙</button>
+      <div id="language-switcher" aria-label="Changer langue">
+        <img src="assets/france-32.png" alt="Français" id="fr-flag" class="flag active" tabindex="0" />
+        <img src="assets/uk-32.png" alt="English" id="en-flag" class="flag" tabindex="0" />
+      </div>
+    </div>
   </header>
 
-  <div id="controls">
-    <button id="toggle-theme" aria-label="Changer thème" title="Changer thème">🌙</button>
-    <button id="toggle-lang-fr" class="lang-btn" aria-label="Français" title="Français">
-      <img src="assets/fr-flag.svg" alt="Français" />
-    </button>
-    <button id="toggle-lang-en" class="lang-btn" aria-label="English" title="English">
-      <img src="assets/gb-flag.svg" alt="English" />
-    </button>
-  </div>
-
-  <section class="tuile" id="bonjour">
-    <h2 data-fr="Bonjour" data-en="Hello">Bonjour</h2>
-    <p data-fr="Actuellement à Paris et alentours" data-en="Currently in Paris and surroundings">Actuellement à Paris et alentours</p>
+  <section class="tuile tuile-bonjour">
+    <h2 id="bonjour-title">Bonjour</h2>
+    <p id="bonjour-text">Actuellement à Paris et alentours</p>
   </section>
 
   <section class="tuiles-row">
     <section class="tuile" id="portfolio-video">
-      <h2 data-fr="Portfolio Vidéo" data-en="Video Portfolio">Portfolio Vidéo</h2>
+      <h2 id="portfolio-video-title">Portfolio Vidéo</h2>
       <div class="videos-container">
         <iframe src="https://www.instagram.com/p/CzRJOBDsZo4/embed" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>
         <iframe src="https://www.instagram.com/p/CyOqZ8QrNeJ/embed" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>
@@ -38,41 +37,35 @@
     </section>
 
     <section class="tuile" id="portfolio-ecrit">
-      <h2 data-fr="Portfolio Écrit" data-en="Written Portfolio">Portfolio Écrit</h2>
-      <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank" rel="noopener noreferrer" aria-label="Profil auteur Figaro">
+      <h2 id="portfolio-ecrit-title">Portfolio Écrit</h2>
+      <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank" rel="noopener noreferrer" class="figaro-link" aria-label="Profil auteur Figaro">
         <img src="assets/figaro-logo.jpg" alt="Logo Le Figaro" />
       </a>
     </section>
 
     <section class="tuile" id="photographie">
-      <h2 data-fr="Photographie" data-en="Photography">Photographie</h2>
-      <a href="https://www.instagram.com/louis.l.photographie/" target="_blank" rel="noopener noreferrer" class="instagram-photo-link">
-        <div class="photo-overlay">
-          <p data-fr="Suivez-moi sur Instagram" data-en="Follow me on Instagram">Suivez-moi sur Instagram</p>
-        </div>
-        <img src="assets/insta-cover.jpg" alt="Photo couverture Instagram Louis Lallement" />
-      </a>
+      <h2 id="photographie-title">Photographie</h2>
+      <div class="photo-background">
+        <div class="photo-overlay"></div>
+        <p class="instagram-text">Suivez-moi sur <a href="https://www.instagram.com/louis.l.photographie/" target="_blank" rel="noopener noreferrer" id="instagram-link">Instagram</a></p>
+      </div>
     </section>
   </section>
 
-  <section class="tuile" id="contact">
-    <h2 data-fr="Contact" data-en="Contact">Contact</h2>
-    <form action="https://formsubmit.co/louis.lallement@outlook.fr" method="POST" class="contact-form">
+  <section class="tuile tuile-contact">
+    <h2 id="contact-title">Contact</h2>
+    <form action="https://formsubmit.co/louis.lallement@outlook.fr" method="POST">
       <input type="hidden" name="_captcha" value="false" />
       <input type="hidden" name="_subject" value="Nouveau message depuis ton site CV !" />
-      <label for="nom" data-fr="Nom :" data-en="Last Name:">Nom :</label>
+      <label for="nom" id="label-nom">Nom :</label>
       <input type="text" id="nom" name="nom" required placeholder="Ton nom" />
-      
-      <label for="prenom" data-fr="Prénom :" data-en="First Name:">Prénom :</label>
+      <label for="prenom" id="label-prenom">Prénom :</label>
       <input type="text" id="prenom" name="prenom" required placeholder="Ton prénom" />
-      
-      <label for="email" data-fr="Email :" data-en="Email:">Email :</label>
+      <label for="email" id="label-email">Email :</label>
       <input type="email" id="email" name="email" required placeholder="Ton adresse mail" />
-      
-      <label for="message" data-fr="Message :" data-en="Message:">Message :</label>
+      <label for="message" id="label-message">Message :</label>
       <textarea id="message" name="message" required placeholder="Écris ton message ici..." rows="5"></textarea>
-      
-      <button type="submit" data-fr="Envoyer" data-en="Send">Envoyer</button>
+      <button type="submit" id="submit-btn">Envoyer</button>
     </form>
   </section>
 
@@ -85,7 +78,7 @@
         <img src="assets/linkedin-32.png" alt="LinkedIn" />
       </a>
     </div>
-    <div id="visitor-count">Visites : 0</div>
+    <div id="visitor-count" aria-live="polite">Visites : 0</div>
     <div id="copyright">© Louis Lallement 2025</div>
   </footer>
 
