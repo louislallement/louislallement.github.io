@@ -1,8 +1,8 @@
-window.addEventListener("load", () => {
+// Animation fade-in au scroll (garde ce que tu as déjà)
+document.addEventListener("DOMContentLoaded", () => {
   const faders = document.querySelectorAll(".fade-in");
 
   if (!("IntersectionObserver" in window)) {
-    // Fallback: tout afficher directement si l'observateur n'est pas supporté
     faders.forEach(el => el.classList.add("visible"));
     return;
   }
@@ -22,5 +22,26 @@ window.addEventListener("load", () => {
 
   faders.forEach(el => {
     appearOnScroll.observe(el);
+  });
+});
+
+// Dark mode toggle
+window.addEventListener('load', () => {
+  const toggle = document.getElementById('darkModeToggle');
+  const body = document.body;
+
+  // Appliquer la préférence au chargement
+  if (localStorage.getItem('darkMode') === 'enabled') {
+    body.classList.add('dark-mode');
+  }
+
+  toggle.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+
+    if (body.classList.contains('dark-mode')) {
+      localStorage.setItem('darkMode', 'enabled');
+    } else {
+      localStorage.removeItem('darkMode');
+    }
   });
 });
