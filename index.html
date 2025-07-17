@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Louis Lallement | Journaliste & Photographe</title>
   <link rel="stylesheet" href="style.css" />
   <script defer src="script.js"></script>
@@ -11,43 +11,76 @@
   <header>
     <h1>Louis Lallement</h1>
     <p class="subtitle">journaliste <span class="separator">|</span> photographe</p>
-    <button id="mode-toggle">🌓</button>
+    <button id="mode-toggle" aria-label="Changer mode clair/sombre">🌓</button>
   </header>
 
-  <section id="video-portfolio" class="fade-in">
-    <h2>Portfolio Vidéo</h2>
-    <div class="insta-reels">
-      <iframe src="https://www.instagram.com/reel/C1Reel1/embed" loading="lazy"></iframe>
-      <iframe src="https://www.instagram.com/reel/C2Reel2/embed" loading="lazy"></iframe>
-      <iframe src="https://www.instagram.com/reel/C3Reel3/embed" loading="lazy"></iframe>
-    </div>
-  </section>
+  <main>
+    <section id="video-portfolio" class="fade-in">
+      <h2>Portfolio Vidéo</h2>
+      <div class="insta-reels">
+        <iframe
+          src="https://www.instagram.com/reel/CyCA2-hMr-y/embed"
+          loading="lazy"
+          frameborder="0"
+          allowfullscreen
+          ></iframe>
+        <iframe
+          src="https://www.instagram.com/reel/CyOqZ8QrNeJ/embed"
+          loading="lazy"
+          frameborder="0"
+          allowfullscreen
+          ></iframe>
+        <iframe
+          src="https://www.instagram.com/reel/CzRJOBDsZo4/embed"
+          loading="lazy"
+          frameborder="0"
+          allowfullscreen
+          ></iframe>
+      </div>
+    </section>
 
-  <section id="written-portfolio" class="fade-in">
-    <h2>Portfolio Écrit</h2>
-    <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank" rel="noopener">
-      <img src="figaro-logo.png" alt="Figaro" class="logo" />
-    </a>
-  </section>
+    <section id="written-portfolio" class="fade-in">
+      <h2>Portfolio Écrit</h2>
+      <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank" rel="noopener noreferrer">
+        <img src="assets/figaro-logo.png" alt="Logo Le Figaro" class="logo" />
+      </a>
+    </section>
 
-  <section id="photography" class="fade-in">
-    <h2>Photographie</h2>
-    <p>Contactez-moi</p>
-  </section>
+    <section id="photography" class="fade-in">
+      <h2>Photographie</h2>
+      <p>Contactez-moi</p>
+    </section>
 
-  <section id="contact" class="fade-in">
-    <h2>Contact</h2>
-    <form>
-      <input type="text" placeholder="Votre nom" required />
-      <input type="email" placeholder="Votre email" required />
-      <textarea placeholder="Votre message..." required></textarea>
-      <button type="submit">Envoyer</button>
-    </form>
-  </section>
+    <section id="contact" class="fade-in">
+      <h2>Contact</h2>
+      <form action="https://formsubmit.co/louis.lallement@outlook.fr" method="POST" >
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_subject" value="Nouveau message depuis ton site CV !" />
+        
+        <label for="nom">Nom</label>
+        <input id="nom" name="nom" type="text" required placeholder="Votre nom" />
+        
+        <label for="prenom">Prénom</label>
+        <input id="prenom" name="prenom" type="text" required placeholder="Votre prénom" />
+        
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required placeholder="Votre email" />
+        
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" required placeholder="Votre message..."></textarea>
+        
+        <button type="submit">Envoyer</button>
+      </form>
+    </section>
+  </main>
 
   <footer>
-    <a href="https://twitter.com/votre_compte" target="_blank"><img src="twitter.svg" alt="Twitter" /></a>
-    <a href="https://www.linkedin.com/in/louis-lallement-32751b159/" target="_blank"><img src="linkedin.svg" alt="LinkedIn" /></a>
+    <a href="https://twitter.com/louislall" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+      <img src="assets/twitter.svg" alt="Twitter" />
+    </a>
+    <a href="https://www.linkedin.com/in/louis-lallement-32751b159/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+      <img src="assets/linkedin.svg" alt="LinkedIn" />
+    </a>
   </footer>
 </body>
 </html>
