@@ -3,33 +3,46 @@ document.addEventListener("DOMContentLoaded", () => {
   const langToggle = document.getElementById("lang-toggle");
   const flag = document.getElementById("flag");
 
-  // Theme
+  // Gérer thème clair/sombre
   themeToggle.addEventListener("click", () => {
     document.body.classList.toggle("dark");
     themeToggle.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
   });
 
-  // Language
+  // Gérer changement de langue FR/EN
   langToggle.addEventListener("click", () => {
-    const isFr = flag.src.includes("fr.png");
-    flag.src = isFr ? "gb.png" : "fr.png";
-    flag.alt = isFr ? "English" : "Français";
-    // Change text if needed (simple example)
-    document.querySelector("h2").textContent = isFr ? "Journalist | Photographer" : "Journaliste | Photographe";
-    document.querySelector(".intro p").textContent = isFr
+    const isFrench = flag.src.includes("fr.png");
+    flag.src = isFrench ? "gb.png" : "fr.png";
+    flag.alt = isFrench ? "English" : "Français";
+
+    document.querySelector("h2").textContent = isFrench
+      ? "Journalist | Photographer"
+      : "Journaliste | Photographe";
+
+    document.querySelector(".intro p").textContent = isFrench
       ? "Currently in Paris and nearby"
       : "Actuellement à Paris et alentours";
-    document.querySelector("#photo .insta-link").textContent = isFr
+
+    document.querySelector("#portfolio-video h3").textContent = isFrench
+      ? "Video Portfolio"
+      : "Portfolio Vidéo";
+
+    document.querySelector("#portfolio-ecrit h3").textContent = isFrench
+      ? "Written Portfolio"
+      : "Portfolio Écrit";
+
+    document.querySelector("#photographie h3").textContent = isFrench
+      ? "Photography"
+      : "Photographie";
+
+    document.querySelector("#photographie .insta-link").textContent = isFrench
       ? "Follow me on Instagram"
       : "Suivez-moi sur Instagram";
-    document.querySelector("#written h3").textContent = isFr ? "Written Portfolio" : "Portfolio Écrit";
-    document.querySelector("#video h3").textContent = isFr ? "Video Portfolio" : "Portfolio Vidéo";
-    document.querySelector("#photo h3").textContent = isFr ? "Photography" : "Photographie";
   });
 
-  // Visits (demo)
-  const visitEl = document.getElementById("visit-counter");
+  // Compteur de visites basique (localStorage)
+  const visitCounter = document.getElementById("visit-counter");
   let visits = parseInt(localStorage.getItem("visits") || "0", 10) + 1;
   localStorage.setItem("visits", visits);
-  visitEl.textContent = visits;
+  visitCounter.textContent = visits;
 });
