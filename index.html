@@ -9,18 +9,33 @@
 <body>
   <header>
     <h1>Louis Lallement</h1>
-    <p>journaliste <span class="bar">|</span> photographe</p>
+    <p>
+      <span class="lang fr">journaliste <span class="bar">|</span> photographe</span>
+      <span class="lang en" style="display:none;">journalist <span class="bar">|</span> photographer</span>
+    </p>
     <button id="toggle-theme" aria-label="Changer thème">🌙</button>
+    <button id="lang-toggle" aria-label="Changer langue" title="Switch language" style="margin-left:1rem; font-size:1.2rem; background:none; border:none; cursor:pointer;">
+      🇫🇷
+    </button>
   </header>
 
   <section class="tuile" id="bonjour">
-    <h2>Bonjour</h2>
-    <p>Actuellement à Paris et alentour</p>
+    <h2>
+      <span class="lang fr">Bonjour</span>
+      <span class="lang en" style="display:none;">Hello</span>
+    </h2>
+    <p>
+      <span class="lang fr">Actuellement à Paris et alentours</span>
+      <span class="lang en" style="display:none;">Currently in Paris and surroundings</span>
+    </p>
   </section>
 
   <section class="tuiles-row">
     <section class="tuile" id="portfolio-video">
-      <h2>Portfolio Vidéo</h2>
+      <h2>
+        <span class="lang fr">Portfolio Vidéo</span>
+        <span class="lang en" style="display:none;">Video Portfolio</span>
+      </h2>
       <div class="videos-container">
         <iframe src="https://www.instagram.com/p/CzRJOBDsZo4/embed" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>
         <iframe src="https://www.instagram.com/p/CyOqZ8QrNeJ/embed" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>
@@ -29,32 +44,60 @@
     </section>
 
     <section class="tuile" id="portfolio-ecrit">
-      <h2>Portfolio Écrit</h2>
+      <h2>
+        <span class="lang fr">Portfolio Écrit</span>
+        <span class="lang en" style="display:none;">Written Portfolio</span>
+      </h2>
       <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank" rel="noopener noreferrer" aria-label="Profil auteur Figaro">
         <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Le_Figaro_Logo_2014.svg" alt="Logo Le Figaro" />
       </a>
     </section>
 
     <section class="tuile" id="photographie">
-      <h2>Photographie</h2>
-      <p><a href="https://www.instagram.com/louis.l.photographie/" target="_blank" rel="noopener noreferrer">Suivez-moi sur Instagram</a></p>
+      <h2>
+        <span class="lang fr">Photographie</span>
+        <span class="lang en" style="display:none;">Photography</span>
+      </h2>
+      <p>
+        <span class="lang fr">
+          <a href="https://www.instagram.com/louis.l.photographie/" target="_blank" rel="noopener noreferrer">Suivez-moi sur Instagram</a>
+        </span>
+        <span class="lang en" style="display:none;">
+          <a href="https://www.instagram.com/louis.l.photographie/" target="_blank" rel="noopener noreferrer">Follow me on Instagram</a>
+        </span>
+      </p>
     </section>
   </section>
 
   <section class="tuile" id="contact">
-    <h2>Contact</h2>
+    <h2>
+      <span class="lang fr">Contact</span>
+      <span class="lang en" style="display:none;">Contact</span>
+    </h2>
     <form action="https://formsubmit.co/louis.lallement@outlook.fr" method="POST">
       <input type="hidden" name="_captcha" value="false" />
       <input type="hidden" name="_subject" value="Nouveau message depuis ton site CV !" />
-      <label for="nom">Nom :</label><br />
+      
+      <label for="nom" class="lang fr">Nom :</label>
+      <label for="nom" class="lang en" style="display:none;">Last Name:</label><br />
       <input type="text" id="nom" name="nom" required placeholder="Ton nom" /><br /><br />
-      <label for="prenom">Prénom :</label><br />
+
+      <label for="prenom" class="lang fr">Prénom :</label>
+      <label for="prenom" class="lang en" style="display:none;">First Name:</label><br />
       <input type="text" id="prenom" name="prenom" required placeholder="Ton prénom" /><br /><br />
-      <label for="email">Email :</label><br />
+
+      <label for="email" class="lang fr">Email :</label>
+      <label for="email" class="lang en" style="display:none;">Email:</label><br />
       <input type="email" id="email" name="email" required placeholder="Ton adresse mail" /><br /><br />
-      <label for="message">Message :</label><br />
+
+      <label for="message" class="lang fr">Message :</label>
+      <label for="message" class="lang en" style="display:none;">Message:</label><br />
       <textarea id="message" name="message" required placeholder="Écris ton message ici..." rows="5"></textarea><br /><br />
-      <button type="submit">Envoyer</button>
+
+      <button type="submit">
+        <span class="lang fr">Envoyer</span>
+        <span class="lang en" style="display:none;">Send</span>
+      </button>
     </form>
   </section>
 
@@ -68,7 +111,10 @@
       </a>
     </div>
     <div id="visitor-count">Visites : 0</div>
-    <div id="copyright">© Louis Lallement 2025</div>
+    <div id="copyright">
+      <span class="lang fr">© Louis Lallement 2025</span>
+      <span class="lang en" style="display:none;">© Louis Lallement 2025</span>
+    </div>
   </footer>
 
   <script src="script.js"></script>
