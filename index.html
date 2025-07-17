@@ -10,15 +10,16 @@
   <header>
     <h1>Louis Lallement</h1>
     <h2>Journaliste <span class="barre">|</span> Photographe</h2>
+    <button id="mode-toggle" aria-label="Basculer mode clair/sombre">🌙</button>
   </header>
 
   <main>
-    <section id="bonjour">
+    <section class="tile" data-anim>
       <h2>Bonjour</h2>
       <p>Actuellement à Paris et ses alentours.</p>
     </section>
 
-    <section id="portfolio-video">
+    <section class="tile" data-anim>
       <h2>Portfolio Vidéo</h2>
       <div class="video-grid">
         <iframe src="https://www.instagram.com/p/CzRJOBDsZo4/embed" frameborder="0" allowfullscreen></iframe>
@@ -27,21 +28,21 @@
       </div>
     </section>
 
-    <section id="portfolio-ecrit">
+    <section class="tile" data-anim>
       <h2>Portfolio Écrit</h2>
-      <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank" rel="noopener noreferrer">
-        <img src="assets/figaro-logo.png" alt="Figaro logo" class="logo-small" />
+      <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank" rel="noopener noreferrer" class="figaro-link" aria-label="Profil Figaro Louis Lallement">
+        <img src="assets/figaro-logo.png" alt="Logo Figaro" />
       </a>
     </section>
 
-    <section id="photographie">
+    <section class="tile" data-anim>
       <h2>Photographie</h2>
-      <p>Suivez-moi sur <a href="https://www.instagram.com/louis.l.photographie/" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></p>
+      <p>Suivez-moi sur <a href="https://www.instagram.com/louis.l.photographie/" target="_blank" rel="noopener noreferrer">Instagram</a></p>
     </section>
 
-    <section id="contact">
+    <section class="tile" data-anim>
       <h2>Contact</h2>
-      <form action="mailto:tonadresse@example.com" method="post" enctype="text/plain">
+      <form action="mailto:tonadresse@example.com" method="post" enctype="text/plain" class="contact-form">
         <input type="text" name="name" placeholder="Votre nom" required />
         <input type="email" name="email" placeholder="Votre email" required />
         <textarea name="message" placeholder="Votre message..." required></textarea>
@@ -51,13 +52,12 @@
   </main>
 
   <footer>
-    <a href="https://www.linkedin.com/in/louis-lallement-32751b159/" target="_blank" rel="noopener noreferrer">
+    <a href="https://www.linkedin.com/in/louis-lallement-32751b159/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
       <img src="assets/174857.png" alt="LinkedIn" class="icon-footer" />
     </a>
-    <a href="https://twitter.com/louis_lallement" target="_blank" rel="noopener noreferrer">
+    <a href="https://twitter.com/louislall" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
       <img src="assets/twitter.svg" alt="Twitter" class="icon-footer" />
     </a>
-    <button id="mode-toggle" aria-label="Basculer mode clair/sombre">🌙</button>
   </footer>
 
   <script src="script.js"></script>
