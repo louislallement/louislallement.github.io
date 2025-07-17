@@ -1,4 +1,3 @@
-/* Import police Inter */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
 :root {
@@ -56,7 +55,7 @@ main {
   gap: 2rem;
 }
 
-/* Cartes "Glassmorphism" */
+/* Glassmorphism style cards */
 .glass-card {
   background-color: var(--color-card-light);
   border-radius: 15px;
@@ -65,43 +64,38 @@ main {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255 255 255 / 0.3);
-  opacity: 0;
-  transform: translateY(20px);
+  opacity: 1;
+  transform: translateY(0);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.glass-card.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Titres H2 en nuance de gris pour bien rester visibles */
+/* Titles */
 h2 {
   margin-top: 0;
   font-weight: 600;
-  color: #333333; /* gris foncé en clair */
+  color: #333333; /* Gris foncé en clair */
   transition: color 0.3s ease;
 }
 
-/* En mode sombre, gris clair */
+/* Dark mode title color */
 body.dark-mode h2 {
   color: #cccccc;
 }
 
-/* Titres principaux */
+/* Main header */
 h1 {
   margin: 0 0 0.5rem;
   font-weight: 600;
   font-size: 2.8rem;
 }
 
-/* Présentation */
+/* Presentation paragraph */
 #presentation p {
   font-size: 1.1rem;
   line-height: 1.5;
 }
 
-/* Portfolio reels */
+/* Portfolio reels layout */
 .reels {
   display: flex;
   flex-direction: column;
@@ -129,7 +123,7 @@ h1 {
   }
 }
 
-/* Expériences */
+/* Experiences list */
 #experiences ul {
   list-style-type: disc;
   padding-left: 1.5rem;
@@ -148,7 +142,7 @@ h1 {
   filter: drop-shadow(0 0 3px #2563eb);
 }
 
-/* Formulaire */
+/* Form styles */
 form {
   display: flex;
   flex-direction: column;
@@ -207,8 +201,7 @@ button:hover {
   filter: drop-shadow(0 0 5px #2563eb);
 }
 
-/* ===== Mode sombre ===== */
-
+/* Dark mode styles */
 body.dark-mode {
   background-color: var(--color-bg-dark);
   color: var(--color-text-dark);
