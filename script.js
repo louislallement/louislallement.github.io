@@ -1,27 +1,21 @@
-// Script pour faire apparaître les sections au scroll avec animation
-document.addEventListener('DOMContentLoaded', function () {
-  const sections = document.querySelectorAll('section');
+document.addEventListener("DOMContentLoaded", () => {
+  const faders = document.querySelectorAll(".fade-in");
 
-  function checkSections() {
-    const triggerBottom = window.innerHeight * 0.85;
+  const appearOptions = {
+    threshold: 0.1,
+    rootMargin: "0px 0px -50px 0px"
+  };
 
-    sections.forEach(section => {
-      const sectionTop = section.getBoundingClientRect().top;
+  const appearOnScroll = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
 
-      if (sectionTop < triggerBottom) {
-        section.classList.remove('hidden');
-      } else {
-        section.classList.add('hidden');
-      }
+      entry.target.classList.add("visible");
+      observer.unobserve(entry.target);
     });
-  }
+  }, appearOptions);
 
-  // Initialement, cache toutes les sections
-  sections.forEach(section => section.classList.add('hidden'));
-
-  window.addEventListener('scroll', checkSections);
-  window.addEventListener('resize', checkSections);
-
-  // Vérifie au chargement aussi
-  checkSections();
+  faders.forEach(el => {
+    appearOnScroll.observe(el);
+  });
 });
