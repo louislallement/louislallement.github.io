@@ -2,97 +2,65 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Louis Lallement - Journaliste | Photographe</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Louis Lallement</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body class="light">
   <header>
     <h1>Louis Lallement</h1>
-    <p>journaliste <span class="bar">|</span> photographe</p>
+    <h2>journaliste | photographe</h2>
   </header>
 
   <div class="controls">
-    <div class="lang-switch">
-      <button id="btn-fr" aria-label="Passer en français" class="active">
-        <img src="assets/fr-flag.png" alt="Français" />
-      </button>
-      <button id="btn-en" aria-label="Switch to English">
-        <img src="assets/gb-flag.png" alt="English" />
-      </button>
-    </div>
-    <button id="toggle-theme" aria-label="Changer thème" title="Changer thème">
-      <span id="theme-icon">🌞</span>
-    </button>
+    <img src="assets/fr.svg" alt="Français" id="fr-btn" class="flag" />
+    <img src="assets/en.svg" alt="English" id="en-btn" class="flag" />
+    <button id="theme-toggle">🌙</button>
   </div>
 
   <main>
-    <section class="tuile tuile-bonjour">
-      <h2 data-fr="Bonjour" data-en="Hello">Bonjour</h2>
-      <p data-fr="Actuellement à Paris et alentours" data-en="Currently in Paris and surroundings">
-        Actuellement à Paris et alentours
-      </p>
+    <section class="tile large-tile" id="bonjour">
+      <h3>Bonjour</h3>
+      <p>Bienvenue sur mon site !</p>
     </section>
 
-    <section class="tuiles-row">
-      <section class="tuile portfolio-video">
-        <h2 data-fr="Portfolio Vidéo" data-en="Video Portfolio">Portfolio Vidéo</h2>
-        <div class="videos-container">
-          <iframe src="https://www.instagram.com/p/CzRJOBDsZo4/embed" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>
-          <iframe src="https://www.instagram.com/p/CyOqZ8QrNeJ/embed" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>
-          <iframe src="https://www.instagram.com/p/CyCA2-hMr-y/embed" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>
+    <section class="tiles">
+      <section class="tile">
+        <h3>Portfolio Vidéo</h3>
+        <div class="video-placeholder">Intégration des réels Instagram</div>
+      </section>
+
+      <section class="tile">
+        <h3>Portfolio Écrit</h3>
+        <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank">
+          <img src="assets/figaro-logo.jpg" alt="Figaro" class="logo" />
+        </a>
+      </section>
+
+      <section class="tile" id="photography">
+        <div class="photo-overlay">
+          <h3>Suivez-moi sur Instagram</h3>
         </div>
       </section>
-
-      <section class="tuile portfolio-ecrit">
-        <h2 data-fr="Portfolio Écrit" data-en="Writing Portfolio">Portfolio Écrit</h2>
-        <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank" rel="noopener noreferrer" aria-label="Profil auteur Figaro">
-          <img src="assets/figaro-logo.jpg" alt="Logo Le Figaro" />
-        </a>
-      </section>
-
-      <section class="tuile photographie">
-        <h2 data-fr="Photographie" data-en="Photography">Photographie</h2>
-        <a href="https://www.instagram.com/louis.l.photographie/" target="_blank" rel="noopener noreferrer" class="photo-link" aria-label="Instagram Photographie">
-          <div class="photo-bg"></div>
-          <span data-fr="Suivez-moi sur Instagram" data-en="Follow me on Instagram" class="overlay-text">Suivez-moi sur Instagram</span>
-        </a>
-      </section>
     </section>
 
-    <section class="tuile tuile-contact">
-      <h2 data-fr="Contact" data-en="Contact">Contact</h2>
-      <form action="https://formsubmit.co/louis.lallement@outlook.fr" method="POST">
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_subject" value="Nouveau message depuis ton site CV !" />
-        <label for="nom" data-fr="Nom :" data-en="Last Name:">Nom :</label>
-        <input type="text" id="nom" name="nom" required placeholder="Ton nom" />
-        
-        <label for="prenom" data-fr="Prénom :" data-en="First Name:">Prénom :</label>
-        <input type="text" id="prenom" name="prenom" required placeholder="Ton prénom" />
-        
-        <label for="email" data-fr="Email :" data-en="Email:">Email :</label>
-        <input type="email" id="email" name="email" required placeholder="Ton adresse mail" />
-        
-        <label for="message" data-fr="Message :" data-en="Message:">Message :</label>
-        <textarea id="message" name="message" required placeholder="Écris ton message ici..." rows="5"></textarea>
-        
-        <button type="submit" data-fr="Envoyer" data-en="Send">Envoyer</button>
+    <section class="tile large-tile" id="contact">
+      <h3>Contact</h3>
+      <form>
+        <input type="text" placeholder="Votre nom" required />
+        <input type="email" placeholder="Votre email" required />
+        <textarea placeholder="Votre message..." required></textarea>
+        <button type="submit">Envoyer</button>
       </form>
     </section>
   </main>
 
   <footer>
-    <div id="social-links">
-      <a href="https://twitter.com/louislall" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-        <img src="assets/twitter-32.png" alt="Twitter" />
-      </a>
-      <a href="https://www.linkedin.com/in/louis-lallement-32751b159/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-        <img src="assets/linkedin-32.png" alt="LinkedIn" />
-      </a>
+    <p>© Louis Lallement</p>
+    <div class="social-icons">
+      <a href="https://twitter.com/" target="_blank"><img src="assets/twitter-32.png" alt="Twitter"/></a>
+      <a href="https://linkedin.com/" target="_blank"><img src="assets/linkedin-32.png" alt="LinkedIn"/></a>
     </div>
-    <div id="visitor-count">Visites : 0</div>
-    <div id="copyright">© Louis Lallement 2025</div>
   </footer>
 
   <script src="script.js"></script>
