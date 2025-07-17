@@ -3,24 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="CV en ligne de Louis Lallement, journaliste vidéo et photographe à Paris." />
-  <title>Louis Lallement - CV en ligne</title>
+  <meta name="description" content="Louis Lallement, journaliste vidéo basé à Paris. Découvrez son portfolio et ses expériences." />
+  <title>Louis Lallement - CV</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
     <h1>Louis Lallement</h1>
     <p>Journaliste vidéo | Photographe | Vidéaste</p>
+    <p class="location">Localisé à Paris</p>
   </header>
 
   <section id="presentation">
     <h2>Présentation</h2>
-    <p>Bienvenue sur mon CV en ligne moderne, avec vidéos et animations.</p>
+    <p>Bienvenue sur mon CV en ligne.</p>
   </section>
 
   <section id="portfolio">
     <h2>Portfolio Vidéo</h2>
-    <!-- Exemple d’intégration vidéo Instagram -->
     <iframe 
       src="https://www.instagram.com/p/CWl1Pm7Dov7/embed" 
       width="400" height="480" frameborder="0" scrolling="no" allowtransparency="true">
@@ -30,24 +30,35 @@
   <section id="experiences">
     <h2>Expériences professionnelles</h2>
     <ul>
-      <li>Journaliste vidéo à CNEWS (2021 - 2024)</li>
-      <li>Stagiaire au Figaro Étudiant</li>
+      <li>
+        <img src="https://upload.wikimedia.org/wikipedia/fr/6/62/CNEWS_Logo_2017.svg" alt="Logo CNEWS" style="height: 24px; vertical-align: middle; margin-right: 8px;">
+        Journaliste vidéo à CNEWS (2021 - 2024)
+      </li>
+      <li>
+        <a href="https://www.lefigaro.fr" target="_blank" rel="noopener noreferrer">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Le_Figaro_logo.svg" alt="Logo Figaro" style="height: 24px; vertical-align: middle; margin-right: 8px;">
+        </a>
+        Stagiaire au Figaro Étudiant
+      </li>
     </ul>
   </section>
 
   <section id="contact">
     <h2>Contact</h2>
     <form action="https://formsubmit.co/louis.lallement@outlook.fr" method="POST">
-      <!-- Options de configuration -->
+      <!-- Config FormSubmit -->
       <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_subject" value="Nouveau message depuis ton site CV !">
       <input type="hidden" name="_next" value="https://louislallement.github.io/merci.html">
+      <input type="hidden" name="_subject" value="Message depuis ton site CV">
+
+      <label for="nom">Nom :</label><br />
+      <input type="text" id="nom" name="nom" required placeholder="Ton nom" /><br /><br />
 
       <label for="prenom">Prénom :</label><br />
       <input type="text" id="prenom" name="prenom" required placeholder="Ton prénom" /><br /><br />
 
-      <label for="email">Adresse email :</label><br />
-      <input type="email" id="email" name="email" required placeholder="Ton adresse mail" /><br /><br />
+      <label for="email">Adresse mail :</label><br />
+      <input type="email" id="email" name="email" required placeholder="Ton email" /><br /><br />
 
       <label for="message">Message :</label><br />
       <textarea id="message" name="message" required placeholder="Écris ton message ici..." rows="5"></textarea><br /><br />
