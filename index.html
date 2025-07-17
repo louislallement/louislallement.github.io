@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Louis Lallement - Journaliste & Photographe</title>
-  <!-- Google Fonts : Inter -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -63,17 +62,15 @@
             src="https://upload.wikimedia.org/wikipedia/fr/thumb/7/7e/Logo_CNEWS_2021.svg/1200px-Logo_CNEWS_2021.svg.png"
             alt="Logo CNEWS"
             class="experience-logo"
-            style="height: 24px; margin-left: 10px; vertical-align: middle;"
           />
         </li>
         <li>
           Stagiaire au Figaro Étudiant
-          <a href="https://www.lefigaro.fr" target="_blank" rel="noopener noreferrer" class="figaro-link" style="margin-left: 10px;">
+          <a href="https://www.lefigaro.fr" target="_blank" rel="noopener noreferrer" class="figaro-link">
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Logo_Le_Figaro.svg"
               alt="Logo Le Figaro"
               class="experience-logo"
-              style="height: 24px; vertical-align: middle;"
             />
           </a>
         </li>
@@ -85,16 +82,22 @@
       <form action="https://formsubmit.co/louis.lallement@outlook.fr" method="POST">
         <input type="hidden" name="_captcha" value="false" />
         <input type="hidden" name="_subject" value="Nouveau message depuis ton site CV !" />
+
         <label for="prenom">Prénom :</label>
         <input type="text" id="prenom" name="prenom" required placeholder="Ton prénom" />
+
         <label for="nom">Nom :</label>
         <input type="text" id="nom" name="nom" required placeholder="Ton nom" />
+
         <label for="email">Email :</label>
         <input type="email" id="email" name="email" required placeholder="Ton adresse email" />
+
         <label for="message">Message :</label>
         <textarea id="message" name="message" required placeholder="Écris ton message ici..." rows="5"></textarea>
+
         <button type="submit">Envoyer</button>
       </form>
+
       <div id="social-links">
         <a href="https://x.com/louislall" target="_blank" rel="noopener noreferrer" title="Twitter">
           <img src="https://cdn-icons-png.flaticon.com/32/733/733579.png" alt="Twitter" />
