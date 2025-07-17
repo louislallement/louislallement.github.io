@@ -1,16 +1,15 @@
-// Mode sombre / clair
-const toggleBtn = document.getElementById("theme-toggle");
-toggleBtn.addEventListener("click", () => {
-  document.body.classList.toggle("dark-mode");
-  toggleBtn.textContent =
-    document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
+// Mode clair/sombre
+const toggle = document.getElementById("mode-toggle");
+toggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+  toggle.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
 });
 
-// Bascule langue (placeholder)
-document.getElementById("fr-btn").addEventListener("click", () => {
-  alert("🇫🇷 Mode français activé !");
+// Langue
+document.getElementById("lang-fr").addEventListener("click", () => {
+  alert("Passage au français (simulation)");
 });
 
-document.getElementById("en-btn").addEventListener("click", () => {
-  alert("🇬🇧 English mode coming soon!");
+document.getElementById("lang-en").addEventListener("click", () => {
+  alert("Switch to English (simulation)");
 });
