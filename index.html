@@ -2,62 +2,73 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Louis Lallement</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Louis Lallement - Journaliste | Photographe</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
     <h1>Louis Lallement</h1>
-    <p>journaliste | photographe</p>
-    <button id="toggle-theme" aria-label="Changer le thème">🌙</button>
+    <p>journaliste <span class="bar">|</span> photographe</p>
+    <button id="toggle-theme" aria-label="Changer thème">🌙</button>
   </header>
 
-  <main>
-    <section class="tuiles-row">
-      <div class="tuile">
-        <h2>Portfolio Vidéo</h2>
-        <div class="videos-container">
-          <iframe src="https://www.instagram.com/reel/Cexample1/embed" frameborder="0" allowfullscreen></iframe>
-          <iframe src="https://www.instagram.com/reel/Cexample2/embed" frameborder="0" allowfullscreen></iframe>
-          <iframe src="https://www.instagram.com/reel/Cexample3/embed" frameborder="0" allowfullscreen></iframe>
-        </div>
-      </div>
+  <section class="tuile" id="bonjour">
+    <h2>Bonjour</h2>
+    <p>Actuellement à Paris et alentour</p>
+  </section>
 
-      <div class="tuile">
-        <h2>Portfolio Écrit</h2>
-        <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank">
-          <img src="figaro-logo.png" alt="Le Figaro" style="width: 150px;">
-        </a>
-      </div>
-
-      <div class="tuile">
-        <h2>Photographie</h2>
-        <p>Contactez-moi</p>
+  <section class="tuiles-row">
+    <section class="tuile" id="portfolio-video">
+      <h2>Portfolio Vidéo</h2>
+      <div class="videos-container">
+        <iframe src="https://www.instagram.com/p/CzRJOBDsZo4/embed" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>
+        <iframe src="https://www.instagram.com/p/CyOqZ8QrNeJ/embed" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>
+        <iframe src="https://www.instagram.com/p/CyCA2-hMr-y/embed" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>
       </div>
     </section>
 
-    <section class="tuile">
-      <h2>Contact</h2>
-      <form action="https://formreact.com/YOUR-FORM-ID" method="POST">
-        <input type="text" name="nom" placeholder="Votre nom" required />
-        <input type="email" name="email" placeholder="Votre email" required />
-        <textarea name="message" rows="4" placeholder="Votre message" required></textarea>
-        <button type="submit">Envoyer</button>
-      </form>
+    <section class="tuile" id="portfolio-ecrit">
+      <h2>Portfolio Écrit</h2>
+      <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank" rel="noopener noreferrer" aria-label="Profil auteur Figaro">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Le_Figaro_Logo_2014.svg" alt="Logo Le Figaro" />
+      </a>
     </section>
-  </main>
+
+    <section class="tuile" id="photographie">
+      <h2>Photographie</h2>
+      <p><a href="https://www.instagram.com/louis.l.photographie/" target="_blank" rel="noopener noreferrer">Suivez-moi sur Instagram</a></p>
+    </section>
+  </section>
+
+  <section class="tuile" id="contact">
+    <h2>Contact</h2>
+    <form action="https://formsubmit.co/louis.lallement@outlook.fr" method="POST">
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_subject" value="Nouveau message depuis ton site CV !" />
+      <label for="nom">Nom :</label><br />
+      <input type="text" id="nom" name="nom" required placeholder="Ton nom" /><br /><br />
+      <label for="prenom">Prénom :</label><br />
+      <input type="text" id="prenom" name="prenom" required placeholder="Ton prénom" /><br /><br />
+      <label for="email">Email :</label><br />
+      <input type="email" id="email" name="email" required placeholder="Ton adresse mail" /><br /><br />
+      <label for="message">Message :</label><br />
+      <textarea id="message" name="message" required placeholder="Écris ton message ici..." rows="5"></textarea><br /><br />
+      <button type="submit">Envoyer</button>
+    </form>
+  </section>
 
   <footer>
-    <div id="visitor-count">Visites : ...</div>
     <div id="social-links">
-      <a href="https://twitter.com/tonprofil" target="_blank">
-        <img src="twitter-icon.png" alt="Twitter" />
+      <a href="https://twitter.com/louislall" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+        <img src="https://cdn-icons-png.flaticon.com/32/733/733579.png" alt="Twitter" />
       </a>
-      <a href="https://www.linkedin.com/in/tonprofil" target="_blank">
-        <img src="linkedin-icon.png" alt="LinkedIn" />
+      <a href="https://www.linkedin.com/in/louis-lallement-32751b159/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <img src="https://cdn-icons-png.flaticon.com/32/174/174857.png" alt="LinkedIn" />
       </a>
     </div>
+    <div id="visitor-count">Visites : 0</div>
+    <div id="copyright">© Louis Lallement 2025</div>
   </footer>
 
   <script src="script.js"></script>
