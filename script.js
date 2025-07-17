@@ -1,5 +1,11 @@
-document.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("load", () => {
   const faders = document.querySelectorAll(".fade-in");
+
+  if (!("IntersectionObserver" in window)) {
+    // Fallback: tout afficher directement si l'observateur n'est pas supporté
+    faders.forEach(el => el.classList.add("visible"));
+    return;
+  }
 
   const appearOptions = {
     threshold: 0.1,
@@ -9,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const appearOnScroll = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
-
       entry.target.classList.add("visible");
       observer.unobserve(entry.target);
     });
