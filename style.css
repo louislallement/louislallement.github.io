@@ -1,219 +1,300 @@
-/* Variables couleurs jour */
+/* Couleurs et variables */
 :root {
-  --bg-color: #f2f4f8;
-  --text-color: #222;
-  --accent-color: #0077cc;
-  --link-color: #004a99;
-  --shadow-color: rgba(0, 0, 0, 0.15);
-  --barre-color: #888;
+  --clr-bg-light: #f2f4f8;
+  --clr-bg-dark: #0b2340;
+  --clr-text-light: #222;
+  --clr-text-dark: #cbd6f0;
+  --clr-accent-light: #0077cc;
+  --clr-accent-dark: #4da6ff;
+  --clr-link-light: #004a99;
+  --clr-link-dark: #b3d1ff;
+  --shadow-light: rgba(0,0,0,0.15);
+  --shadow-dark: rgba(0,0,0,0.5);
+  --border-radius: 24px;
+  --transition-time: 0.4s;
 }
 
-/* Variables couleurs nuit */
-body.dark {
-  --bg-color: #0b2340;
-  --text-color: #cbd6f0;
-  --accent-color: #4da6ff;
-  --link-color: #b3d1ff;
-  --shadow-color: rgba(0, 0, 0, 0.5);
-  --barre-color: #a0b5d4;
-}
-
-* {
-  box-sizing: border-box;
-}
-
+/* Mode clair par défaut */
 body {
-  background-color: var(--bg-color);
-  color: var(--text-color);
+  background-color: var(--clr-bg-light);
+  color: var(--clr-text-light);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
-  padding: 0 1rem;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  padding: 1rem;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  transition: background-color var(--transition-time), color var(--transition-time);
 }
 
+/* Mode sombre */
+body.dark {
+  background-color: var(--clr-bg-dark);
+  color: var(--clr-text-dark);
+}
+
+/* Header */
 header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
   text-align: center;
-  margin: 2rem 0 1rem 0;
+  position: relative;
 }
 
 header h1 {
   font-size: 3rem;
   margin: 0;
+  flex-basis: 100%;
 }
 
 header h2 {
-  font-size: 1.25rem;
-  margin-top: 0.25rem;
   font-weight: 400;
-  color: var(--accent-color);
+  font-size: 1.3rem;
+  color: var(--clr-accent-light);
+}
+
+body.dark header h2 {
+  color: var(--clr-accent-dark);
 }
 
 .barre {
   margin: 0 0.5rem;
-  color: var(--barre-color);
+  color: var(--clr-text-light);
 }
 
+body.dark .barre {
+  color: var(--clr-text-dark);
+}
+
+#mode-toggle {
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: var(--clr-accent-light);
+  transition: color var(--transition-time);
+  position: absolute;
+  right: 0;
+  top: 0.5rem;
+}
+
+body.dark #mode-toggle {
+  color: var(--clr-accent-dark);
+}
+
+#mode-toggle:focus {
+  outline: 2px solid var(--clr-accent-light);
+  outline-offset: 2px;
+}
+
+/* Main */
 main {
-  flex-grow: 1;
-  max-width: 900px;
+  max-width: 1100px;
   margin: 0 auto 3rem auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  padding: 0 1rem;
 }
 
-section {
-  background: var(--bg-color);
-  padding: 1rem 1.5rem;
-  margin-bottom: 2rem;
-  border-radius: 16px;
-  box-shadow: 0 6px 14px var(--shadow-color);
-  transition: background-color 0.3s ease;
+/* Tuiles */
+.tile {
+  background: var(--clr-bg-light);
+  border-radius: var(--border-radius);
+  box-shadow: 0 10px 30px var(--shadow-light);
+  padding: 2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255 255 255 / 0.2);
 }
 
+body.dark .tile {
+  background: rgba(10 25 55 / 0.8);
+  box-shadow: 0 10px 30px var(--shadow-dark);
+  border: 1px solid rgba(255 255 255 / 0.1);
+}
+
+/* Quand visible */
+.tile.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Titres */
 h2 {
   margin-top: 0;
-  color: var(--text-color);
+  margin-bottom: 1rem;
+  color: var(--clr-text-light);
+  transition: color var(--transition-time);
 }
 
+body.dark h2 {
+  color: var(--clr-text-dark);
+}
+
+/* Liens */
 a {
-  color: var(--link-color);
-  text-decoration: none;
+  color: var(--clr-link-light);
   font-weight: 600;
-  transition: color 0.3s ease;
+  text-decoration: none;
+  transition: color var(--transition-time);
+}
+
+body.dark a {
+  color: var(--clr-link-dark);
 }
 
 a:hover,
 a:focus {
-  color: var(--accent-color);
+  color: var(--clr-accent-light);
   outline: none;
 }
 
+body.dark a:hover,
+body.dark a:focus {
+  color: var(--clr-accent-dark);
+}
+
+/* Vidéos */
 .video-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
   gap: 1rem;
 }
 
 .video-grid iframe {
   width: 100%;
   height: 480px;
-  border-radius: 16px;
+  border-radius: var(--border-radius);
   border: none;
 }
 
-.logo-small {
-  height: 48px;
-  width: auto;
-  filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.2));
+/* Logos */
+.figaro-link img {
+  width: 120px;
+  height: auto;
+  filter: drop-shadow(1px 1px 3px rgba(0,0,0,0.3));
   transition: filter 0.3s ease;
+  border-radius: 8px;
 }
 
-.logo-small:hover {
-  filter: drop-shadow(0 0 6px var(--accent-color));
+.figaro-link:hover img,
+.figaro-link:focus img {
+  filter: drop-shadow(0 0 8px var(--clr-accent-light));
+  outline: none;
 }
 
+body.dark .figaro-link:hover img,
+body.dark .figaro-link:focus img {
+  filter: drop-shadow(0 0 8px var(--clr-accent-dark));
+}
+
+/* Photographie */
 #photographie p {
   font-size: 1.1rem;
 }
 
-.instagram-link {
-  font-weight: 700;
-  color: var(--accent-color);
-}
-
-.instagram-link:hover,
-.instagram-link:focus {
-  color: var(--link-color);
-  text-decoration: underline;
-  outline: none;
-}
-
-form {
+/* Formulaire */
+.contact-form {
   display: flex;
   flex-direction: column;
+  gap: 1rem;
 }
 
-form input,
-form textarea {
+.contact-form input,
+.contact-form textarea {
+  padding: 0.8rem;
   font-size: 1rem;
-  padding: 0.6rem;
-  margin-bottom: 1rem;
   border: 1.5px solid #ccc;
-  border-radius: 10px;
-  transition: border-color 0.3s ease;
+  border-radius: 14px;
   resize: vertical;
+  transition: border-color 0.3s ease;
 }
 
-form input:focus,
-form textarea:focus {
-  border-color: var(--accent-color);
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--clr-accent-light);
   outline: none;
 }
 
-button[type="submit"] {
-  background-color: var(--accent-color);
-  color: white;
+body.dark .contact-form input:focus,
+body.dark .contact-form textarea:focus {
+  border-color: var(--clr-accent-dark);
+}
+
+.contact-form button {
+  background-color: var(--clr-accent-light);
+  color: #fff;
   font-weight: 700;
-  padding: 0.75rem;
   border: none;
-  border-radius: 12px;
+  padding: 0.8rem;
+  border-radius: 14px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-button[type="submit"]:hover,
-button[type="submit"]:focus {
-  background-color: var(--link-color);
+.contact-form button:hover,
+.contact-form button:focus {
+  background-color: var(--clr-link-light);
   outline: none;
 }
 
+body.dark .contact-form button {
+  background-color: var(--clr-accent-dark);
+}
+
+body.dark .contact-form button:hover,
+body.dark .contact-form button:focus {
+  background-color: var(--clr-link-dark);
+}
+
+/* Footer */
 footer {
   display: flex;
   justify-content: center;
-  gap: 1.5rem;
-  align-items: center;
+  gap: 2rem;
   padding-bottom: 1.5rem;
 }
 
 .icon-footer {
-  height: 32px;
-  width: 32px;
+  width: 36px;
+  height: 36px;
   filter: drop-shadow(0 0 1px rgba(0,0,0,0.3));
   transition: filter 0.3s ease;
 }
 
 .icon-footer:hover,
 .icon-footer:focus {
-  filter: drop-shadow(0 0 6px var(--accent-color));
+  filter: drop-shadow(0 0 8px var(--clr-accent-light));
   outline: none;
 }
 
-#mode-toggle {
-  background: none;
-  border: none;
-  font-size: 1.6rem;
-  cursor: pointer;
-  color: var(--accent-color);
-  transition: color 0.3s ease;
-}
-
-#mode-toggle:hover,
-#mode-toggle:focus {
-  color: var(--link-color);
-  outline: none;
+body.dark .icon-footer:hover,
+body.dark .icon-footer:focus {
+  filter: drop-shadow(0 0 8px var(--clr-accent-dark));
 }
 
 /* Responsive */
-
 @media (max-width: 600px) {
   header h1 {
-    font-size: 2.2rem;
+    font-size: 2.4rem;
   }
   header h2 {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
   .video-grid iframe {
     height: 280px;
+  }
+  main {
+    grid-template-columns: 1fr;
+  }
+  .tile {
+    padding: 1.5rem;
   }
 }
