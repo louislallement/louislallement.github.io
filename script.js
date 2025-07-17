@@ -1,39 +1,39 @@
-// Toggle mode jour/nuit
-document.addEventListener('DOMContentLoaded', () => {
+// Toggle mode clair / sombre
+document.addEventListener("DOMContentLoaded", () => {
   const body = document.body;
 
-  // Création d'un bouton toggle en haut à droite
-  const toggleBtn = document.createElement('button');
-  toggleBtn.textContent = '🌙 / ☀️';
-  toggleBtn.setAttribute('aria-label', 'Basculer mode jour/nuit');
-  toggleBtn.style.position = 'fixed';
-  toggleBtn.style.top = '15px';
-  toggleBtn.style.right = '15px';
-  toggleBtn.style.padding = '8px 12px';
-  toggleBtn.style.borderRadius = '8px';
-  toggleBtn.style.border = 'none';
-  toggleBtn.style.cursor = 'pointer';
-  toggleBtn.style.backgroundColor = '#4a90e2';
-  toggleBtn.style.color = '#fff';
-  toggleBtn.style.fontSize = '1.1rem';
-  toggleBtn.style.zIndex = '1000';
-  toggleBtn.style.boxShadow = '0 3px 10px rgba(74,144,226,0.5)';
-
+  // Créer un bouton toggle en haut à droite
+  const toggleBtn = document.createElement("button");
+  toggleBtn.textContent = "🌙";
+  toggleBtn.style.position = "fixed";
+  toggleBtn.style.top = "20px";
+  toggleBtn.style.right = "20px";
+  toggleBtn.style.padding = "10px 16px";
+  toggleBtn.style.fontSize = "1.4rem";
+  toggleBtn.style.border = "none";
+  toggleBtn.style.borderRadius = "12px";
+  toggleBtn.style.cursor = "pointer";
+  toggleBtn.style.background = "var(--blue-light)";
+  toggleBtn.style.color = "white";
+  toggleBtn.style.zIndex = "9999";
   document.body.appendChild(toggleBtn);
 
-  // Charger la préférence stockée en localStorage
-  if(localStorage.getItem('theme') === 'night') {
-    body.classList.add('night');
-  }
-
-  // Basculer thème
-  toggleBtn.addEventListener('click', () => {
-    body.classList.toggle('night');
-
-    if(body.classList.contains('night')) {
-      localStorage.setItem('theme', 'night');
+  toggleBtn.addEventListener("click", () => {
+    if (body.classList.contains("dark")) {
+      body.classList.remove("dark");
+      toggleBtn.textContent = "🌙";
+      localStorage.setItem("theme", "light");
     } else {
-      localStorage.setItem('theme', 'day');
+      body.classList.add("dark");
+      toggleBtn.textContent = "☀️";
+      localStorage.setItem("theme", "dark");
     }
   });
+
+  // Charger le thème sauvegardé
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    body.classList.add("dark");
+    toggleBtn.textContent = "☀️";
+  }
 });
