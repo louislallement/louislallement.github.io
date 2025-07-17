@@ -10,16 +10,19 @@
   <header>
     <h1>Louis Lallement</h1>
     <p>journaliste <span class="bar">|</span> photographe</p>
-    <div id="controls">
-      <button id="toggle-theme" aria-label="Changer thème">🌙</button>
-      <button id="lang-fr" aria-label="Français" class="lang-button selected">
-        <img src="assets/france-32.png" alt="FR" />
+  </header>
+
+  <div class="controls">
+    <div class="lang-toggle">
+      <button id="btn-fr" aria-label="Français" class="active">
+        <img src="assets/france-32.png" alt="Français" />
       </button>
-      <button id="lang-en" aria-label="English" class="lang-button">
-        <img src="assets/uk-32.png" alt="EN" />
+      <button id="btn-en" aria-label="English">
+        <img src="assets/uk-32.png" alt="English" />
       </button>
     </div>
-  </header>
+    <button id="toggle-theme" aria-label="Changer thème">🌙</button>
+  </div>
 
   <section class="tuile tuile-bonjour">
     <h2>Bonjour</h2>
@@ -43,13 +46,13 @@
       </a>
     </section>
 
-    <section class="tuile tuile-photographie" id="photographie">
+    <section class="tuile photographie" id="photographie">
       <h2>Photographie</h2>
-      <a href="https://www.instagram.com/louis.l.photographie/" target="_blank" rel="noopener noreferrer" class="insta-link">
-        <div class="insta-overlay">
-          <p>Suivez-moi sur Instagram</p>
-        </div>
-      </a>
+      <div class="photo-bg">
+        <a href="https://www.instagram.com/louis.l.photographie/" target="_blank" rel="noopener noreferrer" aria-label="Instagram photographe">
+          <span class="overlay-text">Suivez-moi sur Instagram</span>
+        </a>
+      </div>
     </section>
   </section>
 
