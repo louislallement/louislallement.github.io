@@ -1,33 +1,39 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const toggle = document.getElementById("mode-toggle");
+// Toggle mode jour/nuit
+document.addEventListener('DOMContentLoaded', () => {
   const body = document.body;
 
-  // Activer le mode sombre si préférence utilisateur
-  if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-    body.classList.add("dark");
+  // Création d'un bouton toggle en haut à droite
+  const toggleBtn = document.createElement('button');
+  toggleBtn.textContent = '🌙 / ☀️';
+  toggleBtn.setAttribute('aria-label', 'Basculer mode jour/nuit');
+  toggleBtn.style.position = 'fixed';
+  toggleBtn.style.top = '15px';
+  toggleBtn.style.right = '15px';
+  toggleBtn.style.padding = '8px 12px';
+  toggleBtn.style.borderRadius = '8px';
+  toggleBtn.style.border = 'none';
+  toggleBtn.style.cursor = 'pointer';
+  toggleBtn.style.backgroundColor = '#4a90e2';
+  toggleBtn.style.color = '#fff';
+  toggleBtn.style.fontSize = '1.1rem';
+  toggleBtn.style.zIndex = '1000';
+  toggleBtn.style.boxShadow = '0 3px 10px rgba(74,144,226,0.5)';
+
+  document.body.appendChild(toggleBtn);
+
+  // Charger la préférence stockée en localStorage
+  if(localStorage.getItem('theme') === 'night') {
+    body.classList.add('night');
   }
 
-  toggle.addEventListener("click", () => {
-    body.classList.toggle("dark");
-  });
+  // Basculer thème
+  toggleBtn.addEventListener('click', () => {
+    body.classList.toggle('night');
 
-  // Animation fade-in au scroll
-  const faders = document.querySelectorAll(".fade-in");
-
-  const appearOptions = {
-    threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px",
-  };
-
-  const appearOnScroll = new IntersectionObserver((entries, observer) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add("appear");
-      observer.unobserve(entry.target);
-    });
-  }, appearOptions);
-
-  faders.forEach((fader) => {
-    appearOnScroll.observe(fader);
+    if(body.classList.contains('night')) {
+      localStorage.setItem('theme', 'night');
+    } else {
+      localStorage.setItem('theme', 'day');
+    }
   });
 });
