@@ -1,164 +1,236 @@
-/* Reset */
+/* Reset & basics */
 * {
-  margin: 0; padding: 0; box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-sizing: border-box;
+  margin: 0; padding: 0;
 }
 
 body {
-  background-color: #f0f4f8;
-  color: #333;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: #f0f2f5;
+  color: #2a2a2a;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Dark mode */
 body.dark {
   background-color: #0a1e3f;
   color: #c9d6f2;
 }
 
+/* Header */
 header {
-  width: 100%;
-  max-width: 900px;
   text-align: center;
   position: relative;
+  width: 100%;
+  max-width: 900px;
   margin-bottom: 20px;
 }
 
 header h1 {
-  font-size: 3rem;
-  font-weight: 900;
-  margin-bottom: 8px;
-  color: inherit;
+  font-size: 3.2rem;
+  font-weight: 800;
+  margin-bottom: 5px;
 }
 
 header p {
-  font-size: 1.25rem;
-  letter-spacing: 0.1em;
+  font-size: 1.3rem;
   color: #555;
 }
 
-body.dark header p {
-  color: #a9b9d9;
+header p .bar {
+  margin: 0 8px;
+  color: #999;
 }
 
+/* Toggle theme button */
 #toggle-theme {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  background: transparent;
+  top: 15px;
+  right: 15px;
+  background: none;
   border: none;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   cursor: pointer;
-  color: #555;
+  color: inherit;
   transition: color 0.3s ease;
 }
 
-body.dark #toggle-theme {
-  color: #c9d6f2;
+#toggle-theme:hover {
+  color: #0077ff;
 }
 
+/* Tuile container en ligne sur grand écran */
+.tuiles-row {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 900px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+/* Chaque tuile */
 .tuile {
-  background: #e0e7ff;
+  background: #fff;
   border-radius: 15px;
   box-shadow: 0 8px 20px rgba(50, 50, 93, 0.1);
   padding: 20px;
-  margin-bottom: 20px;
-  width: 100%;
+  flex: 1 1 280px;
   max-width: 290px;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
+  transition: background 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
 }
 
 body.dark .tuile {
   background: #163d7a;
   box-shadow: 0 8px 20px rgba(20, 45, 80, 0.8);
+  color: #c9d6f2;
 }
 
+/* Titres des tuiles */
 .tuile h2 {
-  font-size: 1.5rem;
-  margin-bottom: 12px;
-  color: #444;
+  margin-bottom: 15px;
+  font-weight: 700;
 }
 
-body.dark .tuile h2 {
-  color: #bcd1ff;
-}
-
-#portfolio-container {
+/* Vidéos Instagram */
+.videos-container {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   gap: 15px;
-  flex-wrap: wrap;
-  max-width: 900px;
-  margin-bottom: 30px;
 }
 
-#portfolio-container > section {
-  flex: 1 1 30%;
-  min-width: 260px;
-}
-
-.videos iframe {
+.videos-container iframe {
   width: 100%;
-  height: 350px;
-  border-radius: 12px;
-  margin-bottom: 12px;
+  aspect-ratio: 9 / 16;
+  border-radius: 15px;
   border: none;
 }
 
-#portfolio-ecrit img {
+/* Logo Figaro */
+.figaro-link img {
   width: 100%;
   max-width: 150px;
-  cursor: pointer;
-  filter: drop-shadow(0 0 2px rgba(0,0,0,0.15));
+  display: block;
+  margin: 0 auto;
+  filter: grayscale(0.3);
   transition: filter 0.3s ease;
 }
 
-#portfolio-ecrit img:hover {
-  filter: drop-shadow(0 0 8px rgba(0,0,255,0.5));
+.figaro-link:hover img {
+  filter: grayscale(0);
 }
 
-#photographie a {
-  color: #2c58ff;
+/* Photographie */
+#photographie p a {
+  color: #0077ff;
   text-decoration: none;
   font-weight: 600;
 }
 
-body.dark #photographie a {
-  color: #a2baff;
+#photographie p a:hover {
+  text-decoration: underline;
 }
 
+/* Formulaire contact */
+form label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 6px;
+  color: inherit;
+}
+
+form input[type="text"],
+form input[type="email"],
+form textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #bbb;
+  font-size: 1rem;
+  margin-bottom: 15px;
+  background: #fefefe;
+  color: #2a2a2a;
+  transition: border-color 0.3s ease;
+}
+
+form input[type="text"]:focus,
+form input[type="email"]:focus,
+form textarea:focus {
+  outline: none;
+  border-color: #0077ff;
+}
+
+form button {
+  background-color: #0077ff;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #005bb5;
+}
+
+body.dark form input[type="text"],
+body.dark form input[type="email"],
+body.dark form textarea {
+  background: #0a1e3f;
+  color: #c9d6f2;
+  border-color: #375aa8;
+}
+
+body.dark form input[type="text"]:focus,
+body.dark form input[type="email"]:focus,
+body.dark form textarea:focus {
+  border-color: #66a0ff;
+}
+
+body.dark form button {
+  background-color: #375aa8;
+}
+
+body.dark form button:hover {
+  background-color: #2a4f8b;
+}
+
+/* Footer */
 footer {
+  text-align: center;
+  margin-top: auto;
+  padding: 15px 10px 30px;
+  font-size: 0.9rem;
+  color: #555;
   width: 100%;
   max-width: 900px;
-  text-align: center;
-  font-size: 0.9rem;
-  color: #666;
-  margin-top: auto;
-  padding: 15px 0 30px 0;
   user-select: none;
 }
 
-body.dark footer {
-  color: #99aeea;
-}
-
 #social-links {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 #social-links a {
   margin: 0 10px;
   display: inline-block;
+  vertical-align: middle;
 }
 
 #social-links img {
   width: 28px;
   height: 28px;
-  filter: grayscale(0.6);
+  filter: grayscale(0.5);
   transition: filter 0.3s ease;
 }
 
@@ -166,16 +238,34 @@ body.dark footer {
   filter: grayscale(0);
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  #portfolio-container {
-    flex-direction: column;
-    gap: 20px;
+#visitor-count {
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 6px;
+}
+
+/* Responsive - Mobile */
+@media (max-width: 720px) {
+  header h1 {
+    font-size: 2.4rem;
   }
+
+  header p {
+    font-size: 1.1rem;
+  }
+
+  .tuiles-row {
+    flex-direction: column;
+    max-width: 400px;
+  }
+
   .tuile {
     max-width: 100%;
   }
-  header h1 {
-    font-size: 2.5rem;
+
+  #toggle-theme {
+    top: 10px;
+    right: 10px;
+    font-size: 1.6rem;
   }
 }
