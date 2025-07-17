@@ -1,54 +1,37 @@
-// Gestion du mode clair/sombre
+// Mode jour/nuit
 const toggleThemeBtn = document.getElementById('toggle-theme');
-const body = document.body;
-
-function setTheme(theme) {
-  if (theme === 'dark') {
-    body.classList.add('dark');
-    toggleThemeBtn.textContent = '☀️';
-  } else {
-    body.classList.remove('dark');
-    toggleThemeBtn.textContent = '🌙';
-  }
-  localStorage.setItem('theme', theme);
-}
-
-// Chargement du thème sauvegardé
-const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-setTheme(savedTheme);
-
 toggleThemeBtn.addEventListener('click', () => {
-  const newTheme = body.classList.contains('dark') ? 'light' : 'dark';
-  setTheme(newTheme);
+  document.body.classList.toggle('dark-mode');
+  updateThemeIcon();
 });
 
-// Gestion du changement de langue FR/EN
-const langFrBtn = document.getElementById('lang-fr');
-const langEnBtn = document.getElementById('lang-en');
-const elementsToTranslate = document.querySelectorAll('[data-fr]');
+function updateThemeIcon() {
+  if (document.body.classList.contains('dark-mode')) {
+    toggleThemeBtn.textContent = '☀️';
+  } else {
+    toggleThemeBtn.textContent = '🌙';
+  }
+}
+updateThemeIcon();
+
+// Changement langue FR / EN
+const btnFR = document.getElementById('toggle-lang-fr');
+const btnEN = document.getElementById('toggle-lang-en');
+const translatableElements = document.querySelectorAll('[data-fr]');
 
 function setLanguage(lang) {
-  elementsToTranslate.forEach(el => {
+  translatableElements.forEach(el => {
     el.textContent = el.getAttribute(`data-${lang}`);
   });
-  if (lang === 'fr') {
-    langFrBtn.classList.add('active');
-    langEnBtn.classList.remove('active');
-  } else {
-    langEnBtn.classList.add('active');
-    langFrBtn.classList.remove('active');
-  }
-  localStorage.setItem('language', lang);
 }
 
-// Chargement de la langue sauvegardée ou par défaut français
-const savedLang = localStorage.getItem('language') || 'fr';
-setLanguage(savedLang);
+btnFR.addEventListener('click', () => setLanguage('fr'));
+btnEN.addEventListener('click', () => setLanguage('en'));
 
-langFrBtn.addEventListener('click', () => setLanguage('fr'));
-langEnBtn.addEventListener('click', () => setLanguage('en'));
+// Initialise en français par défaut
+setLanguage('fr');
 
-// Effet de translation sur les tuiles au hover (plus accentué)
+// Effets hover légers sur tuiles
 const tuiles = document.querySelectorAll('.tuile');
 tuiles.forEach(tuile => {
   tuile.addEventListener('mousemove', e => {
@@ -57,22 +40,29 @@ tuiles.forEach(tuile => {
     const y = e.clientY - rect.top;
     const midX = rect.width / 2;
     const midY = rect.height / 2;
-    const rotateX = ((y - midY) / midY) * 8; // accentué
-    const rotateY = ((x - midX) / midX) * 8;
-    tuile.style.transform = `perspective(500px) rotateX(${-rotateX}deg) rotateY(${rotateY}deg) scale(1.07)`;
-    tuile.style.boxShadow = `0 20px 40px rgba(0, 0, 0, 0.25)`;
+    const maxTranslate = 6; // px max déplacement (réduit)
+
+    const moveX = ((x - midX) / midX) * maxTranslate;
+    const moveY = ((y - midY) / midY) * maxTranslate;
+
+    tuile.style.transform = `translate(${moveX}px, ${moveY}px)`;
   });
+
   tuile.addEventListener('mouseleave', () => {
-    tuile.style.transform = '';
-    tuile.style.boxShadow = '';
+    tuile.style.transform = 'translate(0, 0)';
   });
 });
 
-// Gestion compteur visite (exemple simplifié)
-// Ce compteur doit être lié à un vrai backend ou service (Matomo, Google Analytics, etc.)
-// Ici, on simule avec localStorage juste pour démonstration, mais ça compte localement (pas global)
+// Simulateur compteur visite (tu pourras connecter un vrai API)
 const visitorCountEl = document.getElementById('visitor-count');
-let visits = localStorage.getItem('visits') || 0;
-visits = Number(visits) + 1;
-localStorage.setItem('visits', visits);
-visitorCountEl.textContent = `Visites : ${visits}`;
+
+let visitorCount = localStorage.getItem('visitorCount');
+if (!visitorCount) {
+  visitorCount = 42; // valeur de départ fictive
+}
+visitorCountEl.textContent = `Visites : ${visitorCount}`;
+
+// Exemple : incrémenter compteur à chaque chargement (localStorage)
+visitorCount++;
+localStorage.setItem('visitorCount', visitorCount);
+visitorCountEl.textContent = `Visites : ${visitorCount}`;
