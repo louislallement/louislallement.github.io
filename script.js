@@ -1,30 +1,33 @@
-// Dark/Light theme toggle
+// Dark/Light mode toggle
 const toggleThemeBtn = document.getElementById('toggle-theme');
 const body = document.body;
 
 function setTheme(theme) {
-  if (theme === 'dark') {
-    body.classList.add('dark-theme');
+  if(theme === 'dark') {
+    body.classList.add('dark');
     toggleThemeBtn.textContent = '☀️';
   } else {
-    body.classList.remove('dark-theme');
+    body.classList.remove('dark');
     toggleThemeBtn.textContent = '🌙';
   }
   localStorage.setItem('theme', theme);
 }
 
 // Initial load theme
-const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+const savedTheme = localStorage.getItem('theme') || 'light';
 setTheme(savedTheme);
 
 toggleThemeBtn.addEventListener('click', () => {
-  const newTheme = body.classList.contains('dark-theme') ? 'light' : 'dark';
-  setTheme(newTheme);
+  if(body.classList.contains('dark')) {
+    setTheme('light');
+  } else {
+    setTheme('dark');
+  }
 });
 
-// Language switcher
-const frFlag = document.getElementById('fr-flag');
-const enFlag = document.getElementById('en-flag');
+// Language toggle
+const langFrBtn = document.getElementById('lang-fr');
+const langEnBtn = document.getElementById('lang-en');
 
 const translations = {
   fr: {
@@ -33,14 +36,13 @@ const translations = {
     portfolioVideoTitle: 'Portfolio Vidéo',
     portfolioEcritTitle: 'Portfolio Écrit',
     photographieTitle: 'Photographie',
-    instagramText: 'Suivez-moi sur',
-    instagramLinkText: 'Instagram',
+    photographieText: 'Suivez-moi sur Instagram',
     contactTitle: 'Contact',
-    labelNom: 'Nom :',
-    labelPrenom: 'Prénom :',
-    labelEmail: 'Email :',
-    labelMessage: 'Message :',
-    submitBtn: 'Envoyer',
+    formNom: 'Nom :',
+    formPrenom: 'Prénom :',
+    formEmail: 'Email :',
+    formMessage: 'Message :',
+    formSubmit: 'Envoyer',
   },
   en: {
     bonjourTitle: 'Hello',
@@ -48,58 +50,55 @@ const translations = {
     portfolioVideoTitle: 'Video Portfolio',
     portfolioEcritTitle: 'Written Portfolio',
     photographieTitle: 'Photography',
-    instagramText: 'Follow me on',
-    instagramLinkText: 'Instagram',
+    photographieText: 'Follow me on Instagram',
     contactTitle: 'Contact',
-    labelNom: 'Last name:',
-    labelPrenom: 'First name:',
-    labelEmail: 'Email:',
-    labelMessage: 'Message:',
-    submitBtn: 'Send',
-  },
+    formNom: 'Last name:',
+    formPrenom: 'First name:',
+    formEmail: 'Email:',
+    formMessage: 'Message:',
+    formSubmit: 'Send',
+  }
 };
 
 function setLanguage(lang) {
-  document.getElementById('bonjour-title').textContent = translations[lang].bonjourTitle;
-  document.getElementById('bonjour-text').textContent = translations[lang].bonjourText;
-  document.getElementById('portfolio-video-title').textContent = translations[lang].portfolioVideoTitle;
-  document.getElementById('portfolio-ecrit-title').textContent = translations[lang].portfolioEcritTitle;
-  document.getElementById('photographie-title').textContent = translations[lang].photographieTitle;
-  document.querySelector('.instagram-text').firstChild.textContent = translations[lang].instagramText + ' ';
-  const instaLink = document.querySelector('.instagram-text a');
-  instaLink.textContent = translations[lang].instagramLinkText;
-  document.getElementById('contact-title').textContent = translations[lang].contactTitle;
-  document.getElementById('label-nom').textContent = translations[lang].labelNom;
-  document.getElementById('label-prenom').textContent = translations[lang].labelPrenom;
-  document.getElementById('label-email').textContent = translations[lang].labelEmail;
-  document.getElementById('label-message').textContent = translations[lang].labelMessage;
-  document.getElementById('submit-btn').textContent = translations[lang].submitBtn;
+  document.querySelector('.tuile-bonjour h2').textContent = translations[lang].bonjourTitle;
+  document.querySelector('.tuile-bonjour p').textContent = translations[lang].bonjourText;
+  document.querySelector('#portfolio-video h2').textContent = translations[lang].portfolioVideoTitle;
+  document.querySelector('#portfolio-ecrit h2').textContent = translations[lang].portfolioEcritTitle;
+  document.querySelector('.tuile-photographie h2').textContent = translations[lang].photographieTitle;
+  document.querySelector('.insta-overlay p').textContent = translations[lang].photographieText;
+  document.querySelector('.tuile-contact h2').textContent = translations[lang].contactTitle;
 
-  if (lang === 'fr') {
-    frFlag.classList.add('active');
-    enFlag.classList.remove('active');
+  // Form labels and button
+  document.querySelector('label[for="nom"]').textContent = translations[lang].formNom;
+  document.querySelector('label[for="prenom"]').textContent = translations[lang].formPrenom;
+  document.querySelector('label[for="email"]').textContent = translations[lang].formEmail;
+  document.querySelector('label[for="message"]').textContent = translations[lang].formMessage;
+  document.querySelector('button[type="submit"]').textContent = translations[lang].formSubmit;
+
+  // Language button styles
+  if(lang === 'fr') {
+    langFrBtn.classList.add('selected');
+    langEnBtn.classList.remove('selected');
   } else {
-    frFlag.classList.remove('active');
-    enFlag.classList.add('active');
+    langFrBtn.classList.remove('selected');
+    langEnBtn.classList.add('selected');
   }
-  localStorage.setItem('language', lang);
+
+  localStorage.setItem('lang', lang);
 }
 
-frFlag.addEventListener('click', () => setLanguage('fr'));
-enFlag.addEventListener('click', () => setLanguage('en'));
+langFrBtn.addEventListener('click', () => setLanguage('fr'));
+langEnBtn.addEventListener('click', () => setLanguage('en'));
 
-// Load saved language or default to French
-const savedLang = localStorage.getItem('language') || 'fr';
+const savedLang = localStorage.getItem('lang') || 'fr';
 setLanguage(savedLang);
 
-// Visitor counter (simulate with localStorage for demo)
+// Visitor count from localStorage
 const visitorCountEl = document.getElementById('visitor-count');
+let count = parseInt(localStorage.getItem('visitorCount') || '0', 10);
 
-async function fetchVisitorCount() {
-  // Here you'd call your real visitor count API or service
-  // For demo, we simulate with localStorage (not shared globally)
-  let count = localStorage.getItem('visitorCount');
-  if (!count) count = 0;
+function fetchVisitorCount() {
   count++;
   localStorage.setItem('visitorCount', count);
   visitorCountEl.textContent = `Visites : ${count}`;
@@ -107,7 +106,7 @@ async function fetchVisitorCount() {
 
 fetchVisitorCount();
 
-// Animation on tuiles: reduce max movement on hover
+// Animation on tuiles: reduced movement on hover
 document.querySelectorAll('.tuile').forEach(tuile => {
   tuile.addEventListener('mousemove', e => {
     const rect = tuile.getBoundingClientRect();
@@ -116,13 +115,13 @@ document.querySelectorAll('.tuile').forEach(tuile => {
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
 
-    const deltaX = (x - centerX) / centerX * 4; // max 4px movement instead of 8px
-    const deltaY = (y - centerY) / centerY * 4;
+    const rotateX = ((y - centerY) / centerY) * 5; // reduced angle
+    const rotateY = ((x - centerX) / centerX) * 5;
 
-    tuile.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+    tuile.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
   });
 
   tuile.addEventListener('mouseleave', () => {
-    tuile.style.transform = '';
+    tuile.style.transform = 'translateY(0)';
   });
 });
