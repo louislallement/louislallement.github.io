@@ -3,84 +3,74 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Louis Lallement | Journaliste & Photographe</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Page non trouvée - 404</title>
+  <style>
+    body {
+      background-color: #f0f4f8;
+      color: #222;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      text-align: center;
+      padding: 2rem;
+    }
+    h1 {
+      font-size: 6rem;
+      color: #0078d7;
+      margin-bottom: 0.5rem;
+      user-select: none;
+    }
+    p {
+      font-size: 1.8rem;
+      color: #555;
+      max-width: 400px;
+      user-select: none;
+    }
+    a {
+      margin-top: 2rem;
+      display: inline-block;
+      font-size: 1.2rem;
+      text-decoration: none;
+      color: #0078d7;
+      border: 2px solid #0078d7;
+      padding: 0.6rem 1.2rem;
+      border-radius: 12px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      user-select: none;
+    }
+    a:hover {
+      background-color: #0078d7;
+      color: white;
+    }
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #121212;
+        color: #ddd;
+      }
+      h1 {
+        color: #66aaff;
+      }
+      p {
+        color: #bbb;
+      }
+      a {
+        border-color: #66aaff;
+        color: #66aaff;
+      }
+      a:hover {
+        background-color: #66aaff;
+        color: #121212;
+      }
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <div class="header-left">
-      <h1>Louis Lallement</h1>
-      <h2>Journaliste <span class="bar">|</span> Photographe</h2>
-    </div>
-    <div class="header-right">
-      <button id="toggle-theme" aria-label="Changer thème">🌙</button>
-      <button id="toggle-lang" aria-label="Changer langue">
-        <img id="flag-icon" src="assets/fr-flag.png" alt="Français" />
-      </button>
-    </div>
-  </header>
-
-  <section class="tuile" id="bonjour">
-    <h2>Bonjour</h2>
-    <p>Actuellement à Paris et alentours</p>
-  </section>
-
-  <section class="tuiles-row">
-    <section class="tuile" id="portfolio-video">
-      <h2>Portfolio Vidéo</h2>
-      <div class="videos-container">
-        <iframe src="https://www.instagram.com/reel/C6oZ65atZ-A/embed" frameborder="0" allowfullscreen scrolling="no"></iframe>
-        <iframe src="https://www.instagram.com/reel/C8FqFkmIwBd/embed" frameborder="0" allowfullscreen scrolling="no"></iframe>
-        <iframe src="https://www.instagram.com/reel/C7zIlEkIknc/embed" frameborder="0" allowfullscreen scrolling="no"></iframe>
-      </div>
-    </section>
-
-    <section class="tuile" id="portfolio-ecrit">
-      <h2>Portfolio Écrit</h2>
-      <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank" rel="noopener noreferrer" aria-label="Profil Figaro">
-        <img src="assets/figaro.jpg" alt="Logo Le Figaro" />
-      </a>
-    </section>
-
-    <section class="tuile" id="photographie">
-      <h2>Photographie</h2>
-      <a href="https://www.instagram.com/louis.l.photographie/" target="_blank" rel="noopener noreferrer">
-        <img src="assets/photographie.jpg" alt="Photo de Louis Lallement" />
-        <p>Suivez-moi sur Instagram</p>
-      </a>
-    </section>
-  </section>
-
-  <section id="contact">
-    <h2>Contact</h2>
-    <form action="https://formsubmit.co/louis.lallement@outlook.fr" method="POST">
-      <input type="hidden" name="_captcha" value="false" />
-      <input type="hidden" name="_subject" value="Nouveau message depuis le site CV !" />
-      <label for="prenom">Prénom :</label>
-      <input type="text" id="prenom" name="prenom" required placeholder="Votre prénom" />
-      <label for="nom">Nom :</label>
-      <input type="text" id="nom" name="nom" required placeholder="Votre nom" />
-      <label for="email">Email :</label>
-      <input type="email" id="email" name="email" required placeholder="Votre adresse mail" />
-      <label for="message">Message :</label>
-      <textarea id="message" name="message" rows="5" required placeholder="Écrivez votre message ici..."></textarea>
-      <button type="submit">Envoyer</button>
-    </form>
-  </section>
-
-  <footer>
-    <div class="footer-logos">
-      <a href="https://www.linkedin.com/in/louis-lallement-32751b159/" target="_blank" aria-label="LinkedIn">
-        <img src="assets/linkedin.svg" alt="LinkedIn" />
-      </a>
-      <a href="https://twitter.com/louislall" target="_blank" aria-label="Twitter">
-        <img src="assets/twitter.svg" alt="Twitter" />
-      </a>
-    </div>
-    <div id="visitor-count">Visites : 0</div>
-    <div id="copyright">© Louis Lallement 2025</div>
-  </footer>
-
-  <script src="script.js"></script>
+  <h1>404</h1>
+  <p>Cette page n’a pas encore été imaginée.</p>
+  <a href="index.html" aria-label="Retour à la page d'accueil">Retour à l’accueil</a>
 </body>
 </html>
