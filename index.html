@@ -3,349 +3,58 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Louis Lallement - Journaliste | Photographe</title>
-  <style>
-    :root {
-      --color-bg-light: #f5f7fa;
-      --color-bg-dark: #0a1e3a;
-      --color-text-light: #333;
-      --color-text-dark: #b0d4ff;
-      --color-primary-light: #0077cc;
-      --color-primary-dark: #4da6ff;
-      --color-tile-bg-light: #ffffff;
-      --color-tile-bg-dark: #142b55;
-      --border-radius: 16px;
-      --transition-speed: 0.3s;
-      --box-shadow-light: 0 4px 10px rgba(0, 0, 0, 0.1);
-      --box-shadow-dark: 0 4px 10px rgba(0, 0, 0, 0.3);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    body.dark {
-      background-color: var(--color-bg-dark);
-      color: var(--color-text-dark);
-    }
-
-    body.dark .tile {
-      background-color: var(--color-tile-bg-dark);
-      box-shadow: var(--box-shadow-dark);
-    }
-
-    body.dark a {
-      color: var(--color-primary-dark);
-    }
-
-    body {
-      margin: 0;
-      background-color: var(--color-bg-light);
-      color: var(--color-text-light);
-      transition: background-color var(--transition-speed), color var(--transition-speed);
-    }
-
-    a {
-      color: var(--color-primary-light);
-      text-decoration: none;
-      transition: color var(--transition-speed);
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px 15px 60px;
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
-    }
-
-    header {
-      text-align: center;
-      position: relative;
-      padding-bottom: 10px;
-    }
-
-    header h1 {
-      font-size: 3.2rem;
-      margin: 0;
-      font-weight: 700;
-      letter-spacing: 1.2px;
-    }
-
-    header p {
-      margin: 8px 0 0;
-      font-size: 1.3rem;
-      font-weight: 500;
-      color: var(--color-primary-light);
-      letter-spacing: 0.15em;
-    }
-
-    body.dark header p {
-      color: var(--color-primary-dark);
-    }
-
-    #darkModeToggle {
-      position: fixed;
-      top: 15px;
-      right: 20px;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      font-size: 1.6rem;
-      color: var(--color-text-light);
-      transition: color var(--transition-speed);
-      z-index: 1000;
-    }
-    body.dark #darkModeToggle {
-      color: var(--color-text-dark);
-    }
-
-    .tiles-row {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .tile {
-      background-color: var(--color-tile-bg-light);
-      box-shadow: var(--box-shadow-light);
-      border-radius: var(--border-radius);
-      padding: 20px;
-      flex: 1 1 300px;
-      max-width: 360px;
-      min-width: 280px;
-      display: flex;
-      flex-direction: column;
-      transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
-    }
-
-    #bonjour {
-      text-align: center;
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: var(--color-primary-light);
-      max-width: 400px;
-      margin: 0 auto;
-      background-color: var(--color-tile-bg-light);
-      box-shadow: var(--box-shadow-light);
-      border-radius: var(--border-radius);
-      padding: 15px 20px;
-      transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
-    }
-    body.dark #bonjour {
-      background-color: var(--color-tile-bg-dark);
-      box-shadow: var(--box-shadow-dark);
-      color: var(--color-primary-dark);
-    }
-
-    .tile h2 {
-      margin-top: 0;
-      margin-bottom: 15px;
-      font-size: 1.8rem;
-      color: #555555;
-      transition: color var(--transition-speed);
-    }
-
-    body.dark .tile h2 {
-      color: #a8bddb;
-    }
-
-    .video-frame {
-      position: relative;
-      padding-bottom: 177.78%; /* 9:16 */
-      height: 0;
-      overflow: hidden;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    }
-    .video-frame iframe {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      border: none;
-      border-radius: 12px;
-    }
-
-    #portfolio-ecrit img {
-      width: 120px;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-      filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.15));
-      border-radius: 12px;
-    }
-    #portfolio-ecrit img:hover {
-      transform: scale(1.1);
-    }
-
-    #photographie a {
-      display: inline-block;
-      font-weight: 600;
-      font-size: 1.1rem;
-      color: var(--color-primary-light);
-      border: 2px solid var(--color-primary-light);
-      padding: 8px 15px;
-      border-radius: 14px;
-      transition: all 0.3s ease;
-      user-select: none;
-      max-width: fit-content;
-    }
-    #photographie a:hover {
-      background-color: var(--color-primary-light);
-      color: white;
-      text-decoration: none;
-    }
-    body.dark #photographie a {
-      color: var(--color-primary-dark);
-      border-color: var(--color-primary-dark);
-    }
-    body.dark #photographie a:hover {
-      background-color: var(--color-primary-dark);
-    }
-
-    footer {
-      margin-top: 40px;
-      padding: 15px 10px;
-      text-align: center;
-      font-size: 0.9rem;
-      color: var(--color-text-light);
-      border-top: 1px solid #ccc;
-      user-select: none;
-    }
-    body.dark footer {
-      color: var(--color-text-dark);
-      border-color: #335588;
-    }
-
-    footer #social-links a {
-      margin: 0 10px;
-      display: inline-block;
-    }
-
-    footer #social-links img {
-      width: 30px;
-      height: 30px;
-      filter: drop-shadow(0 0 1px rgba(0,0,0,0.2));
-      transition: transform 0.3s ease;
-      vertical-align: middle;
-    }
-    footer #social-links a:hover img {
-      transform: scale(1.2);
-    }
-
-    @media (max-width: 980px) {
-      .tiles-row {
-        flex-direction: column;
-        align-items: center;
-      }
-      .tile {
-        max-width: 90vw;
-        min-width: auto;
-      }
-    }
-
-    .fade-slide-up {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
-    .fade-slide-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  </style>
+  <title>Louis Lallement</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <header>
+    <h1>Louis Lallement</h1>
+    <p>Journaliste | Photographe</p>
+    <button id="toggle-theme" aria-label="Changer le thème">🌙</button>
+  </header>
 
-  <button id="darkModeToggle" aria-label="Toggle dark mode">🌙</button>
+  <section id="bonjour" class="tuile">
+    <h2>Bonjour</h2>
+    <p>Actuellement à Paris et ses alentours.</p>
+  </section>
 
-  <div class="container">
-
-    <header>
-      <h1>Louis Lallement</h1>
-      <p>Journaliste | Photographe</p>
-    </header>
-
-    <section id="bonjour" class="fade-slide-up">
-      Bonjour<br />
-      <small style="font-weight: 400; font-size: 1.1rem; color: var(--color-primary-light);">
-        Actuellement à Paris et ses alentours
-      </small>
+  <section id="portfolio-container">
+    <section id="portfolio-video" class="tuile">
+      <h2>Portfolio Vidéo</h2>
+      <div class="videos">
+        <iframe src="https://www.instagram.com/p/CzRJOBDsZo4/embed" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+        <iframe src="https://www.instagram.com/p/CyOqZ8QrNeJ/embed" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+        <iframe src="https://www.instagram.com/p/CyCA2-hMr-y/embed" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+      </div>
     </section>
 
-    <div class="tiles-row">
+    <section id="portfolio-ecrit" class="tuile">
+      <h2>Portfolio Écrit</h2>
+      <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank" rel="noopener noreferrer">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/1f/Figaro_logo.svg" alt="Logo Le Figaro" />
+      </a>
+    </section>
 
-      <section id="portfolio-video" class="tile fade-slide-up">
-        <h2>Portfolio Vidéo</h2>
-        <div class="video-frame">
-          <iframe src="https://www.instagram.com/p/CzRJOBDsZo4/embed" allowtransparency="true" scrolling="no" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <div class="video-frame" style="margin-top: 15px;">
-          <iframe src="https://www.instagram.com/p/CyOqZ8QrNeJ/embed" allowtransparency="true" scrolling="no" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <div class="video-frame" style="margin-top: 15px;">
-          <iframe src="https://www.instagram.com/p/CyCA2-hMr-y/embed" allowtransparency="true" scrolling="no" frameborder="0" allowfullscreen></iframe>
-        </div>
-      </section>
-
-      <section id="portfolio-ecrit" class="tile fade-slide-up">
-        <h2>Portfolio Écrit</h2>
-        <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank" rel="noopener noreferrer" title="Voir mon profil auteur sur Le Figaro">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Le_Figaro_logo.svg/320px-Le_Figaro_logo.svg.png" alt="Logo Le Figaro" />
-        </a>
-      </section>
-
-      <section id="photographie" class="tile fade-slide-up">
-        <h2>Photographie</h2>
-        <p>Suivez-moi sur&nbsp;
-          <a href="https://www.instagram.com/louis.l.photographie/" target="_blank" rel="noopener noreferrer" title="Instagram Louis Lallement Photographie">
-            Instagram
-          </a>
-        </p>
-      </section>
-
-    </div>
-
-  </div>
+    <section id="photographie" class="tuile">
+      <h2>Photographie</h2>
+      <p>Suivez-moi sur Instagram :</p>
+      <a href="https://www.instagram.com/louis.l.photographie/" target="_blank" rel="noopener noreferrer">@louis.l.photographie</a>
+    </section>
+  </section>
 
   <footer>
     <div id="social-links">
-      <a href="https://x.com/louislall" target="_blank" rel="noopener noreferrer" title="Twitter Louis Lallement">
+      <a href="https://twitter.com/louislall" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
         <img src="https://cdn-icons-png.flaticon.com/32/733/733579.png" alt="Twitter" />
       </a>
-      <a href="https://linkedin.com/in/louis-lallement-32751b159" target="_blank" rel="noopener noreferrer" title="LinkedIn Louis Lallement">
+      <a href="https://www.linkedin.com/in/louis-lallement-32751b159/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
         <img src="https://cdn-icons-png.flaticon.com/32/174/174857.png" alt="LinkedIn" />
       </a>
     </div>
-    <div style="margin-top: 8px; opacity: 0.6;">
-      © Louis Lallement 2025
-    </div>
+    <p>© Louis Lallement 2025</p>
+    <p id="visitor-count">Visites : 0</p>
   </footer>
 
-<script>
-  const toggleBtn = document.getElementById('darkModeToggle');
-  const body = document.body;
-  toggleBtn.addEventListener('click', () => {
-    body.classList.toggle('dark');
-    toggleBtn.textContent = body.classList.contains('dark') ? '☀️' : '🌙';
-  });
-
-  const fadeElements = document.querySelectorAll('.fade-slide-up');
-
-  function handleScroll() {
-    fadeElements.forEach(el => {
-      const rect = el.getBoundingClientRect();
-      if(rect.top < window.innerHeight - 100) {
-        el.classList.add('visible');
-      }
-    });
-  }
-
-  window.addEventListener('scroll', handleScroll);
-  window.addEventListener('load', handleScroll);
-</script>
-
+  <script src="script.js"></script>
 </body>
 </html>
