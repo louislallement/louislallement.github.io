@@ -1,325 +1,330 @@
-/* Reset & Base */
+/* Reset basique */
 * {
   box-sizing: border-box;
-  margin: 0; padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  background-color: #f5f8ff;
-  color: #1a1a1a;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f8fa;
+  color: #222;
+  line-height: 1.6;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding: 0 1rem 2rem;
 }
 
-/* Header */
 header {
-  width: 100%;
-  max-width: 1024px;
-  padding: 1rem 2rem;
   text-align: center;
+  padding: 2rem 1rem 1rem;
   position: relative;
+  z-index: 10;
 }
 
 header h1 {
   font-size: 3rem;
-  font-weight: 900;
+  font-weight: 700;
   margin-bottom: 0.2rem;
 }
 
 header p {
   font-size: 1.25rem;
   color: #555;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
 }
 
-header .bar {
+.bar {
   margin: 0 0.5rem;
-  color: #aaa;
+  color: #888;
+  user-select: none;
 }
 
-#controls {
-  position: absolute;
-  top: 50%;
-  right: 2rem;
-  transform: translateY(-50%);
+.header-controls {
   display: flex;
-  gap: 0.75rem;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  max-width: 960px;
+  margin: 0 auto 2rem;
+  padding: 0 1rem;
+  font-size: 1.5rem;
+}
+
+#theme-toggle {
+  cursor: pointer;
+  user-select: none;
+}
+
+.lang-switch {
+  display: flex;
+  gap: 0.5rem;
   align-items: center;
 }
 
-#controls button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  outline: none;
-}
-
-#controls button img {
+.lang-flag {
   width: 32px;
   height: 32px;
-  display: block;
+  cursor: pointer;
+  border-radius: 4px;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
 }
 
-.lang-button.selected {
-  filter: drop-shadow(0 0 2px #0008);
-  transform: scale(1.1);
-}
-
-#toggle-theme {
-  font-size: 1.4rem;
-}
-
-/* Section Bonjour */
-.tuile-bonjour {
-  max-width: 480px;
-  width: 130%; /* fait plus large que les autres tuiles */
-  margin: 2rem auto 2rem auto;
-  background: #dbe7ff;
-  border-radius: 20px;
-  padding: 2rem;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-  text-align: center;
-  font-weight: 600;
-  font-size: 1.25rem;
-  transition: transform 0.25s ease;
-  cursor: default;
-}
-
-.tuile-bonjour:hover {
-  transform: translateY(-6px);
-}
-
-/* Ligne tuiles centrales */
-.tuiles-row {
-  display: flex;
-  max-width: 1024px;
-  width: 100%;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  padding: 0 1rem;
+.lang-flag.selected,
+.lang-flag:hover {
+  opacity: 1;
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
 }
 
 .tuile {
   background: white;
-  flex: 1;
-  border-radius: 20px;
-  box-shadow: 0 10px 20px rgb(150 150 150 / 0.15);
-  padding: 1.5rem;
-  cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  padding: 2rem;
+  margin: 1rem auto;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  max-width: 480px;
+  cursor: default;
   position: relative;
 }
 
 .tuile:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 30px rgb(100 100 150 / 0.25);
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 20px 30px rgba(0,0,0,0.15);
 }
 
-.tuile h2 {
-  margin-bottom: 1rem;
-  font-weight: 700;
-  font-size: 1.6rem;
-  color: #212121;
+.tuile-bonjour,
+.tuile-contact {
+  max-width: 720px; /* Plus large que les autres */
+  text-align: center;
 }
 
-/* Portfolio vidéos */
-.videos-container {
+.tuiles-row {
   display: flex;
-  gap: 0.75rem;
-  width: 100%;
   justify-content: center;
+  gap: 1rem;
+  max-width: 960px;
+  margin: 0 auto;
+  flex-wrap: wrap;
 }
 
+.tuiles-row .tuile {
+  flex: 1 1 280px;
+  max-width: 300px;
+  cursor: pointer;
+}
+
+.tuiles-row .tuile h2 {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* Vidéos Instagram */
 .videos-container iframe {
-  flex: 1;
-  min-width: 0;
-  aspect-ratio: 1 / 1.7;
-  border-radius: 15px;
+  width: 100%;
+  height: 360px;
+  border-radius: 12px;
   border: none;
-  box-shadow: 0 6px 10px rgb(0 0 0 / 0.12);
+  margin-bottom: 1rem;
 }
 
 /* Portfolio écrit */
-#portfolio-ecrit .figaro-link img {
-  width: 100%;
-  max-width: 180px;
-  border-radius: 10px;
-  object-fit: contain;
+#portfolio-ecrit img {
+  max-width: 150px;
+  display: block;
+  margin: 0 auto;
   cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+#portfolio-ecrit img:hover {
+  transform: scale(1.05);
 }
 
 /* Photographie */
-.tuile-photographie {
+.photographie {
   position: relative;
-  background: url('assets/instagram-cover.jpg') center center / cover no-repeat;
   color: white;
-  font-weight: 700;
-  cursor: pointer;
-  min-height: 280px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 10px 20px rgb(0 0 0 / 0.25);
-  transition: transform 0.25s ease, box-shadow 0.3s ease;
+  max-width: 300px;
 }
 
-.tuile-photographie:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 30px rgb(0 0 0 / 0.4);
-}
-
-.insta-overlay {
+.photographie::before {
+  content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  user-select: none;
-  text-shadow: 0 0 6px rgba(0,0,0,0.7);
+  background-image: url("assets/instagram-cover.jpg");
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(0.3) brightness(0.6);
+  transition: filter 0.3s ease;
+  border-radius: 16px;
+  z-index: 0;
+}
+
+.photographie:hover::before {
+  filter: grayscale(0) brightness(0.8);
+}
+
+.photographie h2,
+.photographie .photo-link {
+  position: relative;
+  z-index: 1;
+  text-align: center;
   font-weight: 700;
+  font-size: 1.5rem;
+  padding: 1rem;
+  text-shadow: 0 0 5px rgba(0,0,0,0.7);
 }
 
-/* Contact */
-.tuile-contact {
-  max-width: 480px;
-  width: 130%; /* même largeur que bonjour */
-  margin: 0 auto 3rem auto;
-  background: #dbe7ff;
-  border-radius: 20px;
-  padding: 2rem 2.5rem;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-  transition: transform 0.25s ease;
+.photographie .photo-link {
+  display: block;
+  margin-top: 0.5rem;
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: #f0f0f0;
+  text-decoration: underline;
 }
 
-.tuile-contact:hover {
-  transform: translateY(-6px);
-}
-
-form {
+/* Formulaire contact */
+.contact-form {
   display: flex;
   flex-direction: column;
-  gap: 0.7rem;
+  gap: 1rem;
+  max-width: 720px;
+  margin: 0 auto;
 }
 
-input[type="text"],
-input[type="email"],
-textarea {
-  border-radius: 10px;
-  border: 1.5px solid #888;
-  padding: 0.6rem 1rem;
-  font-size: 1rem;
+.contact-form label {
   font-weight: 600;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  transition: border-color 0.2s ease;
+  font-size: 1rem;
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-textarea:focus {
-  border-color: #2659ff;
+.contact-form input,
+.contact-form textarea {
+  padding: 0.6rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
   outline: none;
+  border-color: #0073e6;
+  box-shadow: 0 0 6px #0073e6;
 }
 
-textarea {
-  resize: vertical;
-  min-height: 100px;
-  font-weight: 500;
-}
-
-button[type="submit"] {
-  margin-top: 1rem;
-  padding: 0.75rem;
-  font-weight: 700;
-  font-size: 1.1rem;
-  background-color: #2659ff;
+.contact-form button {
+  background-color: #0073e6;
   color: white;
+  padding: 0.75rem 1.5rem;
   border: none;
   border-radius: 12px;
+  font-size: 1.1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  align-self: center;
+  max-width: 200px;
 }
 
-button[type="submit"]:hover {
-  background-color: #0f3cd4;
+.contact-form button:hover {
+  background-color: #005bb5;
 }
 
 /* Footer */
 footer {
-  width: 100%;
-  max-width: 1024px;
-  margin: 0 auto 2rem auto;
-  padding: 1rem 2rem;
+  max-width: 960px;
+  margin: 2rem auto 1rem;
   text-align: center;
+  color: #555;
   font-size: 0.9rem;
-  color: #444;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1.5rem;
-  align-items: center;
-  border-top: 1px solid #ddd;
+  user-select: none;
 }
 
 #social-links {
-  display: flex;
-  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+#social-links a {
+  margin: 0 0.5rem;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 #social-links img {
   width: 32px;
   height: 32px;
-  filter: grayscale(40%);
+  filter: grayscale(0);
   transition: filter 0.3s ease;
-  cursor: pointer;
 }
 
-#social-links img:hover {
-  filter: grayscale(0%);
+#social-links a:hover img {
+  filter: grayscale(0);
+  transform: scale(1.1);
 }
 
-#visitor-count {
-  font-weight: 600;
-  color: #222;
+/* Mode sombre */
+body.dark {
+  background-color: #121212;
+  color: #e1e1e1;
 }
 
-#copyright {
-  font-weight: 400;
-  color: #666;
+body.dark .tuile {
+  background-color: #222;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+  color: #eee;
+}
+
+body.dark header p {
+  color: #bbb;
+}
+
+body.dark #social-links a img {
+  filter: grayscale(1) brightness(1.2);
+}
+
+body.dark .contact-form input,
+body.dark .contact-form textarea {
+  background-color: #333;
+  border: 1px solid #555;
+  color: #eee;
+}
+
+body.dark .contact-form input:focus,
+body.dark .contact-form textarea:focus {
+  border-color: #66aaff;
+  box-shadow: 0 0 8px #66aaff;
+}
+
+body.dark .contact-form button {
+  background-color: #005bb5;
+}
+
+body.dark .contact-form button:hover {
+  background-color: #004080;
 }
 
 /* Responsive */
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .tuiles-row {
     flex-direction: column;
+    max-width: 100%;
   }
-  .tuile {
-    width: 100% !important;
+
+  .tuiles-row .tuile {
+    max-width: 100%;
+    margin: 0 auto 1.5rem;
   }
-  .tuile-bonjour, .tuile-contact {
-    width: 90% !important;
+
+  .tuile-bonjour,
+  .tuile-contact {
+    max-width: 90%;
   }
-  #controls {
-    position: static;
-    transform: none;
-    margin-top: 1rem;
-    justify-content: center;
-  }
-  header {
-    padding-bottom: 1rem;
+
+  .header-controls {
+    justify-content: flex-end;
+    padding: 0 1rem;
   }
 }
