@@ -1,25 +1,23 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Louis Lallement – Journaliste | Photographe</title>
-  <link rel="stylesheet" href="styles.css" />
-  <script defer src="script.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Louis Lallement – Journaliste | Photographe</title>
+<link rel="stylesheet" href="styles.css" />
+<script defer src="script.js"></script>
 </head>
 <body>
   <header class="main-header">
-    <div class="header-content">
-      <div class="name-title">
-        <h1>Louis Lallement</h1>
-        <h2>Journaliste&nbsp;&nbsp;|&nbsp;&nbsp;Photographe</h2>
-      </div>
-      <div class="header-controls">
-        <button id="theme-toggle" aria-label="Changer le thème">🌙</button>
-        <button id="lang-toggle" aria-label="Changer la langue">
-          <img src="fr.png" alt="Français" id="flag" />
-        </button>
-      </div>
+    <div class="header-left">
+      <h1>Louis Lallement</h1>
+      <h2>Journaliste <span class="bar">|</span> Photographe</h2>
+    </div>
+    <div class="header-right">
+      <button id="theme-toggle" aria-label="Changer le thème">🌙</button>
+      <button id="lang-toggle" aria-label="Changer la langue">
+        <img src="fr.png" alt="Français" id="flag" />
+      </button>
     </div>
   </header>
 
@@ -29,41 +27,38 @@
     </section>
 
     <section class="tiles">
-      <div class="tile" id="video">
+      <article class="tile" id="portfolio-video">
         <h3>Portfolio Vidéo</h3>
         <iframe src="https://www.instagram.com/reel/C7D0z-xoiEK/embed" loading="lazy"></iframe>
         <iframe src="https://www.instagram.com/reel/C4RbY6jIEhy/embed" loading="lazy"></iframe>
         <iframe src="https://www.instagram.com/reel/C3ySrdfIcNU/embed" loading="lazy"></iframe>
-      </div>
+      </article>
 
-      <div class="tile" id="written">
+      <article class="tile" id="portfolio-ecrit">
         <h3>Portfolio Écrit</h3>
-        <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank">
+        <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank" rel="noopener">
           <img src="figaro.png" alt="Le Figaro" class="figaro-logo" />
         </a>
-      </div>
+      </article>
 
-      <div class="tile" id="photo">
+      <article class="tile" id="photographie">
         <h3>Photographie</h3>
-        <div class="photo-box">
-          <img src="photocouv.jpg" alt="Photographie de couverture" class="photo-cover" />
-        </div>
-        <a href="https://www.instagram.com/louis.l.photographie/" target="_blank" class="insta-link">
-          Suivez-moi sur Instagram
-        </a>
-      </div>
+        <img src="photocouv.jpg" alt="Photo couverture" class="photo-cover" />
+        <a href="https://www.instagram.com/louis.l.photographie/" target="_blank" rel="noopener" class="insta-link">Suivez-moi sur Instagram</a>
+      </article>
     </section>
 
     <footer>
       <div class="socials">
-        <a href="https://www.linkedin.com/in/louis-lallement-32751b159/" target="_blank">
+        <a href="https://www.linkedin.com/in/louis-lallement-32751b159/" target="_blank" rel="noopener">
           <img src="linkedin.svg" alt="LinkedIn" />
         </a>
-        <a href="https://twitter.com/louislall" target="_blank">
+        <a href="https://twitter.com/louislall" target="_blank" rel="noopener">
           <img src="twitter.svg" alt="Twitter" />
         </a>
       </div>
-      <div class="visits">Visites : <span id="visit-counter">0</span></div>
+      <div class="visit-counter">Visites : <span id="visit-counter">0</span></div>
+      <div class="copyright">© Louis Lallement 2025</div>
     </footer>
   </main>
 </body>
