@@ -12,60 +12,75 @@
     <p>journaliste <span class="bar">|</span> photographe</p>
   </header>
 
-  <div class="header-controls">
-    <div id="theme-toggle" role="button" tabindex="0" aria-label="Changer thème" title="Changer thème">🌙</div>
+  <div class="controls">
     <div class="lang-switch">
-      <img src="assets/france-32.png" alt="Français" id="fr" class="lang-flag selected" />
-      <img src="assets/uk-32.png" alt="English" id="en" class="lang-flag" />
+      <button id="btn-fr" aria-label="Passer en français" class="active">
+        <img src="assets/fr-flag.png" alt="Français" />
+      </button>
+      <button id="btn-en" aria-label="Switch to English">
+        <img src="assets/gb-flag.png" alt="English" />
+      </button>
     </div>
+    <button id="toggle-theme" aria-label="Changer thème" title="Changer thème">
+      <span id="theme-icon">🌞</span>
+    </button>
   </div>
 
-  <section class="tuile tuile-bonjour">
-    <h2>Bonjour</h2>
-    <p>Actuellement à Paris et alentours</p>
-  </section>
-
-  <section class="tuiles-row">
-    <section class="tuile" id="portfolio-video">
-      <h2>Portfolio Vidéo</h2>
-      <div class="videos-container">
-        <iframe src="https://www.instagram.com/p/CzRJOBDsZo4/embed" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>
-        <iframe src="https://www.instagram.com/p/CyOqZ8QrNeJ/embed" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>
-        <iframe src="https://www.instagram.com/p/CyCA2-hMr-y/embed" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>
-      </div>
+  <main>
+    <section class="tuile tuile-bonjour">
+      <h2 data-fr="Bonjour" data-en="Hello">Bonjour</h2>
+      <p data-fr="Actuellement à Paris et alentours" data-en="Currently in Paris and surroundings">
+        Actuellement à Paris et alentours
+      </p>
     </section>
 
-    <section class="tuile" id="portfolio-ecrit">
-      <h2>Portfolio Écrit</h2>
-      <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank" rel="noopener noreferrer" aria-label="Profil auteur Figaro">
-        <img src="assets/figaro-logo.jpg" alt="Logo Le Figaro" />
-      </a>
+    <section class="tuiles-row">
+      <section class="tuile portfolio-video">
+        <h2 data-fr="Portfolio Vidéo" data-en="Video Portfolio">Portfolio Vidéo</h2>
+        <div class="videos-container">
+          <iframe src="https://www.instagram.com/p/CzRJOBDsZo4/embed" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>
+          <iframe src="https://www.instagram.com/p/CyOqZ8QrNeJ/embed" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>
+          <iframe src="https://www.instagram.com/p/CyCA2-hMr-y/embed" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>
+        </div>
+      </section>
+
+      <section class="tuile portfolio-ecrit">
+        <h2 data-fr="Portfolio Écrit" data-en="Writing Portfolio">Portfolio Écrit</h2>
+        <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank" rel="noopener noreferrer" aria-label="Profil auteur Figaro">
+          <img src="assets/figaro-logo.jpg" alt="Logo Le Figaro" />
+        </a>
+      </section>
+
+      <section class="tuile photographie">
+        <h2 data-fr="Photographie" data-en="Photography">Photographie</h2>
+        <a href="https://www.instagram.com/louis.l.photographie/" target="_blank" rel="noopener noreferrer" class="photo-link" aria-label="Instagram Photographie">
+          <div class="photo-bg"></div>
+          <span data-fr="Suivez-moi sur Instagram" data-en="Follow me on Instagram" class="overlay-text">Suivez-moi sur Instagram</span>
+        </a>
+      </section>
     </section>
 
-    <section class="tuile photographie" id="photographie">
-      <h2>Photographie</h2>
-      <a href="https://www.instagram.com/louis.l.photographie/" target="_blank" rel="noopener noreferrer" class="photo-link">
-        Suivez-moi sur Instagram
-      </a>
+    <section class="tuile tuile-contact">
+      <h2 data-fr="Contact" data-en="Contact">Contact</h2>
+      <form action="https://formsubmit.co/louis.lallement@outlook.fr" method="POST">
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_subject" value="Nouveau message depuis ton site CV !" />
+        <label for="nom" data-fr="Nom :" data-en="Last Name:">Nom :</label>
+        <input type="text" id="nom" name="nom" required placeholder="Ton nom" />
+        
+        <label for="prenom" data-fr="Prénom :" data-en="First Name:">Prénom :</label>
+        <input type="text" id="prenom" name="prenom" required placeholder="Ton prénom" />
+        
+        <label for="email" data-fr="Email :" data-en="Email:">Email :</label>
+        <input type="email" id="email" name="email" required placeholder="Ton adresse mail" />
+        
+        <label for="message" data-fr="Message :" data-en="Message:">Message :</label>
+        <textarea id="message" name="message" required placeholder="Écris ton message ici..." rows="5"></textarea>
+        
+        <button type="submit" data-fr="Envoyer" data-en="Send">Envoyer</button>
+      </form>
     </section>
-  </section>
-
-  <section class="tuile tuile-contact">
-    <h2>Contact</h2>
-    <form action="https://formsubmit.co/louis.lallement@outlook.fr" method="POST" class="contact-form">
-      <input type="hidden" name="_captcha" value="false" />
-      <input type="hidden" name="_subject" value="Nouveau message depuis ton site CV !" />
-      <label for="nom">Nom :</label>
-      <input type="text" id="nom" name="nom" required placeholder="Ton nom" />
-      <label for="prenom">Prénom :</label>
-      <input type="text" id="prenom" name="prenom" required placeholder="Ton prénom" />
-      <label for="email">Email :</label>
-      <input type="email" id="email" name="email" required placeholder="Ton adresse mail" />
-      <label for="message">Message :</label>
-      <textarea id="message" name="message" required placeholder="Écris ton message ici..." rows="5"></textarea>
-      <button type="submit">Envoyer</button>
-    </form>
-  </section>
+  </main>
 
   <footer>
     <div id="social-links">
