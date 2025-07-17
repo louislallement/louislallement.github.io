@@ -1,19 +1,16 @@
-const toggle = document.getElementById('theme-toggle');
-const body = document.body;
-const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-if (prefersDark) body.classList.replace('light', 'dark');
-
-toggle.addEventListener('click', () => {
-  body.classList.toggle('dark');
-  body.classList.toggle('light');
-  toggle.textContent = body.classList.contains('dark') ? '☀️' : '🌙';
+// Mode sombre / clair
+const toggleBtn = document.getElementById("theme-toggle");
+toggleBtn.addEventListener("click", () => {
+  document.body.classList.toggle("dark-mode");
+  toggleBtn.textContent =
+    document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
 });
 
-// Langue toggle (bilingue minimal)
-document.getElementById('fr-btn').addEventListener('click', () => {
-  alert("Mode français activé (contenu à traduire manuellement).");
+// Bascule langue (placeholder)
+document.getElementById("fr-btn").addEventListener("click", () => {
+  alert("🇫🇷 Mode français activé !");
 });
-document.getElementById('en-btn').addEventListener('click', () => {
-  alert("English mode activated (content translation pending).");
+
+document.getElementById("en-btn").addEventListener("click", () => {
+  alert("🇬🇧 English mode coming soon!");
 });
