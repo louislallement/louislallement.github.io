@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="CV en ligne de Louis Lallement, journaliste vidéo et photographe à Paris." />
   <title>Louis Lallement - CV en ligne</title>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -31,36 +32,38 @@
     <ul>
       <li>Journaliste vidéo à CNEWS (2021 - 2024)</li>
       <li>Stagiaire au Figaro Étudiant</li>
-      <!-- Tu pourras compléter ici -->
     </ul>
   </section>
 
-  
-<section id="contact">
-  <h2>Contact</h2>
-<form action="https://formsubmit.co/louis.lallement@outlook.fr" method="POST">
-  <input type="hidden" name="_captcha" value="false">
-  <input type="hidden" name="_subject" value="Nouveau message depuis ton site CV !">
+  <section id="contact">
+    <h2>Contact</h2>
+    <form action="https://formsubmit.co/louis.lallement@outlook.fr" method="POST">
+      <!-- Options de configuration -->
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_subject" value="Nouveau message depuis ton site CV !">
+      <input type="hidden" name="_next" value="https://louislallement.github.io/merci.html">
 
-    <label for="prenom">Prénom :</label><br />
-    <input type="text" id="prenom" name="prenom" required placeholder="Ton prénom" /><br /><br />
+      <label for="prenom">Prénom :</label><br />
+      <input type="text" id="prenom" name="prenom" required placeholder="Ton prénom" /><br /><br />
 
-    <label for="message">Message :</label><br />
-    <textarea id="message" name="message" required placeholder="Écris ton message ici..." rows="5"></textarea><br /><br />
+      <label for="email">Adresse email :</label><br />
+      <input type="email" id="email" name="email" required placeholder="Ton adresse mail" /><br /><br />
 
-    <button type="submit">Envoyer</button>
-  </form>
+      <label for="message">Message :</label><br />
+      <textarea id="message" name="message" required placeholder="Écris ton message ici..." rows="5"></textarea><br /><br />
 
-  <div id="social-links" style="margin-top: 20px;">
-    <a href="https://x.com/louislall" target="_blank" rel="noopener noreferrer" style="margin-right: 15px;">
-      <img src="https://cdn-icons-png.flaticon.com/32/733/733579.png" alt="Twitter" />
-    </a>
-    <a href="https://linkedin.com/in/louisslallement" target="_blank" rel="noopener noreferrer">
-      <img src="https://cdn-icons-png.flaticon.com/32/174/174857.png" alt="LinkedIn" />
-    </a>
-  </div>
-</section>
+      <button type="submit">Envoyer</button>
+    </form>
 
+    <div id="social-links" style="margin-top: 20px;">
+      <a href="https://x.com/louislall" target="_blank" rel="noopener noreferrer" style="margin-right: 15px;">
+        <img src="https://cdn-icons-png.flaticon.com/32/733/733579.png" alt="Twitter" />
+      </a>
+      <a href="https://linkedin.com/in/louisslallement" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn-icons-png.flaticon.com/32/174/174857.png" alt="LinkedIn" />
+      </a>
+    </div>
+  </section>
 
   <script src="script.js"></script>
 </body>
