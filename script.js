@@ -1,32 +1,33 @@
+// Toggle mode jour/nuit avec sauvegarde dans localStorage
 const toggleBtn = document.getElementById('mode-toggle');
+const body = document.body;
+
+function setMode(dark) {
+  if (dark) {
+    body.classList.add('dark');
+    toggleBtn.textContent = '☀️';
+  } else {
+    body.classList.remove('dark');
+    toggleBtn.textContent = '🌙';
+  }
+  localStorage.setItem('darkMode', dark ? 'true' : 'false');
+}
 
 toggleBtn.addEventListener('click', () => {
-  document.body.classList.toggle('dark');
-  updateToggleIcon();
+  const isDark = body.classList.contains('dark');
+  setMode(!isDark);
 });
 
-function updateToggleIcon() {
-  toggleBtn.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
-}
+// Au chargement, on applique le mode sauvegardé ou par défaut jour
+window.addEventListener('DOMContentLoaded', () => {
+  const darkModeStored = localStorage.getItem('darkMode');
+  setMode(darkModeStored === 'true');
 
-updateToggleIcon();
-
-const tiles = document.querySelectorAll('[data-anim]');
-
-function checkTilesVisibility() {
-  const triggerBottom = window.innerHeight * 0.85;
-
-  tiles.forEach(tile => {
-    const tileTop = tile.getBoundingClientRect().top;
-
-    if(tileTop < triggerBottom) {
+  // Animation fade-in des tuiles
+  const tiles = document.querySelectorAll('.tile[data-anim]');
+  tiles.forEach((tile, i) => {
+    setTimeout(() => {
       tile.classList.add('visible');
-    } else {
-      tile.classList.remove('visible');
-    }
+    }, i * 250);
   });
-}
-
-window.addEventListener('scroll', checkTilesVisibility);
-window.addEventListener('resize', checkTilesVisibility);
-window.addEventListener('load', checkTilesVisibility);
+});
