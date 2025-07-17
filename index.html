@@ -35,10 +35,31 @@
     </ul>
   </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Tu peux me contacter à l’adresse email : louis@example.com</p>
-  </section>
+<section id="contact">
+  <h2>Contact</h2>
+  <form action="https://formspree.io/f/mayvlvpw" method="POST">
+    <label for="nom">Nom :</label><br />
+    <input type="text" id="nom" name="nom" required placeholder="Ton nom" /><br /><br />
+
+    <label for="prenom">Prénom :</label><br />
+    <input type="text" id="prenom" name="prenom" required placeholder="Ton prénom" /><br /><br />
+
+    <label for="message">Message :</label><br />
+    <textarea id="message" name="message" required placeholder="Écris ton message ici..." rows="5"></textarea><br /><br />
+
+    <button type="submit">Envoyer</button>
+  </form>
+
+  <div id="social-links" style="margin-top: 20px;">
+    <a href="https://twitter.com/tonprofil" target="_blank" rel="noopener noreferrer" style="margin-right: 15px;">
+      <img src="https://cdn-icons-png.flaticon.com/32/733/733579.png" alt="Twitter" />
+    </a>
+    <a href="https://linkedin.com/in/tonprofil" target="_blank" rel="noopener noreferrer">
+      <img src="https://cdn-icons-png.flaticon.com/32/174/174857.png" alt="LinkedIn" />
+    </a>
+  </div>
+</section>
+
 
   <script src="script.js"></script>
 </body>
