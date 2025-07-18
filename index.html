@@ -1,75 +1,92 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Louis Lallement - Journaliste | Photographe</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Louis Lallement - Journaliste | Photographe</title>
+<link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <div class="header-left">
-      <h1 id="name">Louis Lallement</h1>
-      <p id="subtitle">journaliste <span class="bar">|</span> photographe</p>
+    <div class="header-left"></div>
+    <div class="header-center">
+      <h1 id="site-name">Louis Lallement</h1>
+      <p id="site-desc">journaliste <span class="bar">|</span> photographe</p>
     </div>
     <div class="header-right">
-      <button id="toggle-theme" aria-label="Changer thème">🌙</button>
-      <button class="lang-btn" data-lang="fr" aria-label="Français"><img src="assets/france-32.png" alt="FR" /></button>
-      <button class="lang-btn" data-lang="en" aria-label="English"><img src="assets/uk-32.png" alt="EN" /></button>
+      <button id="toggle-theme" aria-label="Changer thème" title="Changer thème">🌙</button>
+      <button class="lang-btn" data-lang="fr" aria-label="Passer en français" title="Français">
+        <img src="assets/france-32.png" alt="FR" />
+      </button>
+      <button class="lang-btn" data-lang="en" aria-label="Switch to English" title="English">
+        <img src="assets/uk-32.png" alt="EN" />
+      </button>
     </div>
   </header>
 
-  <main>
-    <section class="tuile tuile-bonjour" id="bonjour">
-      <h2>Bonjour</h2>
-      <p>Actuellement à Paris et alentours</p>
+  <section class="tuile tuile-bonjour">
+    <h2 class="fr">Bonjour</h2>
+    <h2 class="en" style="display:none;">Hello</h2>
+    <p class="fr">Actuellement à Paris et alentours</p>
+    <p class="en" style="display:none;">Currently in Paris and surrounding areas</p>
+  </section>
+
+  <section class="tuiles-row">
+    <section class="tuile" id="portfolio-video">
+      <h2 class="fr">Portfolio Vidéo</h2>
+      <h2 class="en" style="display:none;">Video Portfolio</h2>
+      <div class="videos-container">
+        <iframe src="https://www.instagram.com/p/CzRJOBDsZo4/embed" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>
+        <iframe src="https://www.instagram.com/p/CyOqZ8QrNeJ/embed" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>
+        <iframe src="https://www.instagram.com/p/CyCA2-hMr-y/embed" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>
+      </div>
     </section>
 
-    <section class="tuiles-row">
-      <section class="tuile" id="portfolio-video">
-        <h2>Portfolio Vidéo</h2>
-        <div class="videos-container">
-          <iframe src="https://www.instagram.com/p/CzRJOBDsZo4/embed" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>
-          <iframe src="https://www.instagram.com/p/CyOqZ8QrNeJ/embed" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>
-          <iframe src="https://www.instagram.com/p/CyCA2-hMr-y/embed" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>
-        </div>
-      </section>
-
-      <section class="tuile" id="portfolio-ecrit">
-        <h2>Portfolio Écrit</h2>
-        <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank" rel="noopener noreferrer" class="figaro-link" aria-label="Profil auteur Figaro">
-          <img src="assets/figaro-logo.jpg" alt="Logo Le Figaro" />
-        </a>
-      </section>
-
-      <section class="tuile" id="photographie">
-        <div class="photo-overlay">
-          <span>Suivez-moi sur Instagram</span>
-        </div>
-      </section>
+    <section class="tuile" id="portfolio-ecrit">
+      <h2 class="fr">Portfolio Écrit</h2>
+      <h2 class="en" style="display:none;">Written Portfolio</h2>
+      <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank" rel="noopener noreferrer" class="figaro-link" aria-label="Profil auteur Figaro">
+        <img src="assets/figaro-logo.jpg" alt="Logo Le Figaro" />
+      </a>
     </section>
 
-    <section class="tuile tuile-contact" id="contact">
-      <h2>Contact</h2>
-      <form action="https://formsubmit.co/louis.lallement@outlook.fr" method="POST" autocomplete="off">
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_subject" value="Nouveau message depuis ton site CV !" />
-        <label for="nom">Nom :</label>
-        <input type="text" id="nom" name="nom" required placeholder="Ton nom" />
-        
-        <label for="prenom">Prénom :</label>
-        <input type="text" id="prenom" name="prenom" required placeholder="Ton prénom" />
-        
-        <label for="email">Email :</label>
-        <input type="email" id="email" name="email" required placeholder="Ton adresse mail" />
-        
-        <label for="message">Message :</label>
-        <textarea id="message" name="message" required placeholder="Écris ton message ici..." rows="5"></textarea>
-        
-        <button type="submit">Envoyer</button>
-      </form>
+    <section class="tuile" id="photographie">
+      <h2 class="fr">Photographie</h2>
+      <h2 class="en" style="display:none;">Photography</h2>
+      <a href="https://www.instagram.com/louis.l.photographie/" target="_blank" rel="noopener noreferrer" class="photography-link" aria-label="Instagram Photographie">
+        <div class="photo-bg"></div>
+        <span class="overlay-text fr">Suivez-moi sur Instagram</span>
+        <span class="overlay-text en" style="display:none;">Follow me on Instagram</span>
+      </a>
     </section>
-  </main>
+  </section>
+
+  <section class="tuile tuile-contact">
+    <h2 class="fr">Contact</h2>
+    <h2 class="en" style="display:none;">Contact</h2>
+    <form action="https://formsubmit.co/louis.lallement@outlook.fr" method="POST">
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_subject" value="Nouveau message depuis ton site CV !" />
+      <label for="nom" class="fr">Nom :</label>
+      <label for="nom" class="en" style="display:none;">Last Name:</label><br />
+      <input type="text" id="nom" name="nom" required placeholder="Ton nom" /><br /><br />
+
+      <label for="prenom" class="fr">Prénom :</label>
+      <label for="prenom" class="en" style="display:none;">First Name:</label><br />
+      <input type="text" id="prenom" name="prenom" required placeholder="Ton prénom" /><br /><br />
+
+      <label for="email" class="fr">Email :</label>
+      <label for="email" class="en" style="display:none;">Email:</label><br />
+      <input type="email" id="email" name="email" required placeholder="Ton adresse mail" /><br /><br />
+
+      <label for="message" class="fr">Message :</label>
+      <label for="message" class="en" style="display:none;">Message:</label><br />
+      <textarea id="message" name="message" required placeholder="Écris ton message ici..." rows="5"></textarea><br /><br />
+
+      <button type="submit" class="fr">Envoyer</button>
+      <button type="submit" class="en" style="display:none;">Send</button>
+    </form>
+  </section>
 
   <footer>
     <div id="social-links">
@@ -84,6 +101,6 @@
     <div id="copyright">© Louis Lallement 2025</div>
   </footer>
 
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
