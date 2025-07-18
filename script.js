@@ -1,65 +1,50 @@
-// Mode jour/nuit + changement langue
+// LANGUES
+const langFrBtn = document.getElementById('btn-fr');
+const langEnBtn = document.getElementById('btn-en');
 
-const toggleThemeBtn = document.getElementById("toggle-theme");
-const btnFr = document.getElementById("btn-fr");
-const btnEn = document.getElementById("btn-en");
+function setLanguage(lang) {
+  const elements = document.querySelectorAll('[data-lang-fr]');
+  elements.forEach(el => {
+    const text = el.getAttribute(lang === 'fr' ? 'data-lang-fr' : 'data-lang-en');
+    if (text) el.textContent = text;
+  });
+  localStorage.setItem('language', lang);
+}
 
-const body = document.body;
+langFrBtn.addEventListener('click', () => setLanguage('fr'));
+langEnBtn.addEventListener('click', () => setLanguage('en'));
+
+// Initialisation langue au chargement
+document.addEventListener('DOMContentLoaded', () => {
+  const savedLang = localStorage.getItem('language') || 'fr';
+  setLanguage(savedLang);
+});
+
+// MODE JOUR / NUIT
+const toggleThemeBtn = document.getElementById('toggle-theme');
 
 function setTheme(theme) {
-  if (theme === "dark") {
-    body.classList.add("dark");
-    toggleThemeBtn.textContent = "☀️";
+  if (theme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    toggleThemeBtn.textContent = '☀️';
   } else {
-    body.classList.remove("dark");
-    toggleThemeBtn.textContent = "🌙";
+    document.documentElement.removeAttribute('data-theme');
+    toggleThemeBtn.textContent = '🌙';
   }
-  localStorage.setItem("theme", theme);
+  localStorage.setItem('theme', theme);
 }
 
-function toggleTheme() {
-  const currentTheme = body.classList.contains("dark") ? "dark" : "light";
-  setTheme(currentTheme === "dark" ? "light" : "dark");
-}
+toggleThemeBtn.addEventListener('click', () => {
+  const currentTheme = localStorage.getItem('theme') || 'light';
+  if (currentTheme === 'light') {
+    setTheme('dark');
+  } else {
+    setTheme('light');
+  }
+});
 
-toggleThemeBtn.addEventListener("click", toggleTheme);
-
-// Load theme from localStorage or system preference
-const savedTheme = localStorage.getItem("theme");
-if (savedTheme) {
+// Initialisation thème au chargement
+document.addEventListener('DOMContentLoaded', () => {
+  const savedTheme = localStorage.getItem('theme') || 'light';
   setTheme(savedTheme);
-} else {
-  // If no preference, detect system preference
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  setTheme(prefersDark ? "dark" : "light");
-}
-
-// Language switcher
-function setLanguage(lang) {
-  const elements = document.querySelectorAll("[data-lang-fr]");
-  elements.forEach((el) => {
-    if (lang === "fr") {
-      el.textContent = el.getAttribute("data-lang-fr");
-    } else {
-      el.textContent = el.getAttribute("data-lang-en");
-    }
-  });
-  localStorage.setItem("language", lang);
-}
-
-btnFr.addEventListener("click", () => setLanguage("fr"));
-btnEn.addEventListener("click", () => setLanguage("en"));
-
-const savedLang = localStorage.getItem("language");
-if (savedLang) {
-  setLanguage(savedLang);
-} else {
-  setLanguage("fr");
-}
-
-// Visitor count simulation (replace with real backend tracking)
-const visitorCountEl = document.getElementById("visitor-count");
-let visitorCount = parseInt(localStorage.getItem("visitorCount")) || 0;
-visitorCount++;
-localStorage.setItem("visitorCount", visitorCount);
-visitorCountEl.textContent = `Visites : ${visitorCount}`;
+});
