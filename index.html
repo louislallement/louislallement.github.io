@@ -9,22 +9,18 @@
 <body>
   <header>
     <div class="header-left">
-      <h1>Louis Lallement</h1>
-      <p>journaliste <span class="bar">|</span> photographe</p>
+      <h1 id="name">Louis Lallement</h1>
+      <p id="subtitle">journaliste <span class="bar">|</span> photographe</p>
     </div>
     <div class="header-right">
       <button id="toggle-theme" aria-label="Changer thème">🌙</button>
-      <button class="lang-btn" data-lang="fr" aria-label="Français">
-        <img src="assets/france-32.png" alt="Français" />
-      </button>
-      <button class="lang-btn" data-lang="en" aria-label="English">
-        <img src="assets/uk-32.png" alt="English" />
-      </button>
+      <button class="lang-btn" data-lang="fr" aria-label="Français"><img src="assets/france-32.png" alt="FR" /></button>
+      <button class="lang-btn" data-lang="en" aria-label="English"><img src="assets/uk-32.png" alt="EN" /></button>
     </div>
   </header>
 
   <main>
-    <section class="tuile" id="bonjour">
+    <section class="tuile tuile-bonjour" id="bonjour">
       <h2>Bonjour</h2>
       <p>Actuellement à Paris et alentours</p>
     </section>
@@ -47,28 +43,29 @@
       </section>
 
       <section class="tuile" id="photographie">
-        <h2>Photographie</h2>
-        <a href="https://www.instagram.com/louis.l.photographie/" target="_blank" rel="noopener noreferrer" class="photo-link" aria-label="Instagram Photographie">
-          <div class="photo-overlay">
-            <span>Suivez-moi sur Instagram</span>
-          </div>
-        </a>
+        <div class="photo-overlay">
+          <span>Suivez-moi sur Instagram</span>
+        </div>
       </section>
     </section>
 
-    <section class="tuile" id="contact">
+    <section class="tuile tuile-contact" id="contact">
       <h2>Contact</h2>
       <form action="https://formsubmit.co/louis.lallement@outlook.fr" method="POST" autocomplete="off">
         <input type="hidden" name="_captcha" value="false" />
         <input type="hidden" name="_subject" value="Nouveau message depuis ton site CV !" />
         <label for="nom">Nom :</label>
         <input type="text" id="nom" name="nom" required placeholder="Ton nom" />
+        
         <label for="prenom">Prénom :</label>
         <input type="text" id="prenom" name="prenom" required placeholder="Ton prénom" />
+        
         <label for="email">Email :</label>
         <input type="email" id="email" name="email" required placeholder="Ton adresse mail" />
+        
         <label for="message">Message :</label>
         <textarea id="message" name="message" required placeholder="Écris ton message ici..." rows="5"></textarea>
+        
         <button type="submit">Envoyer</button>
       </form>
     </section>
