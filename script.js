@@ -1,96 +1,115 @@
-// LANGUES
-const btnFR = document.getElementById('btn-fr');
-const btnEN = document.getElementById('btn-en');
-const langElements = document.querySelectorAll('[data-lang-fr]');
+// Theme toggle with localStorage
+const toggleThemeBtn = document.getElementById("toggle-theme");
+const body = document.body;
 
-function setLanguage(lang) {
-  langElements.forEach(el => {
-    el.textContent = el.getAttribute(`data-lang-${lang}`);
-  });
-  if (lang === 'fr') {
-    btnFR.classList.add('active');
-    btnEN.classList.remove('active');
+function applyTheme(theme) {
+  if (theme === "dark") {
+    body.classList.add("dark");
+    toggleThemeBtn.textContent = "☀️";
   } else {
-    btnEN.classList.add('active');
-    btnFR.classList.remove('active');
-  }
-  localStorage.setItem('site-lang', lang);
-}
-
-btnFR.addEventListener('click', () => setLanguage('fr'));
-btnEN.addEventListener('click', () => setLanguage('en'));
-
-document.addEventListener('DOMContentLoaded', () => {
-  const savedLang = localStorage.getItem('site-lang');
-  if (savedLang) {
-    setLanguage(savedLang);
-  } else {
-    const userLang = navigator.language.startsWith('fr') ? 'fr' : 'en';
-    setLanguage(userLang);
-  }
-});
-
-// MODE JOUR / NUIT
-const toggleThemeBtn = document.getElementById('toggle-theme');
-
-function updateThemeIcon(isDark) {
-  toggleThemeBtn.textContent = isDark ? '☀️' : '🌙';
-  toggleThemeBtn.setAttribute('aria-label', isDark ? 'Mode jour' : 'Mode nuit');
-}
-
-function setTheme(dark) {
-  if (dark) {
-    document.body.classList.add('dark');
-    updateThemeIcon(true);
-    localStorage.setItem('site-theme', 'dark');
-  } else {
-    document.body.classList.remove('dark');
-    updateThemeIcon(false);
-    localStorage.setItem('site-theme', 'light');
+    body.classList.remove("dark");
+    toggleThemeBtn.textContent = "🌙";
   }
 }
 
-toggleThemeBtn.addEventListener('click', () => {
-  const isDark = document.body.classList.contains('dark');
-  setTheme(!isDark);
+function getStoredTheme() {
+  return localStorage.getItem("theme") || "light";
+}
+
+// Initialize theme on page load
+applyTheme(getStoredTheme());
+
+// Toggle theme button click
+toggleThemeBtn.addEventListener("click", () => {
+  const currentTheme = body.classList.contains("dark") ? "dark" : "light";
+  const newTheme = currentTheme === "dark" ? "light" : "dark";
+  applyTheme(newTheme);
+  localStorage.setItem("theme", newTheme);
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-  const savedTheme = localStorage.getItem('site-theme');
-  if (savedTheme === 'dark') {
-    setTheme(true);
-  } else {
-    setTheme(false);
-  }
+// Language toggle
+const langButtons = document.querySelectorAll(".lang-btn");
+const texts = {
+  fr: {
+    bonjourTitle: "Bonjour",
+    bonjourDesc: "Actuellement à Paris et alentours",
+    portfolioVideo: "Portfolio vidéo",
+    portfolioEcrit: "Portfolio écrit",
+    photographie: "Photographie",
+    followInstagram: "Suivez-moi sur Instagram",
+    contact: "Contact",
+    nom: "Nom :",
+    prenom: "Prénom :",
+    email: "Email :",
+    message: "Message :",
+    envoyer: "Envoyer",
+    visiteCount: "Visites :",
+  },
+  en: {
+    bonjourTitle: "Hello",
+    bonjourDesc: "Currently in Paris and surroundings",
+    portfolioVideo: "Video portfolio",
+    portfolioEcrit: "Written portfolio",
+    photographie: "Photography",
+    followInstagram: "Follow me on Instagram",
+    contact: "Contact",
+    nom: "Last name:",
+    prenom: "First name:",
+    email: "Email:",
+    message: "Message:",
+    envoyer: "Send",
+    visiteCount: "Visits:",
+  },
+};
+
+function updateLanguage(lang) {
+  document.querySelector(".tuile.bonjour h2").textContent = texts[lang].bonjourTitle;
+  document.querySelector(".tuile.bonjour p").textContent = texts[lang].bonjourDesc;
+
+  document.querySelector("#portfolio-video h2").textContent = texts[lang].portfolioVideo;
+  document.querySelector("#portfolio-ecrit h2").textContent = texts[lang].portfolioEcrit;
+  document.querySelector("#photographie h2").textContent = texts[lang].photographie;
+  document.querySelector("#photographie .photo-overlay p").textContent = texts[lang].followInstagram;
+  document.querySelector(".tuile.contact h2").textContent = texts[lang].contact;
+
+  document.querySelector('label[for="nom"]').textContent = texts[lang].nom;
+  document.querySelector('label[for="prenom"]').textContent = texts[lang].prenom;
+  document.querySelector('label[for="email"]').textContent = texts[lang].email;
+  document.querySelector('label[for="message"]').textContent = texts[lang].message;
+  document.querySelector('button[type="submit"]').textContent = texts[lang].envoyer;
+
+  // Visitor count label update
+  updateVisitorCountText(lang);
+}
+
+// Set default lang
+let currentLang = "fr";
+updateLanguage(currentLang);
+
+langButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const selectedLang = btn.dataset.lang;
+    if (selectedLang !== currentLang) {
+      currentLang = selectedLang;
+      updateLanguage(currentLang);
+    }
+  });
 });
 
-// Effets légers sur les tuiles au hover / touch
-const tuiles = document.querySelectorAll('.tuile');
+// Visitor count (simple local storage counter)
+const visitorCountEl = document.getElementById("visitor-count");
+const visitorCountKey = "visitorCount";
 
-tuiles.forEach(tuile => {
-  tuile.addEventListener('mousemove', e => {
-    const rect = tuile.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+function updateVisitorCountText(lang) {
+  const baseText = texts[lang].visiteCount;
+  visitorCountEl.textContent = `${baseText} ${localStorage.getItem(visitorCountKey) || 1}`;
+}
 
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
+function incrementVisitorCount() {
+  let count = parseInt(localStorage.getItem(visitorCountKey) || "0", 10);
+  count++;
+  localStorage.setItem(visitorCountKey, count);
+  updateVisitorCountText(currentLang);
+}
 
-    const moveX = (x - centerX) * 0.03; // accentuer légèrement
-    const moveY = (y - centerY) * 0.03;
-
-    tuile.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.02)`;
-  });
-
-  tuile.addEventListener('mouseleave', () => {
-    tuile.style.transform = 'translate(0, 0) scale(1)';
-  });
-
-  // Pour mobile : petit effet au touchstart / touchend
-  tuile.addEventListener('touchstart', () => {
-    tuile.style.transform = 'scale(1.02)';
-  });
-  tuile.addEventListener('touchend', () => {
-    tuile.style.transform = 'scale(1)';
-  });
-});
+incrementVisitorCount();
