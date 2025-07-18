@@ -1,50 +1,96 @@
 // LANGUES
-const langFrBtn = document.getElementById('btn-fr');
-const langEnBtn = document.getElementById('btn-en');
+const btnFR = document.getElementById('btn-fr');
+const btnEN = document.getElementById('btn-en');
+const langElements = document.querySelectorAll('[data-lang-fr]');
 
 function setLanguage(lang) {
-  const elements = document.querySelectorAll('[data-lang-fr]');
-  elements.forEach(el => {
-    const text = el.getAttribute(lang === 'fr' ? 'data-lang-fr' : 'data-lang-en');
-    if (text) el.textContent = text;
+  langElements.forEach(el => {
+    el.textContent = el.getAttribute(`data-lang-${lang}`);
   });
-  localStorage.setItem('language', lang);
+  if (lang === 'fr') {
+    btnFR.classList.add('active');
+    btnEN.classList.remove('active');
+  } else {
+    btnEN.classList.add('active');
+    btnFR.classList.remove('active');
+  }
+  localStorage.setItem('site-lang', lang);
 }
 
-langFrBtn.addEventListener('click', () => setLanguage('fr'));
-langEnBtn.addEventListener('click', () => setLanguage('en'));
+btnFR.addEventListener('click', () => setLanguage('fr'));
+btnEN.addEventListener('click', () => setLanguage('en'));
 
-// Initialisation langue au chargement
 document.addEventListener('DOMContentLoaded', () => {
-  const savedLang = localStorage.getItem('language') || 'fr';
-  setLanguage(savedLang);
+  const savedLang = localStorage.getItem('site-lang');
+  if (savedLang) {
+    setLanguage(savedLang);
+  } else {
+    const userLang = navigator.language.startsWith('fr') ? 'fr' : 'en';
+    setLanguage(userLang);
+  }
 });
 
 // MODE JOUR / NUIT
 const toggleThemeBtn = document.getElementById('toggle-theme');
 
-function setTheme(theme) {
-  if (theme === 'dark') {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    toggleThemeBtn.textContent = '☀️';
+function updateThemeIcon(isDark) {
+  toggleThemeBtn.textContent = isDark ? '☀️' : '🌙';
+  toggleThemeBtn.setAttribute('aria-label', isDark ? 'Mode jour' : 'Mode nuit');
+}
+
+function setTheme(dark) {
+  if (dark) {
+    document.body.classList.add('dark');
+    updateThemeIcon(true);
+    localStorage.setItem('site-theme', 'dark');
   } else {
-    document.documentElement.removeAttribute('data-theme');
-    toggleThemeBtn.textContent = '🌙';
+    document.body.classList.remove('dark');
+    updateThemeIcon(false);
+    localStorage.setItem('site-theme', 'light');
   }
-  localStorage.setItem('theme', theme);
 }
 
 toggleThemeBtn.addEventListener('click', () => {
-  const currentTheme = localStorage.getItem('theme') || 'light';
-  if (currentTheme === 'light') {
-    setTheme('dark');
+  const isDark = document.body.classList.contains('dark');
+  setTheme(!isDark);
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const savedTheme = localStorage.getItem('site-theme');
+  if (savedTheme === 'dark') {
+    setTheme(true);
   } else {
-    setTheme('light');
+    setTheme(false);
   }
 });
 
-// Initialisation thème au chargement
-document.addEventListener('DOMContentLoaded', () => {
-  const savedTheme = localStorage.getItem('theme') || 'light';
-  setTheme(savedTheme);
+// Effets légers sur les tuiles au hover / touch
+const tuiles = document.querySelectorAll('.tuile');
+
+tuiles.forEach(tuile => {
+  tuile.addEventListener('mousemove', e => {
+    const rect = tuile.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const moveX = (x - centerX) * 0.03; // accentuer légèrement
+    const moveY = (y - centerY) * 0.03;
+
+    tuile.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.02)`;
+  });
+
+  tuile.addEventListener('mouseleave', () => {
+    tuile.style.transform = 'translate(0, 0) scale(1)';
+  });
+
+  // Pour mobile : petit effet au touchstart / touchend
+  tuile.addEventListener('touchstart', () => {
+    tuile.style.transform = 'scale(1.02)';
+  });
+  tuile.addEventListener('touchend', () => {
+    tuile.style.transform = 'scale(1)';
+  });
 });
