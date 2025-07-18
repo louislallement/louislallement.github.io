@@ -1,324 +1,370 @@
-/* Reset */
+/* Reset et bases */
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
-
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f0f4f8;
-  color: #222;
-  line-height: 1.5;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow-x: hidden; /* Bloquer scroll horizontal */
-}
-
-/* HEADER */
-header {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 1rem 3rem;
-  background-color: #0d47a1;
-  color: white;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-.header-left {
-  flex: 1;
+/* Variables jour / nuit */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #111111;
+  --bar-color: #666666;
+  --tuile-bg: #f0f0f0;
+  --tuile-shadow: rgba(0, 0, 0, 0.1);
+  --tuile-hover-shadow: rgba(0, 0, 0, 0.25);
+  --btn-bg: #e0e0e0;
+  --btn-text: #333333;
+}
+
+body.dark {
+  --bg-color: #0a122a;
+  --text-color: #cdd6f4;
+  --bar-color: #8f93a2;
+  --tuile-bg: #15202b;
+  --tuile-shadow: rgba(0, 0, 0, 0.5);
+  --tuile-hover-shadow: rgba(0, 0, 0, 0.7);
+  --btn-bg: #243447;
+  --btn-text: #cdd6f4;
+}
+
+/* Header */
+header {
   text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 0.6rem;
+  user-select: none;
 }
-
 header h1 {
-  font-size: 2.8rem;
+  font-size: 3.4rem;
   font-weight: 900;
-  letter-spacing: 1px;
-  margin-bottom: 0.2rem;
+  letter-spacing: 0.06em;
+  color: var(--text-color);
 }
-
 header p {
   font-size: 1.1rem;
-  font-weight: 400;
-  color: #dbe3f1;
+  color: var(--bar-color);
+  margin-top: 0.2rem;
+}
+.bar {
+  margin: 0 0.3em;
+  user-select: none;
 }
 
-.header-right {
+/* Top controls : langues + mode jour/nuit */
+.top-controls {
+  width: 100%;
+  max-width: 900px;
   display: flex;
-  gap: 1rem;
+  justify-content: flex-end;
   align-items: center;
-  flex: 0 0 auto;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+  user-select: none;
 }
-
-/* Boutons langues et thème */
+.lang-toggle {
+  display: flex;
+  gap: 0.5rem;
+}
 .lang-btn {
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
   width: 32px;
   height: 32px;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: transform 0.25s ease;
 }
-
-.lang-btn:hover {
-  transform: scale(1.2);
+.lang-btn.active {
+  opacity: 1;
 }
-
 #toggle-theme {
-  font-size: 1.4rem;
-  background: transparent;
-  border: none;
-  color: white;
-  cursor: pointer;
-  transition: transform 0.25s ease;
-}
-
-#toggle-theme:hover {
-  transform: scale(1.2);
-}
-
-/* TUile BONJOUR */
-.tuile-bonjour {
-  margin: 2rem auto 1rem auto;
-  padding: 2rem 2.5rem;
-  max-width: 900px;
-  background-color: white;
-  border-radius: 20px;
-  box-shadow: 0 8px 15px rgba(13, 71, 161, 0.25);
-  text-align: center;
-  font-weight: 600;
-}
-
-.tuile-bonjour h2 {
-  font-size: 2rem;
-  margin-bottom: 0.7rem;
-}
-
-.tuile-bonjour p {
-  font-size: 1.1rem;
-  color: #555;
-}
-
-/* TUILLES HORIZONTALES */
-.tuiles-row {
-  display: flex;
-  max-width: 960px;
-  margin: 0 auto 2rem auto;
-  gap: 1.5rem;
-  padding: 0 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.tuile {
-  background-color: white;
-  border-radius: 18px;
-  box-shadow: 0 6px 10px rgba(0,0,0,0.1);
-  padding: 1.8rem 1.5rem;
-  flex: 1 1 300px;
-  max-width: 300px;
-  min-width: 280px;
-  position: relative;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-}
-
-.tuile:hover,
-.tuile:focus-visible {
-  transform: translateY(-8px) scale(1.04);
-  box-shadow: 0 15px 25px rgba(0,0,0,0.25);
-}
-
-/* VIDEOS CONTAINER */
-.videos-container iframe {
-  width: 100%;
-  height: 300px;
-  border-radius: 15px;
-  border: none;
-  margin-bottom: 1rem;
-}
-
-/* PORTFOLIO ÉCRIT */
-#portfolio-ecrit img {
-  width: 100%;
-  max-width: 180px;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-#portfolio-ecrit img:hover {
-  transform: scale(1.05);
-}
-
-/* PHOTOGRAPHIE */
-#photographie {
-  padding: 0;
-  overflow: hidden;
-  max-width: 300px;
-}
-
-.photography-link {
-  display: block;
-  position: relative;
-  color: white;
-  text-decoration: none;
-  height: 380px;
-  border-radius: 18px;
-  overflow: hidden;
   cursor: pointer;
   font-size: 1.6rem;
-  font-weight: 700;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  background: var(--btn-bg);
+  border: none;
+  border-radius: 5px;
+  padding: 0.2rem 0.6rem;
+  color: var(--btn-text);
+  transition: background 0.3s ease;
+}
+#toggle-theme:hover {
+  background: var(--btn-bg-hover, #d0d0d0);
 }
 
+/* Main container */
+main {
+  max-width: 900px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.8rem;
+  padding-bottom: 3rem;
+}
+
+/* Tuile Bonjour */
+.tuile-bonjour {
+  background-color: var(--tuile-bg);
+  padding: 2.2rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 12px var(--tuile-shadow);
+  width: 70%;
+  min-width: 280px;
+  text-align: center;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  cursor: default;
+}
+.tuile-bonjour:hover,
+.tuile-bonjour:focus-within {
+  box-shadow: 0 10px 22px var(--tuile-hover-shadow);
+  transform: translateY(-4px);
+}
+
+/* Row 3 tuiles verticales */
+.tuiles-row {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  max-width: 900px;
+  justify-content: center;
+}
+.tuiles-row .tuile.vertical {
+  background-color: var(--tuile-bg);
+  box-shadow: 0 6px 12px var(--tuile-shadow);
+  border-radius: 16px;
+  padding: 1rem 1rem 2rem;
+  flex: 1 1 0;
+  min-width: 220px;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.tuiles-row .tuile.vertical:hover,
+.tuiles-row .tuile.vertical:focus-within {
+  box-shadow: 0 12px 26px var(--tuile-hover-shadow);
+  transform: translateY(-5px);
+}
+
+/* Portfolio vidéo - iframe */
+.videos-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.videos-container iframe {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: 14px;
+  border: none;
+  background: black;
+}
+
+/* Portfolio écrit - figaro logo */
+#portfolio-ecrit img {
+  max-width: 180px;
+  height: auto;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: filter 0.3s ease;
+}
+#portfolio-ecrit img:hover {
+  filter: brightness(1.2);
+}
+
+/* Photographie */
+#photographie {
+  padding: 0;
+  cursor: pointer;
+}
+.photo-link {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 280px;
+  border-radius: 16px;
+  overflow: hidden;
+}
 .photo-bg {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-image: url('assets/instagram-photo.jpg');
-  background-position: center center;
-  background-repeat: no-repeat;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('assets/instagram-cover.jpg');
   background-size: cover;
-  filter: brightness(0.6) grayscale(0.1);
+  background-position: center center;
+  filter: grayscale(30%) brightness(55%);
   transition: filter 0.3s ease;
-  border-radius: 18px;
-  z-index: 0;
 }
-
-.photography-link span {
+.photo-link:hover .photo-bg,
+.photo-link:focus .photo-bg {
+  filter: grayscale(10%) brightness(75%);
+}
+.photo-text {
   position: relative;
-  z-index: 1;
-  text-shadow: 0 0 6px rgba(0,0,0,0.7);
+  z-index: 2;
+  color: white;
+  font-weight: 700;
+  font-size: 1.4rem;
+  text-align: center;
+  line-height: 280px;
+  user-select: none;
 }
 
-.photography-link:hover .photo-bg {
-  filter: brightness(0.75) grayscale(0);
-}
-
-/* TUILE CONTACT */
+/* Tuile Contact */
 .tuile-contact {
-  max-width: 900px;
-  margin: 0 auto 3rem auto;
-  padding: 2rem 2.5rem;
-  background-color: white;
-  border-radius: 20px;
-  box-shadow: 0 8px 15px rgba(13, 71, 161, 0.25);
+  background-color: var(--tuile-bg);
+  padding: 2rem 2.2rem 2.8rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 12px var(--tuile-shadow);
+  width: 70%;
+  min-width: 280px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  cursor: default;
 }
-
+.tuile-contact:hover,
+.tuile-contact:focus-within {
+  box-shadow: 0 10px 22px var(--tuile-hover-shadow);
+  transform: translateY(-4px);
+}
 .tuile-contact form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
-
 .tuile-contact label {
   font-weight: 600;
-  color: #222;
+  font-size: 0.9rem;
 }
-
 .tuile-contact input,
 .tuile-contact textarea {
-  padding: 0.6rem 0.8rem;
-  border: 1.5px solid #0d47a1;
+  border: 1.5px solid #ccc;
   border-radius: 8px;
+  padding: 0.55rem 0.9rem;
   font-size: 1rem;
-  font-family: inherit;
-  resize: vertical;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.25s ease;
+  background-color: white;
+  color: #222;
 }
-
+body.dark .tuile-contact input,
+body.dark .tuile-contact textarea {
+  background-color: #1f2937;
+  color: #e0e6f5;
+  border-color: #444;
+}
 .tuile-contact input:focus,
 .tuile-contact textarea:focus {
   outline: none;
-  border-color: #1e88e5;
+  border-color: #0055ff;
 }
-
 .tuile-contact button {
-  background-color: #0d47a1;
+  background-color: #0055ff;
   color: white;
   font-weight: 700;
+  padding: 0.75rem;
   border: none;
-  padding: 0.8rem;
   border-radius: 10px;
+  font-size: 1.1rem;
   cursor: pointer;
-  font-size: 1.2rem;
   transition: background-color 0.3s ease;
 }
-
 .tuile-contact button:hover {
-  background-color: #1565c0;
+  background-color: #003ea6;
 }
 
-/* FOOTER */
+/* Footer centré */
 footer {
-  background-color: #0d47a1;
-  color: white;
-  padding: 1.5rem 2rem;
-  text-align: center;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1.5rem;
-  align-items: center;
-  font-size: 0.9rem;
+  background-color: var(--tuile-bg);
+  padding: 1.3rem 2rem;
+  border-top: 1px solid #ddd;
   user-select: none;
-}
 
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centre les éléments horizontalement */
+  gap: 0.7rem;
+  text-align: center;
+}
 #social-links {
   display: flex;
   gap: 1rem;
 }
-
 #social-links img {
   width: 32px;
   height: 32px;
   cursor: pointer;
-  filter: brightness(0.9);
-  transition: filter 0.25s ease;
+  filter: var(--social-icon-filter, none);
+  transition: filter 0.3s ease;
 }
-
 #social-links img:hover {
-  filter: brightness(1.2);
+  filter: brightness(1.25);
 }
-
 #visitor-count {
   font-weight: 600;
+  font-size: 1rem;
+  user-select: text;
+}
+#copyright {
+  font-size: 0.85rem;
+  color: var(--bar-color);
+  user-select: none;
 }
 
-/* RESPONSIVE */
-@media (max-width: 720px) {
-  header {
-    padding: 1rem 1.5rem;
+/* Responsive */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2.4rem;
+  }
+  header p {
+    font-size: 1rem;
   }
 
-  .header-right {
-    gap: 0.7rem;
+  .top-controls {
+    max-width: 100%;
+    padding: 0 1rem;
   }
 
-  .tuile-bonjour {
-    max-width: 95%;
+  main {
+    width: 95%;
+    padding-bottom: 2rem;
+  }
+
+  .tuile-bonjour,
+  .tuile-contact {
+    width: 90%;
   }
 
   .tuiles-row {
     flex-direction: column;
-    max-width: 95%;
+    gap: 1.5rem;
   }
 
-  .tuile {
-    max-width: 100% !important;
-    min-width: unset;
+  .tuiles-row .tuile.vertical {
+    max-width: 100%;
+    min-width: auto;
   }
 
-  .tuile-contact {
-    max-width: 95% !important;
+  #photographie .photo-link {
+    height: 200px;
+  }
+
+  #portfolio-video iframe {
+    aspect-ratio: 4 / 3;
   }
 }
