@@ -466,3 +466,155 @@
         <span id="photographie-desc" class="visually-hidden">Lien vers Instagram photographie</span>
       </article>
     </section>
+
+    <section id="contact" aria-label="Formulaire de contact">
+      <h2>Contact</h2>
+      <form method="POST" action="https://formsubmit.co/votreadresse@mail.com" target="_blank" novalidate>
+        <label for="prenom">Prénom</label>
+        <input type="text" id="prenom" name="prenom" required autocomplete="given-name" />
+        <label for="nom">Nom</label>
+        <input type="text" id="nom" name="nom" required autocomplete="family-name" />
+        <label for="email">Adresse e-mail</label>
+        <input type="email" id="email" name="email" required autocomplete="email" />
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+        <button type="submit">Envoyer</button>
+      </form>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <div id="counter" aria-live="polite" aria-atomic="true" tabindex="0">Visites : 0</div>
+    <div class="social-icons" aria-label="Réseaux sociaux">
+      <a href="https://twitter.com/louislall" target="_blank" rel="noopener" aria-label="Twitter Louis Lallement"><img src="assets/twitter-32.png" alt="Logo Twitter" /></a>
+      <a href="https://www.linkedin.com/in/louis-lallement-32751b159/" target="_blank" rel="noopener" aria-label="LinkedIn Louis Lallement"><img src="assets/linkedin-32.png" alt="Logo LinkedIn" /></a>
+    </div>
+    <div id="copyright">© Louis Lallement 2025</div>
+  </footer>
+
+<script>
+  (() => {
+    const body = document.body;
+    const toggleThemeBtn = document.getElementById('toggle-theme');
+    const langFr = document.getElementById('lang-fr');
+    const langEn = document.getElementById('lang-en');
+    const bonjourText = document.getElementById('bonjour-text');
+
+    // Texte en FR/EN
+    const texts = {
+      fr: {
+        bonjour: "Actuellement à Paris et alentours",
+        contact: "Contact",
+        portfolioVideo: "Portfolio vidéo",
+        portfolioEcrit: "Portfolio écrit",
+        photographie: "Photographie",
+        suivezMoi: "Suivez-moi sur Instagram",
+        envoyer: "Envoyer",
+        header: {
+          role: "Journaliste | Photographe"
+        }
+      },
+      en: {
+        bonjour: "Currently in Paris and surroundings",
+        contact: "Contact",
+        portfolioVideo: "Video Portfolio",
+        portfolioEcrit: "Written Portfolio",
+        photographie: "Photography",
+        suivezMoi: "Follow me on Instagram",
+        envoyer: "Send",
+        header: {
+          role: "Journalist | Photographer"
+        }
+      }
+    };
+
+    // I18N - change language function
+    function setLanguage(lang) {
+      if (!texts[lang]) return;
+      body.lang = lang;
+
+      // Update texts
+      bonjourText.textContent = texts[lang].bonjour;
+
+      // Portfolio titles
+      document.querySelector('#portfolio-video h2').textContent = texts[lang].portfolioVideo;
+      document.querySelector('#portfolio-ecrit h2').textContent = texts[lang].portfolioEcrit;
+      document.querySelector('#photographie h2')?.remove(); // no h2 inside photography
+      // Photographie link text
+      const photoLink = document.querySelector('#photographie a');
+      photoLink.textContent = texts[lang].suivezMoi;
+
+      // Contact title and button
+      document.querySelector('#contact h2').textContent = texts[lang].contact;
+      document.querySelector('#contact button[type="submit"]').textContent = texts[lang].envoyer;
+
+      // Header role line
+      const headerRole = document.querySelector('header p');
+      headerRole.textContent = texts[lang].header.role;
+
+      // Save lang choice
+      localStorage.setItem('site-language', lang);
+    }
+
+    // Mode clair/sombre
+    function updateThemeUI() {
+      const isDark = body.classList.contains('dark');
+      toggleThemeBtn.textContent = isDark ? '🌙' : '🌞';
+      toggleThemeBtn.setAttribute('aria-label', isDark ? 'Activer le mode jour' : 'Activer le mode nuit');
+      toggleThemeBtn.title = isDark ? 'Activer le mode jour' : 'Activer le mode nuit';
+    }
+    function toggleTheme() {
+      if (body.classList.contains('dark')) {
+        body.classList.remove('dark');
+        body.classList.add('light');
+      } else {
+        body.classList.remove('light');
+        body.classList.add('dark');
+      }
+      updateThemeUI();
+      localStorage.setItem('site-theme', body.classList.contains('dark') ? 'dark' : 'light');
+    }
+
+    // Initialise mode et langue selon localStorage ou default
+    function initSettings() {
+      const savedLang = localStorage.getItem('site-language') || 'fr';
+      setLanguage(savedLang);
+
+      const savedTheme = localStorage.getItem('site-theme') || 'light';
+      body.classList.remove('light', 'dark');
+      body.classList.add(savedTheme);
+      updateThemeUI();
+    }
+
+    // Event listeners
+    toggleThemeBtn.addEventListener('click', toggleTheme);
+    langFr.addEventListener('click', () => setLanguage('fr'));
+    langEn.addEventListener('click', () => setLanguage('en'));
+    langFr.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setLanguage('fr'); } });
+    langEn.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setLanguage('en'); } });
+
+    // Visites compteur basique
+    const counterEl = document.getElementById('counter');
+    let visits = localStorage.getItem('visits') || 0;
+    visits = parseInt(visits, 10) + 1;
+    localStorage.setItem('visits', visits);
+    counterEl.textContent = `Visites : ${visits}`;
+
+    // Initialize on page load
+    initSettings();
+
+  })();
+</script>
+
+<!-- Accessibilité: class for hidden descriptions -->
+<style>
+  .visually-hidden {
+    position: absolute !important;
+    height: 1px; width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap;
+  }
+</style>
+</body>
+</html>
