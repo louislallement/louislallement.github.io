@@ -1,71 +1,68 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Louis Lallement | journaliste & photographe</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Louis Lallement - journaliste | photographe</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header id="main-header">
-    <div class="header-content">
-      <h1>Louis Lallement</h1>
-      <h2>journaliste | photographe</h2>
+    <div class="top-bar">
+      <div class="lang-toggle">
+        <img src="assets/france-32.png" id="fr" alt="Français" onclick="setLang('fr')">
+        <img src="assets/uk-32.png" id="en" alt="English" onclick="setLang('en')">
+        <img src="assets/moon.svg" id="theme-toggle" alt="Mode" onclick="toggleTheme()">
+      </div>
     </div>
-    <div class="icons-right">
-      <img src="assets/france-32.png" alt="Français" class="lang-icon" />
-      <img src="assets/uk-32.png" alt="English" class="lang-icon" />
-      <img src="assets/moon.svg" alt="Mode Nuit" id="mode-toggle" />
-    </div>
+    <h1>Louis Lallement</h1>
+    <h2>journaliste | photographe</h2>
   </header>
 
   <main>
-    <!-- Tuile Bonjour -->
-    <section class="tile tile-large">
-      <h3>Bonjour</h3>
-      <p>Bienvenue sur mon site personnel.</p>
+    <section class="tile hello">
+      <p>Bonjour et bienvenue sur mon site !</p>
     </section>
 
-    <!-- Trois tuiles verticales -->
-    <div class="tiles-row">
-      <section class="tile tile-small">
+    <section class="tiles-row">
+      <div class="tile video">
         <h3>Portfolio Vidéo</h3>
-        <p>3 vidéos à venir ici (réels Instagram)</p>
-      </section>
-      <section class="tile tile-small">
+        <iframe src="https://www.instagram.com/reel/COdW3vjBtGp/embed" frameborder="0" allowfullscreen></iframe>
+        <iframe src="https://www.instagram.com/reel/CPx2Ej3B9Hx/embed" frameborder="0" allowfullscreen></iframe>
+        <iframe src="https://www.instagram.com/reel/CQyUO1RBYnJ/embed" frameborder="0" allowfullscreen></iframe>
+      </div>
+
+      <div class="tile written">
         <h3>Portfolio Écrit</h3>
         <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank">
-          <img src="assets/logo-figaro.png" alt="Le Figaro" class="figaro-logo" />
+          <img src="assets/figaro-logo.png" alt="Le Figaro">
         </a>
-      </section>
-      <section class="tile tile-small tile-photo">
-        <a href="https://www.instagram.com/ton_profil" target="_blank">
-          <div class="photo-overlay">Suis-moi sur Instagram</div>
-        </a>
-      </section>
-    </div>
+      </div>
 
-    <!-- Formulaire de contact -->
-    <section class="tile tile-large contact-form">
-      <h3>Me contacter</h3>
+      <div class="tile photo" onclick="window.open('https://www.instagram.com/louislallement/', '_blank')">
+        <h3>Photographie</h3>
+        <div class="photo-bg">
+          <p>Suis-moi sur Instagram</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="tile contact">
+      <h3>Contactez-moi</h3>
       <form>
-        <input type="text" placeholder="Votre nom" required />
-        <input type="email" placeholder="Votre email" required />
-        <textarea placeholder="Votre message" required></textarea>
+        <input type="text" placeholder="Nom" required>
+        <input type="email" placeholder="Email" required>
+        <textarea placeholder="Votre message..." required></textarea>
         <button type="submit">Envoyer</button>
       </form>
     </section>
   </main>
 
-  <!-- Footer -->
   <footer>
-    <div class="footer-content">
-      <p>&copy; 2025 Louis Lallement</p>
-      <div class="social-icons">
-        <a href="https://twitter.com/tonprofil">Twitter</a> |
-        <a href="https://linkedin.com/in/tonprofil">LinkedIn</a>
-      </div>
-      <div class="counter">Nombre de visites : XX</div>
+    <div>
+      <p>&copy; Louis Lallement 2025</p>
+      <p><a href="#">LinkedIn</a> | <a href="#">Twitter</a></p>
+      <p>Visites : <span id="visit-count">1234</span></p>
     </div>
   </footer>
 
