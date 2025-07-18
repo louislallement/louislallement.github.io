@@ -1,7 +1,8 @@
-function toggleTheme() {
-  document.body.classList.toggle('dark-mode');
-}
+document.getElementById("toggle-theme").addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+});
 
-function setLang(lang) {
-  alert("Langue changée en : " + (lang === 'fr' ? 'Français' : 'Anglais'));
+function setLanguage(lang) {
+  // Pour l'instant, juste un message
+  alert("Langue changée : " + lang);
 }
