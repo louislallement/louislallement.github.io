@@ -2,72 +2,467 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Louis Lallement</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Louis Lallement - Journaliste | Photographe</title>
+  <style>
+    /* ==== RESET & BASICS ==== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.3s, color 0.3s;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    :root {
+      --color-primary: #0055aa;
+      --color-secondary: #003d7a;
+      --color-accent: #0099ff;
+      --color-light-bg: #f9f9f9;
+      --color-light-text: #222;
+      --color-dark-bg: #121c2c;
+      --color-dark-text: #cfd8f7;
+      --color-tile-bg-light: #ffffff;
+      --color-tile-bg-dark: #1f2a44;
+      --color-tile-shadow-light: rgba(0,0,0,0.15);
+      --color-tile-shadow-dark: rgba(0,0,0,0.6);
+    }
+    body.light {
+      --bg: var(--color-light-bg);
+      --text: var(--color-light-text);
+      --tile-bg: var(--color-tile-bg-light);
+      --tile-shadow: var(--color-tile-shadow-light);
+    }
+    body.dark {
+      --bg: var(--color-dark-bg);
+      --text: var(--color-dark-text);
+      --tile-bg: var(--color-tile-bg-dark);
+      --tile-shadow: var(--color-tile-shadow-dark);
+    }
+
+    a {
+      color: var(--color-accent);
+      text-decoration: none;
+      cursor: pointer;
+    }
+    a:hover, a:focus {
+      text-decoration: underline;
+    }
+
+    /* ==== HEADER ==== */
+    header {
+      width: 100%;
+      max-width: 1200px;
+      padding: 1rem 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      position: relative;
+      user-select: none;
+    }
+    header h1 {
+      flex-basis: 100%;
+      font-size: 3rem;
+      font-weight: 900;
+      margin: 0;
+      text-align: center;
+      color: var(--color-primary);
+    }
+    header p {
+      flex-basis: 100%;
+      text-align: center;
+      margin: 0 0 0.6rem 0;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    /* Mode & Lang controls container */
+    #controls {
+      position: absolute;
+      right: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    button.control-btn {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 1.6rem;
+      padding: 0;
+      color: var(--color-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease;
+    }
+    button.control-btn:hover,
+    button.control-btn:focus {
+      transform: scale(1.15);
+      outline: none;
+    }
+    img.flag {
+      width: 28px;
+      height: 20px;
+      border-radius: 3px;
+      cursor: pointer;
+      filter: drop-shadow(0 0 1px var(--color-tile-shadow));
+      transition: transform 0.2s ease;
+    }
+    img.flag:hover,
+    img.flag:focus {
+      transform: scale(1.2);
+      outline: none;
+    }
+
+    /* ==== TUILES ==== */
+    main {
+      width: 100%;
+      max-width: 1200px;
+      padding: 0 1.5rem 3rem 1.5rem;
+      box-sizing: border-box;
+      flex-grow: 1;
+    }
+
+    .tuile-bonjour {
+      width: 75%;
+      max-width: 900px;
+      margin: 2rem auto 3rem auto;
+      background: var(--tile-bg);
+      box-shadow: 0 8px 24px var(--tile-shadow);
+      border-radius: 15px;
+      padding: 2rem 2.5rem;
+      text-align: center;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+      cursor: default;
+    }
+    .tuile-bonjour:hover,
+    .tuile-bonjour:focus-within {
+      box-shadow: 0 12px 32px var(--tile-shadow);
+      transform: translateY(-4px);
+    }
+    .tuile-bonjour h2 {
+      margin-top: 0;
+      font-size: 2.5rem;
+      color: var(--color-primary);
+    }
+    .tuile-bonjour p {
+      font-size: 1.2rem;
+      color: var(--text);
+      margin-bottom: 0;
+      user-select: text;
+    }
+
+    /* Trois tuiles verticales côte à côte */
+    .tuiles-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 1.3rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+    .tuile {
+      background: var(--tile-bg);
+      box-shadow: 0 8px 24px var(--tile-shadow);
+      border-radius: 15px;
+      padding: 1.5rem 1.5rem 2rem 1.5rem;
+      flex: 1 1 30%;
+      min-width: 280px;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+      cursor: default;
+      position: relative;
+      overflow: hidden;
+    }
+    .tuile:hover,
+    .tuile:focus-within {
+      box-shadow: 0 12px 32px var(--tile-shadow);
+      transform: translateY(-6px);
+    }
+    .tuile h2 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+      color: var(--color-primary);
+      user-select: text;
+    }
+    .tuile p,
+    .tuile a {
+      font-size: 1.1rem;
+      color: var(--text);
+      margin-top: auto;
+      user-select: text;
+      z-index: 2;
+    }
+
+    /* Portfolio vidéo - iframe container */
+    .videos-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      overflow-y: auto;
+      max-height: 360px;
+    }
+    .videos-container iframe {
+      width: 100%;
+      height: 200px;
+      border: none;
+      border-radius: 12px;
+      background: #000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    /* Portfolio écrit - logo Figaro */
+    .figaro-link img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      max-height: 120px;
+      object-fit: contain;
+    }
+
+    /* Photographie - image background with overlay and text */
+    #photographie {
+      position: relative;
+      cursor: pointer;
+      color: white;
+      text-align: center;
+      font-weight: 600;
+      font-size: 1.4rem;
+      user-select: none;
+      padding-top: 4rem;
+      padding-bottom: 2rem;
+      background-size: cover;
+      background-position: center center;
+      border-radius: 15px;
+      overflow: hidden;
+    }
+    #photographie::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      filter: grayscale(40%);
+      transition: background 0.3s ease;
+      border-radius: 15px;
+      z-index: 1;
+    }
+    #photographie > a {
+      position: relative;
+      z-index: 2;
+      color: white;
+      text-decoration: none;
+      user-select: none;
+      font-weight: 700;
+    }
+    #photographie:hover::before,
+    #photographie:focus-within::before {
+      background: rgba(0,0,0,0.3);
+    }
+
+    /* Formulaire Contact - largeur calquée sur tuile bonjour */
+    #contact {
+      width: 75%;
+      max-width: 900px;
+      margin: 0 auto 3rem auto;
+      background: var(--tile-bg);
+      box-shadow: 0 8px 24px var(--tile-shadow);
+      border-radius: 15px;
+      padding: 2rem 2.5rem;
+      box-sizing: border-box;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+    #contact:hover,
+    #contact:focus-within {
+      box-shadow: 0 12px 32px var(--tile-shadow);
+      transform: translateY(-4px);
+    }
+    #contact h2 {
+      margin-top: 0;
+      font-size: 2rem;
+      color: var(--color-primary);
+      text-align: center;
+      margin-bottom: 1.5rem;
+      user-select: text;
+    }
+    form label {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    form input[type="text"],
+    form input[type="email"],
+    form textarea {
+      width: 100%;
+      padding: 0.45rem 0.6rem;
+      margin-bottom: 1rem;
+      border: 1.8px solid var(--color-primary);
+      border-radius: 8px;
+      font-size: 1rem;
+      background: transparent;
+      color: var(--text);
+      transition: border-color 0.25s ease;
+      resize: vertical;
+    }
+    form input[type="text"]:focus,
+    form input[type="email"]:focus,
+    form textarea:focus {
+      outline: none;
+      border-color: var(--color-accent);
+      box-shadow: 0 0 6px var(--color-accent);
+      background: var(--tile-bg);
+      color: var(--text);
+    }
+    form button[type="submit"] {
+      background: var(--color-primary);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 0.7rem 1.8rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: block;
+      margin: 1rem auto 0 auto;
+      width: fit-content;
+      user-select: none;
+    }
+    form button[type="submit"]:hover,
+    form button[type="submit"]:focus {
+      background: var(--color-accent);
+      outline: none;
+    }
+
+    /* FOOTER */
+    footer {
+      width: 100%;
+      max-width: 1200px;
+      padding: 1rem 1.5rem;
+      background: var(--tile-bg);
+      color: var(--text);
+      box-shadow: 0 -5px 15px var(--tile-shadow);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.9rem;
+      user-select: none;
+      border-radius: 0 0 15px 15px;
+    }
+    #counter {
+      flex-grow: 1;
+      min-width: 160px;
+      text-align: center;
+    }
+    .social-icons {
+      display: flex;
+      gap: 1rem;
+      min-width: 100px;
+      justify-content: center;
+      align-items: center;
+    }
+    .social-icons a img {
+      width: 32px;
+      height: 32px;
+      filter: var(--icon-filter, none);
+      transition: filter 0.3s ease;
+    }
+    .social-icons a:hover img,
+    .social-icons a:focus img {
+      filter: drop-shadow(0 0 3px var(--color-accent));
+      outline: none;
+    }
+    #copyright {
+      flex-grow: 1;
+      min-width: 200px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    /* ==== RESPONSIVE ==== */
+    @media (max-width: 900px) {
+      .tuiles-row {
+        flex-direction: column;
+      }
+      .tuile {
+        min-width: 100%;
+      }
+      #controls {
+        position: static;
+        transform: none;
+        justify-content: center;
+        margin-bottom: 1rem;
+        gap: 2rem;
+      }
+      header h1 {
+        font-size: 2.4rem;
+      }
+      header p {
+        font-size: 1rem;
+      }
+      .tuile-bonjour,
+      #contact {
+        width: 95%;
+      }
+    }
+
+  </style>
 </head>
-<body>
-  <header id="main-header">
+<body class="light" lang="fr">
+  <header>
     <h1>Louis Lallement</h1>
-    <p>journaliste | photographe</p>
-    <div class="top-icons">
-      <img src="assets/france-32.png" alt="Français" onclick="setLanguage('fr')" />
-      <img src="assets/uk-32.png" alt="English" onclick="setLanguage('en')" />
-      <img src="assets/moon.svg" alt="Mode Nuit" id="toggle-theme" />
+    <p>Journaliste &nbsp;|&nbsp; Photographe</p>
+    <div id="controls" aria-label="Contrôles de langue et mode">
+      <button id="toggle-theme" class="control-btn" aria-label="Changer le mode jour/nuit" title="Changer le mode jour/nuit" type="button">
+        🌞
+      </button>
+      <img src="assets/france-32.png" alt="Français" id="lang-fr" class="flag" tabindex="0" role="button" aria-label="Passer en français" title="Passer en français" />
+      <img src="assets/uk-32.png" alt="English" id="lang-en" class="flag" tabindex="0" role="button" aria-label="Switch to English" title="Switch to English" />
     </div>
   </header>
 
   <main>
-    <!-- Tuile Bonjour -->
-    <section class="tile tile-wide">
+    <section tabindex="0" class="tuile-bonjour" id="bonjour-tile" aria-label="Tuile Bonjour">
       <h2>Bonjour</h2>
-      <p>Actuellement à Paris et alentours.</p>
+      <p id="bonjour-text">Actuellement à Paris et alentours</p>
     </section>
 
-    <!-- Trois tuiles côte à côte -->
-    <div class="tile-row">
-      <section class="tile">
-        <h2>Portfolio Vidéo</h2>
-        <!-- À remplacer par des iframes ou liens fonctionnels -->
-        <p>Réels Instagram ici.</p>
-      </section>
+    <section class="tuiles-row" aria-label="Portfolios">
+      <article class="tuile" id="portfolio-video" tabindex="0" aria-label="Portfolio vidéo">
+        <h2>Portfolio vidéo</h2>
+        <div class="videos-container" aria-live="polite">
+          <iframe src="https://www.instagram.com/reel/CrKNt5Uh15T/embed" allowfullscreen loading="lazy" title="Reel 1"></iframe>
+          <iframe src="https://www.instagram.com/reel/Cs0kl0Wrp17/embed" allowfullscreen loading="lazy" title="Reel 2"></iframe>
+          <iframe src="https://www.instagram.com/reel/Cp-2HLPrsSx/embed" allowfullscreen loading="lazy" title="Reel 3"></iframe>
+        </div>
+      </article>
 
-      <section class="tile">
-        <h2>Portfolio Écrit</h2>
-        <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank">
-          <img src="assets/figaro-logo.png" alt="Figaro" style="max-width: 100px;" />
+      <article class="tuile" id="portfolio-ecrit" tabindex="0" aria-label="Portfolio écrit">
+        <h2>Portfolio écrit</h2>
+        <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank" rel="noopener" class="figaro-link" aria-label="Voir le profil auteur Louis Lallement sur Le Figaro">
+          <img src="assets/figaro-logo.jpg" alt="Logo Le Figaro" />
         </a>
-      </section>
+      </article>
 
-      <section class="tile photo-tile" onclick="window.open('https://instagram.com/toncompte', '_blank')">
-        <h2>Photographie</h2>
-        <p>Suis-moi sur Instagram</p>
-      </section>
-    </div>
-
-    <!-- Formulaire -->
-    <section class="tile tile-wide">
-      <h2>Contact</h2>
-      <form>
-        <input type="text" placeholder="Nom" required>
-        <input type="email" placeholder="Email" required>
-        <textarea placeholder="Message" required></textarea>
-        <button type="submit">Envoyer</button>
-      </form>
+      <article class="tuile" id="photographie" aria-label="Portfolio photographie" tabindex="0" role="link" aria-describedby="photographie-desc" style="background-image: url('assets/instagram-cover.jpg');">
+        <a href="https://www.instagram.com/louis.l.photographie/" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">Suivez-moi sur Instagram</a>
+        <span id="photographie-desc" class="visually-hidden">Lien vers Instagram photographie</span>
+      </article>
     </section>
-  </main>
-
-  <footer>
-    <div>
-      <p>© Louis Lallement 2025</p>
-      <p>Visites : <span id="counter">123</span></p>
-      <p>
-        <a href="https://twitter.com" target="_blank">Twitter</a> |
-        <a href="https://linkedin.com" target="_blank">LinkedIn</a>
-      </p>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
-</body>
-</html>
