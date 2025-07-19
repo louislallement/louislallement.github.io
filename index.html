@@ -11,9 +11,9 @@
   <header>
     <h1>Louis Lallement</h1>
     <p class="subtitle">journaliste <span class="separator">|</span> photographe</p>
-    <div class="controls">
-      <img src="assets/france-32.png" alt="FR" class="lang-icon" title="Français" />
-      <img src="assets/uk-32.png" alt="EN" class="lang-icon" title="English" />
+    <div class="header-controls" aria-label="Réglages">
+      <img src="assets/france-32.png" alt="Français" class="lang-icon" title="Français" />
+      <img src="assets/uk-32.png" alt="English" class="lang-icon" title="English" />
       <button id="theme-toggle" aria-label="Basculer mode clair/sombre">🌙</button>
     </div>
   </header>
@@ -21,22 +21,23 @@
   <main>
     <!-- Tuile Bonjour -->
     <section class="tile tile-wide fade-in" id="bonjour">
-      <h2>Actuellement à Paris et alentours</h2>
+      <h2>Bonjour</h2>
+      <p>Actuellement à Paris et alentours</p>
     </section>
 
     <!-- Trio tuiles côte à côte -->
-    <section class="tile-row fade-in">
+    <section class="tile-row fade-in" aria-label="Portfolio">
       <!-- Portfolio Vidéo -->
       <article class="tile tile-col" id="portfolio-video">
         <h3>Portfolio Vidéo</h3>
         <div class="video-wrapper">
           <iframe 
-            src="https://www.instagram.com/reel/C3zBdkzIcPqa/embed" 
+            src="https://www.instagram.com/p/CyOqZ8QrNeJ/embed" 
             frameborder="0" allowfullscreen loading="lazy"
-            title="Reel Instagram Louis Lallement"
+            title="Vidéo Instagram Louis Lallement"
           ></iframe>
         </div>
-        <a href="https://www.instagram.com/louis__lallement" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.instagram.com/louis_lallement/" target="_blank" rel="noopener noreferrer">
           Voir d'autres vidéos
         </a>
       </article>
@@ -44,13 +45,17 @@
       <!-- Portfolio Écrit -->
       <article class="tile tile-col" id="portfolio-ecrit">
         <h3>Portfolio Écrit</h3>
-        <img src="assets/figaro-logo.png" alt="Figaro logo" class="figaro-logo" />
-        <div class="article-preview">
-          <img src="assets/apercu-article.jpg" alt="Aperçu article" />
-          <h4>Titre de l'article</h4>
-          <p>Petit chapeau pour donner envie de lire cet article...</p>
-        </div>
         <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank" rel="noopener noreferrer">
+          <img src="assets/figaro-logo.png" alt="Logo Figaro" class="figaro-logo" />
+        </a>
+        <div class="article-preview">
+          <a href="https://etudiant.lefigaro.fr/article/quatre-etudiants-organisent-des-chantiers-pour-restaurer-le-patrimoine_ec0c3508-b78a-11ea-a01f-40e5c119e738/" target="_blank" rel="noopener noreferrer">
+            <img src="assets/apercu-article.jpg" alt="Aperçu article" />
+            <h4>Quatre étudiants organisent des chantiers pour restaurer le patrimoine</h4>
+            <p>Une initiative étudiante qui allie passion et patrimoine...</p>
+          </a>
+        </div>
+        <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank" rel="noopener noreferrer" class="btn-articles">
           Lire plus d’articles
         </a>
       </article>
@@ -63,7 +68,7 @@
           <img src="assets/photo2.jpg" alt="Photo portrait" />
           <img src="assets/photo3.jpg" alt="Photo paysage" />
         </div>
-        <a href="https://www.instagram.com/louis_lallement_photo" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.instagram.com/louis.l.photographie/" target="_blank" rel="noopener noreferrer">
           Voir plus de photos
         </a>
       </article>
@@ -72,10 +77,10 @@
     <!-- Tuile Contact -->
     <section class="tile tile-wide fade-in" id="contact">
       <h3>Contact</h3>
-      <form action="#" method="post">
+      <form action="#" method="post" novalidate>
         <input type="text" name="nom" placeholder="Votre nom" required />
         <input type="email" name="email" placeholder="Votre email" required />
-        <textarea name="message" placeholder="Votre message" required></textarea>
+        <textarea name="message" placeholder="Votre message" rows="5" required></textarea>
         <button type="submit">Envoyer</button>
       </form>
     </section>
@@ -84,15 +89,9 @@
   <footer>
     <p>&copy; 2025 Louis Lallement</p>
     <div class="socials">
-      <a href="https://www.linkedin.com/in/louis-lallement" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
-      <a href="https://twitter.com/louislallement" target="_blank" rel="noopener noreferrer">Twitter</a>
+      <a href="https://www.linkedin.com/in/louis-lallement-32751b159/" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
+      <a href="https://twitter.com/louislall" target="_blank" rel="noopener noreferrer">Twitter</a>
     </div>
   </footer>
-
-<script>
-  console.log("Script chargé");
-  document.body.style.background = 'red'; // Test visuel rapide
-</script>
-
 </body>
 </html>
