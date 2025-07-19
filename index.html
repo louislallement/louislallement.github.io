@@ -12,7 +12,7 @@
     <h2>journaliste | photographe</h2>
   </header>
 
-  <nav id="sticky-menu">
+  <nav id="sticky-menu" aria-label="Menu de réglages">
     <button id="theme-toggle" aria-label="Basculer mode clair/sombre">🌙</button>
     <div id="lang-switch">
       <button id="btn-fr" aria-label="Passer en français">FR</button>
@@ -34,9 +34,10 @@
             allowfullscreen
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
+            title="Vidéo Instagram Louis Lallement"
           ></iframe>
         </div>
-        <a href="https://www.instagram.com/louis_lallement/" target="_blank" class="cta-link"
+        <a href="https://www.instagram.com/louis_lallement/" target="_blank" rel="noopener" class="cta-link"
           >Voir plus de sujets vidéo</a
         >
       </section>
@@ -55,24 +56,33 @@
             </p>
             <a
               href="https://etudiant.lefigaro.fr/article/quatre-etudiants-organisent-des-chantiers-pour-restaurer-le-patrimoine_ec0c3508-b78a-11ea-a01f-40e5c119e738/"
-              target="_blank"
+              target="_blank" rel="noopener"
               >Lire l’article</a
             >
           </div>
         </div>
-        <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank" class="cta-link"
+        <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank" rel="noopener" class="cta-link"
           >Voir plus d’articles</a
         >
       </section>
 
       <section class="tile" id="portfolio-photo">
         <h3>Photographie</h3>
-        <div class="photo-gallery">
-          <img src="assets/photo1.jpg" alt="Photo 1" />
-          <img src="assets/photo2.jpg" alt="Photo 2" />
-          <img src="assets/photo3.jpg" alt="Photo 3" />
+        <div id="photo-filters" class="photo-filters" aria-label="Filtres galerie photo">
+          <button class="filter-btn active" data-filter="all" aria-pressed="true">Tous</button>
+          <button class="filter-btn" data-filter="mariage" aria-pressed="false">Mariage</button>
+          <button class="filter-btn" data-filter="portrait" aria-pressed="false">Portrait</button>
+          <button class="filter-btn" data-filter="paysage" aria-pressed="false">Paysage</button>
         </div>
-        <a href="https://www.instagram.com/louis.l.photographie/" target="_blank" class="cta-link"
+        <div class="photo-gallery">
+          <img src="assets/photo1.jpg" alt="Photo mariage 1" data-category="mariage" />
+          <img src="assets/photo2.jpg" alt="Photo portrait 1" data-category="portrait" />
+          <img src="assets/photo3.jpg" alt="Photo paysage 1" data-category="paysage" />
+          <img src="assets/photo4.jpg" alt="Photo mariage 2" data-category="mariage" />
+          <img src="assets/photo5.jpg" alt="Photo portrait 2" data-category="portrait" />
+          <img src="assets/photo6.jpg" alt="Photo paysage 2" data-category="paysage" />
+        </div>
+        <a href="https://www.instagram.com/louis.l.photographie/" target="_blank" rel="noopener" class="cta-link"
           >Jeter un œil à mes photos</a
         >
       </section>
@@ -81,8 +91,8 @@
     <section class="tile tile-large" id="contact">
       <h3>Contact</h3>
       <form id="contact-form">
-        <input type="email" name="email" placeholder="Votre email" required />
-        <textarea name="message" placeholder="Votre message" required></textarea>
+        <input type="email" name="email" placeholder="Votre email" required autocomplete="email" />
+        <textarea name="message" placeholder="Votre message" required rows="5"></textarea>
         <button type="submit">Envoyer</button>
       </form>
     </section>
@@ -90,10 +100,10 @@
 
   <footer>
     <div class="socials">
-      <a href="https://www.linkedin.com/in/louis-lallement-32751b159/" target="_blank"
+      <a href="https://www.linkedin.com/in/louis-lallement-32751b159/" target="_blank" rel="noopener"
         ><img src="assets/linkedin-32.png" alt="LinkedIn" />
       </a>
-      <a href="https://twitter.com/louislall" target="_blank"
+      <a href="https://twitter.com/louislall" target="_blank" rel="noopener"
         ><img src="assets/twitter-32.png" alt="Twitter" />
       </a>
     </div>
