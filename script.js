@@ -1,49 +1,37 @@
-// -------- Mode sombre / jour --------
-const toggleDarkMode = document.getElementById("toggle-dark");
-const html = document.documentElement;
+document.addEventListener('DOMContentLoaded', () => {
+  // Fade-in au scroll
+  const faders = document.querySelectorAll('.fade-in');
+  const appearOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
 
-function setDarkMode(enabled) {
-  if (enabled) {
-    html.classList.add("dark");
-    localStorage.setItem("theme", "dark");
-  } else {
-    html.classList.remove("dark");
-    localStorage.setItem("theme", "light");
-  }
-}
+  const appearOnScroll = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    });
+  }, appearOptions);
 
-// Appliquer le thème au chargement
-const savedTheme = localStorage.getItem("theme");
-if (savedTheme === "dark") {
-  setDarkMode(true);
-} else {
-  setDarkMode(false);
-}
+  faders.forEach(fader => {
+    appearOnScroll.observe(fader);
+  });
 
-toggleDarkMode.addEventListener("click", () => {
-  html.classList.toggle("dark");
-  const isDark = html.classList.contains("dark");
-  localStorage.setItem("theme", isDark ? "dark" : "light");
-});
-
-// -------- Switch langue FR / EN --------
-const langFR = document.getElementById("lang-fr");
-const langEN = document.getElementById("lang-en");
-
-function setLanguage(lang) {
-  document.querySelectorAll("[data-lang-fr], [data-lang-en]").forEach(el => {
-    if (lang === "fr") {
-      el.textContent = el.getAttribute("data-lang-fr");
+  // Toggle dark mode
+  const toggleBtn = document.getElementById('theme-toggle');
+  toggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    if (document.body.classList.contains('dark-mode')) {
+      localStorage.setItem('theme', 'dark');
     } else {
-      el.textContent = el.getAttribute("data-lang-en");
+      localStorage.setItem('theme', 'light');
     }
   });
-  localStorage.setItem("lang", lang);
-}
 
-// Appliquer la langue au chargement
-const savedLang = localStorage.getItem("lang") || "fr";
-setLanguage(savedLang);
-
-langFR.addEventListener("click", () => setLanguage("fr"));
-langEN.addEventListener("click", () => setLanguage("en"));
+  // Charger thème sauvegardé
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'dark') {
+    document.body.classList.add('dark-mode');
+  }
+});
