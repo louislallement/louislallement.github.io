@@ -2,55 +2,79 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Louis Lallement</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Louis Lallement - Portfolio</title>
   <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
 </head>
 <body>
   <header>
     <h1>Louis Lallement</h1>
-    <p>journaliste</p>
+    <p class="subtitle">journaliste <span class="separator">|</span> photographe</p>
+    <div class="controls">
+      <img src="assets/france-32.png" alt="FR" class="lang-icon" title="Français" />
+      <img src="assets/uk-32.png" alt="EN" class="lang-icon" title="English" />
+      <button id="theme-toggle" aria-label="Basculer mode clair/sombre">🌙</button>
+    </div>
   </header>
 
-  <div class="controls">
-    <img src="assets/france-32.png" alt="Français" id="lang-fr" />
-    <img src="assets/uk-32.png" alt="English" id="lang-en" />
-    <button id="toggle-theme">🌙</button>
-  </div>
-
   <main>
-    <section class="tile" id="bonjour">
-      <h2 data-fr="Bonjour" data-en="Hello">Bonjour</h2>
-      <p data-fr="Actuellement à Paris et alentours" data-en="Currently in Paris and surroundings"></p>
+    <!-- Tuile Bonjour -->
+    <section class="tile tile-wide fade-in" id="bonjour">
+      <h2>Actuellement à Paris et alentours</h2>
     </section>
 
-    <section class="tile" id="video">
-      <h2>Portfolio Vidéo</h2>
-      <div class="reels">
-        <iframe src="https://www.instagram.com/reel/C3RRP5oC6EC/embed" loading="lazy"></iframe>
-        <iframe src="https://www.instagram.com/reel/C2ujQdAr-OW/embed" loading="lazy"></iframe>
-        <iframe src="https://www.instagram.com/reel/C2Em5hKroK0/embed" loading="lazy"></iframe>
-      </div>
+    <!-- Trio tuiles côte à côte -->
+    <section class="tile-row fade-in">
+      <!-- Portfolio Vidéo -->
+      <article class="tile tile-col" id="portfolio-video">
+        <h3>Portfolio Vidéo</h3>
+        <div class="video-wrapper">
+          <iframe 
+            src="https://www.instagram.com/reel/C3zBdkzIcPqa/embed" 
+            frameborder="0" allowfullscreen loading="lazy"
+            title="Reel Instagram Louis Lallement"
+          ></iframe>
+        </div>
+        <a href="https://www.instagram.com/louis__lallement" target="_blank" rel="noopener noreferrer">
+          Voir d'autres vidéos
+        </a>
+      </article>
+
+      <!-- Portfolio Écrit -->
+      <article class="tile tile-col" id="portfolio-ecrit">
+        <h3>Portfolio Écrit</h3>
+        <img src="assets/figaro-logo.png" alt="Figaro logo" class="figaro-logo" />
+        <div class="article-preview">
+          <img src="assets/apercu-article.jpg" alt="Aperçu article" />
+          <h4>Titre de l'article</h4>
+          <p>Petit chapeau pour donner envie de lire cet article...</p>
+        </div>
+        <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank" rel="noopener noreferrer">
+          Lire plus d’articles
+        </a>
+      </article>
+
+      <!-- Photographie -->
+      <article class="tile tile-col" id="photographie">
+        <h3>Photographie</h3>
+        <div class="photo-grid">
+          <img src="assets/photo1.jpg" alt="Photo mariage" />
+          <img src="assets/photo2.jpg" alt="Photo portrait" />
+          <img src="assets/photo3.jpg" alt="Photo paysage" />
+        </div>
+        <a href="https://www.instagram.com/louis_lallement_photo" target="_blank" rel="noopener noreferrer">
+          Voir plus de photos
+        </a>
+      </article>
     </section>
 
-    <section class="tile" id="ecrit">
-      <h2>Portfolio Écrit</h2>
-      <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank">
-        <img src="assets/figaro-logo.png" alt="Figaro">
-      </a>
-    </section>
-
-    <section class="tile photo" id="photographie">
-      <a href="https://www.instagram.com/louis.l.photographie/" target="_blank">
-        <h2>Suivez-moi sur Instagram</h2>
-      </a>
-    </section>
-
-    <section class="tile" id="contact">
-      <h2 data-fr="Contact" data-en="Contact">Contact</h2>
-      <form>
-        <input type="text" name="name" placeholder="Nom" required />
-        <input type="email" name="email" placeholder="Email" required />
+    <!-- Tuile Contact -->
+    <section class="tile tile-wide fade-in" id="contact">
+      <h3>Contact</h3>
+      <form action="#" method="post">
+        <input type="text" name="nom" placeholder="Votre nom" required />
+        <input type="email" name="email" placeholder="Votre email" required />
         <textarea name="message" placeholder="Votre message" required></textarea>
         <button type="submit">Envoyer</button>
       </form>
@@ -58,13 +82,11 @@
   </main>
 
   <footer>
-    <p>© Louis Lallement — 2025</p>
+    <p>&copy; 2025 Louis Lallement</p>
     <div class="socials">
-      <a href="https://www.linkedin.com/in/louis-lallement" target="_blank"><img src="assets/linkedin-32.png" alt="LinkedIn" /></a>
-      <a href="https://twitter.com/louis_lallement" target="_blank"><img src="assets/twitter-32.png" alt="Twitter" /></a>
+      <a href="https://www.linkedin.com/in/louis-lallement" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
+      <a href="https://twitter.com/louislallement" target="_blank" rel="noopener noreferrer">Twitter</a>
     </div>
   </footer>
-
-  <script src="script.js"></script>
 </body>
 </html>
