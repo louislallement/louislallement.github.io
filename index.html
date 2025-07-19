@@ -2,96 +2,74 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Louis Lallement - Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Louis Lallement</title>
   <link rel="stylesheet" href="style.css" />
-  <script defer src="script.js"></script>
 </head>
 <body>
   <header>
     <h1>Louis Lallement</h1>
-    <p class="subtitle">journaliste <span class="separator">|</span> photographe</p>
-    <div class="header-controls" aria-label="Réglages">
-      <img src="assets/france-32.png" alt="Français" class="lang-icon" title="Français" />
-      <img src="assets/uk-32.png" alt="English" class="lang-icon" title="English" />
-      <button id="theme-toggle" aria-label="Basculer mode clair/sombre">🌙</button>
-    </div>
+    <h2>journaliste | photographe</h2>
   </header>
 
-  <main>
-    <!-- Tuile Bonjour -->
-    <section class="tile tile-wide fade-in" id="bonjour">
-      <h2>Bonjour</h2>
-      <p>Actuellement à Paris et alentours</p>
-    </section>
+  <div class="controls">
+    <button id="themeToggle">🌙</button>
+    <img src="assets/france-32.png" alt="Français" />
+    <img src="assets/uk-32.png" alt="English" />
+  </div>
 
-    <!-- Trio tuiles côte à côte -->
-    <section class="tile-row fade-in" aria-label="Portfolio">
-      <!-- Portfolio Vidéo -->
-      <article class="tile tile-col" id="portfolio-video">
-        <h3>Portfolio Vidéo</h3>
-        <div class="video-wrapper">
-          <iframe 
-            src="https://www.instagram.com/p/CyOqZ8QrNeJ/embed" 
-            frameborder="0" allowfullscreen loading="lazy"
-            title="Vidéo Instagram Louis Lallement"
-          ></iframe>
-        </div>
-        <a href="https://www.instagram.com/louis_lallement/" target="_blank" rel="noopener noreferrer">
-          Voir d'autres vidéos
-        </a>
-      </article>
+  <section class="tile" id="bonjour">
+    <h3>Bonjour</h3>
+    <p>Actuellement à Paris et alentours</p>
+  </section>
 
-      <!-- Portfolio Écrit -->
-      <article class="tile tile-col" id="portfolio-ecrit">
-        <h3>Portfolio Écrit</h3>
-        <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank" rel="noopener noreferrer">
-          <img src="assets/figaro-logo.png" alt="Logo Figaro" class="figaro-logo" />
-        </a>
-        <div class="article-preview">
-          <a href="https://etudiant.lefigaro.fr/article/quatre-etudiants-organisent-des-chantiers-pour-restaurer-le-patrimoine_ec0c3508-b78a-11ea-a01f-40e5c119e738/" target="_blank" rel="noopener noreferrer">
-            <img src="assets/apercu-article.jpg" alt="Aperçu article" />
-            <h4>Quatre étudiants organisent des chantiers pour restaurer le patrimoine</h4>
-            <p>Une initiative étudiante qui allie passion et patrimoine...</p>
-          </a>
-        </div>
-        <a href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank" rel="noopener noreferrer" class="btn-articles">
-          Lire plus d’articles
-        </a>
-      </article>
+  <section class="tile" id="video">
+    <h3>Portfolio Vidéo</h3>
+    <div class="insta-video">
+      <iframe src="https://www.instagram.com/p/CyOqZ8QrNeJ/embed" allowfullscreen></iframe>
+      <p><a href="https://www.instagram.com/louis_lallement/" target="_blank">Voir plus sur Instagram</a></p>
+    </div>
+  </section>
 
-      <!-- Photographie -->
-      <article class="tile tile-col" id="photographie">
-        <h3>Photographie</h3>
-        <div class="photo-grid">
-          <img src="assets/photo1.jpg" alt="Photo mariage" />
-          <img src="assets/photo2.jpg" alt="Photo portrait" />
-          <img src="assets/photo3.jpg" alt="Photo paysage" />
-        </div>
-        <a href="https://www.instagram.com/louis.l.photographie/" target="_blank" rel="noopener noreferrer">
-          Voir plus de photos
-        </a>
-      </article>
-    </section>
+  <section class="tile" id="ecrit">
+    <h3>Portfolio Écrit</h3>
+    <div class="article-preview">
+      <img src="https://images.etudiant.lefigaro.fr/images/etudiant/lefigaro/articles/2020/06/27/ETU20200627PHOWWW00301/ETU20200627PHOWWW00301.jpg" alt="Aperçu article" />
+      <div>
+        <h4>Quatre étudiants organisent des chantiers pour restaurer le patrimoine</h4>
+        <p>Ils allient bénévolat, patrimoine et vacances.</p>
+        <a href="https://etudiant.lefigaro.fr/article/quatre-etudiants-organisent-des-chantiers-pour-restaurer-le-patrimoine_ec0c3508-b78a-11ea-a01f-40e5c119e738/" target="_blank">Lire l'article</a>
+      </div>
+    </div>
+    <a class="more-articles" href="https://www.lefigaro.fr/auteur/louis-lallement" target="_blank">Voir plus d’articles</a>
+  </section>
 
-    <!-- Tuile Contact -->
-    <section class="tile tile-wide fade-in" id="contact">
-      <h3>Contact</h3>
-      <form action="#" method="post" novalidate>
-        <input type="text" name="nom" placeholder="Votre nom" required />
-        <input type="email" name="email" placeholder="Votre email" required />
-        <textarea name="message" placeholder="Votre message" rows="5" required></textarea>
-        <button type="submit">Envoyer</button>
-      </form>
-    </section>
-  </main>
+  <section class="tile" id="photo">
+    <h3>Photographie</h3>
+    <div class="photo-gallery">
+      <img src="assets/photo1.jpg" alt="Photo 1" />
+      <img src="assets/photo2.jpg" alt="Photo 2" />
+      <img src="assets/photo3.jpg" alt="Photo 3" />
+    </div>
+    <p><a href="https://www.instagram.com/louis.l.photographie/" target="_blank">Voir plus de photos</a></p>
+  </section>
 
   <footer>
-    <p>&copy; 2025 Louis Lallement</p>
+    <form>
+      <input type="text" placeholder="Votre email" required />
+      <textarea placeholder="Votre message" required></textarea>
+      <button type="submit">Envoyer</button>
+    </form>
     <div class="socials">
-      <a href="https://www.linkedin.com/in/louis-lallement-32751b159/" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
-      <a href="https://twitter.com/louislall" target="_blank" rel="noopener noreferrer">Twitter</a>
+      <a href="https://www.linkedin.com/in/louis-lallement-32751b159/" target="_blank">
+        <img src="assets/linkedin-32.png" alt="LinkedIn" />
+      </a>
+      <a href="https://twitter.com/louislall" target="_blank">
+        <img src="assets/twitter-32.png" alt="Twitter" />
+      </a>
     </div>
   </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
