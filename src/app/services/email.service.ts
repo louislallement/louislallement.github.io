@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { from, Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs';
 import emailjs from '@emailjs/browser';
 
 export interface ContactForm {
@@ -21,7 +21,7 @@ export interface EmailResponse {
 // 3. Copier la Public Key depuis Account > API Keys
 // ====================================================================
 const EMAILJS_SERVICE_ID = 'service_vqs6hqm';
-const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID'; // À compléter
+const EMAILJS_TEMPLATE_ID = 'template_oh1ckob';
 const EMAILJS_PUBLIC_KEY = 'zRpvGG_P0ES162dY4';
 
 @Injectable({
@@ -29,13 +29,6 @@ const EMAILJS_PUBLIC_KEY = 'zRpvGG_P0ES162dY4';
 })
 export class EmailService {
   sendEmail(contactForm: ContactForm): Observable<EmailResponse> {
-    if (EMAILJS_SERVICE_ID === 'YOUR_SERVICE_ID') {
-      return of({
-        success: false,
-        message: 'Le service d\'email n\'est pas encore configuré. Veuillez contacter directement par email.',
-      });
-    }
-
     const templateParams = {
       from_name: contactForm.name,
       from_email: contactForm.email,
