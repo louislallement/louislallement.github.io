@@ -6,7 +6,7 @@
     </p>
   </section>
 
-  <section id="contact">
+  <section id="contact" appScrollAnimate>
     <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
       @if (submitMessage) {
         <div class="submit-message" [class.success]="submitSuccess" [class.error]="!submitSuccess">

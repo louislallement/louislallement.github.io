@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter } from 'rxjs';
@@ -16,6 +16,7 @@ export class HeaderComponent {
   private router = inject(Router);
 
   menuOpen = signal(false);
+  scrolled = signal(false);
 
   constructor() {
     this.router.events
@@ -24,6 +25,16 @@ export class HeaderComponent {
         takeUntilDestroyed(),
       )
       .subscribe(() => this.menuOpen.set(false));
+
+    afterNextRender(() => {
+      window.addEventListener(
+        'scroll',
+        () => {
+          this.scrolled.set(window.scrollY > 50);
+        },
+        { passive: true },
+      );
+    });
   }
 
   toggleMenu(): void {

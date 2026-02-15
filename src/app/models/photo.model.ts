@@ -6,4 +6,5 @@ export interface Photo {
   lightboxSrc: string;
   alt: string;
   category: PhotoCategory;
+  focus: string; // CSS object-position, ex: "top", "center", "20% 30%"
 }

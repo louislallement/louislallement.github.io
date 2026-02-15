@@ -1,30 +1,50 @@
 <div class="lightbox-overlay" (click)="closeEvent.emit()"
-     (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event)">
+     (touchstart)="onTouchStart($event)" (touchmove)="onTouchMove($event)" (touchend)="onTouchEnd($event)"
+     (mousemove)="onMouseMove($event)" (mouseup)="onMouseUp()" (mouseleave)="onMouseUp()">
   <button #closeBtnRef class="close-btn" (click)="closeEvent.emit(); $event.stopPropagation()" aria-label="Fermer la visionneuse">&times;</button>
 
   <div class="zoom-controls" (click)="$event.stopPropagation()">
     <button class="zoom-btn" (click)="zoomIn()" aria-label="Zoomer">+</button>
-    <button class="zoom-btn" (click)="zoomOut()" aria-label="Dézoomer">−</button>
-    <button class="zoom-btn" (click)="resetZoom()" aria-label="Taille normale">⌂</button>
+    <button class="zoom-btn" (click)="zoomOut()" aria-label="Dezoomer">&minus;</button>
+    <button class="zoom-btn" (click)="resetZoom()" aria-label="Taille normale">&lceil;</button>
+    <span class="controls-separator"></span>
+    <button class="zoom-btn" (click)="toggleFullscreen()" [attr.aria-label]="isFullscreen() ? 'Quitter le plein ecran' : 'Plein ecran'">
+      @if (isFullscreen()) {
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/></svg>
+      } @else {
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+      }
+    </button>
+    <button class="zoom-btn" (click)="toggleSlideshow()" [attr.aria-label]="isSlideshowPlaying() ? 'Arreter le diaporama' : 'Lancer le diaporama'">
+      @if (isSlideshowPlaying()) {
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+      } @else {
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+      }
+    </button>
+    <span class="controls-separator"></span>
+    <button class="zoom-btn" (click)="sharePhoto()" aria-label="Partager la photo">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+    </button>
   </div>
 
   @if (counter) {
     <div class="photo-counter" aria-live="polite">{{ counter }}</div>
   }
 
-  @if (hasPrev) {
-    <button class="nav-btn nav-prev" (click)="prev(); $event.stopPropagation()" aria-label="Photo précédente">
+  @if (hasPrev && !isZoomed) {
+    <button class="nav-btn nav-prev" (click)="prev(); $event.stopPropagation()" aria-label="Photo precedente">
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
     </button>
   }
 
-  @if (hasNext) {
-    <button class="nav-btn nav-next" (click)="next(); $event.stopPropagation()" aria-label="Photo suivante">
+  @if (hasNext && !isZoomed) {
+    <button class="nav-btn nav-next" (click)="nextManual(); $event.stopPropagation()" aria-label="Photo suivante">
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
     </button>
   }
 
-  <div class="lightbox-content">
+  <div class="lightbox-content" (click)="$event.stopPropagation()" (wheel)="onWheel($event)">
     @if (isLoading()) {
       <div class="loading-spinner">
         <div class="spinner"></div>
@@ -33,12 +53,15 @@
     }
     <img [src]="displayUrl"
          [alt]="altText()"
-         (click)="toggleZoom(); $event.stopPropagation()"
+         (click)="onImageClick($event)"
+         (mousedown)="onMouseDown($event)"
          (load)="onImageLoad()"
          (error)="onImageError()"
          [class.zoomed]="isZoomed"
+         [class.dragging]="isDragging"
          [style.transform]="getTransform()"
          [style.display]="isLoading() ? 'none' : 'block'"
-         referrerpolicy="no-referrer">
+         referrerpolicy="no-referrer"
+         draggable="false">
   </div>
 </div>

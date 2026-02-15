@@ -227,6 +227,19 @@ footer .socials a:hover img {
   transform: translateY(0);
 }
 
+/* Scroll Animate Directive */
+
+[appScrollAnimate] {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+[appScrollAnimate].scroll-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* Responsive */
 
 @media (max-width: 480px) {
@@ -238,5 +251,93 @@ footer .socials a:hover img {
   }
   main {
     padding: 0 1rem;
+  }
+}
+
+/* Accessibility: reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [appScrollAnimate] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+}
+
+/* Accessibility: focus visible */
+:focus-visible {
+  outline: 3px solid var(--color-link);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Remove default focus outline for mouse users */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Print styles */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 12pt;
+  }
+
+  .site-header,
+  .menu-toggle,
+  .menu-backdrop,
+  .theme-toggle,
+  .scroll-progress,
+  .back-to-top,
+  .route-loading,
+  .secondary-nav,
+  .custom-cursor,
+  footer .socials,
+  .gallery-cta .cta-btn,
+  .lightbox-overlay {
+    display: none !important;
+  }
+
+  a {
+    color: black !important;
+    text-decoration: underline;
+  }
+
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #555;
+  }
+
+  a[href^="#"]::after,
+  a[href^="/"]::after {
+    content: "";
+  }
+
+  img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+
+  h1, h2, h3 {
+    page-break-after: avoid;
+  }
+
+  .masonry-grid {
+    columns: 2 !important;
   }
 }

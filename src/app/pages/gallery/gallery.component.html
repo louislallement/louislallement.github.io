@@ -17,23 +17,32 @@
       </div>
     </div>
   } @else {
-    <div class="masonry-grid">
+    <div class="masonry-grid"
+         [class.filter-changing]="filterChanging()"
+         (mousemove)="onGridMouseMove($event)"
+         (mouseenter)="onGridMouseEnter()"
+         (mouseleave)="onGridMouseLeave()">
       @for (photo of photos(); track photo.src; let i = $index) {
         <div class="photo-item" [class.loaded]="isLoaded(photo.src)" [style.animation-delay]="i * 60 + 'ms'"
              (contextmenu)="$event.preventDefault()">
-          <img class="lqip" [src]="photo.lqipSrc" [alt]="photo.alt" referrerpolicy="no-referrer" />
+          <img class="lqip" [src]="photo.lqipSrc" [alt]="photo.alt" [style.object-position]="photo.focus"
+               referrerpolicy="no-referrer" />
           <img class="full" [src]="photo.src" [alt]="photo.alt" [class.loaded]="isLoaded(photo.src)"
-               (click)="openLightbox(photo)" (load)="onImageLoaded(photo.src)"
-               (error)="onImageError($event)" loading="lazy" referrerpolicy="no-referrer"
-               draggable="false" />
+               [style.object-position]="photo.focus" (click)="openLightbox(photo)"
+               (load)="onImageLoaded(photo.src)" (error)="onImageError($event)"
+               loading="lazy" referrerpolicy="no-referrer" draggable="false" />
         </div>
       }
     </div>
+    <div class="custom-cursor"
+         [class.visible]="showCursor()"
+         [style.left.px]="cursorX()"
+         [style.top.px]="cursorY()">Voir</div>
   }
 </section>
 
 @if (photos().length > 0) {
-  <section class="gallery-cta">
+  <section class="gallery-cta" appScrollAnimate>
     <p class="cta-text">Vous aimez ce que vous voyez ?</p>
     <a routerLink="/contact" class="cta-btn">Parlons de votre projet</a>
   </section>

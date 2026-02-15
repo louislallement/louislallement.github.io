@@ -1,3 +1,7 @@
+<div class="scroll-progress" [style.width.%]="scrollProgress()"></div>
+@if (isNavigating()) {
+  <div class="route-loading"></div>
+}
 <a class="skip-link" href="#main-content">Aller au contenu principal</a>
 <app-header></app-header>
 
@@ -8,3 +12,9 @@
 </div>
 
 <app-footer></app-footer>
+
+@if (showBackToTop()) {
+  <button class="back-to-top" (click)="scrollToTop()" aria-label="Retour en haut de page">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+  </button>
+}

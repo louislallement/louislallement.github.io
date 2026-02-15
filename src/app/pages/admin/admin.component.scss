@@ -380,6 +380,218 @@ tr:hover td {
   &:hover { background: #f8bbd0; }
 }
 
+// --- Photos grid ---
+
+.photo-grid-hint {
+  text-align: center;
+  color: #555;
+  margin-bottom: 1rem;
+
+  :host-context(body.dark) & { color: #aaa; }
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 0.75rem;
+}
+
+.photo-grid-item {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    border-color: var(--color-link);
+    transform: translateY(-2px);
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .photo-name {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0.4rem 0.5rem;
+    font-size: 0.7rem;
+    color: white;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+// --- Focal editor ---
+
+.focal-editor {
+  animation: slideIn 0.3s ease;
+}
+
+.btn-back {
+  padding: 0.4rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: transparent;
+  color: #555;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+
+  :host-context(body.dark) & {
+    border-color: #555;
+    color: #aaa;
+  }
+
+  &:hover { background: rgba(0, 0, 0, 0.05); }
+}
+
+.editor-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 2rem;
+  align-items: start;
+}
+
+.editor-main {
+  h3 {
+    margin: 0 0 1rem;
+    font-size: 1rem;
+    color: var(--color-text-light);
+
+    :host-context(body.dark) & { color: var(--color-text-dark); }
+  }
+}
+
+.focal-image-container {
+  position: relative;
+  cursor: crosshair;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+
+  :host-context(body.dark) & { border-color: rgba(255, 255, 255, 0.1); }
+
+  .focal-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+}
+
+.focal-marker {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3);
+  background: var(--color-link);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  transition: left 0.15s ease, top 0.15s ease;
+}
+
+.focal-coords {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #555;
+  font-family: monospace;
+
+  :host-context(body.dark) & { color: #aaa; }
+}
+
+.editor-sidebar {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: var(--border-radius);
+  padding: 1.25rem;
+
+  :host-context(body.dark) & {
+    background: rgba(24, 32, 48, 0.9);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  h3 {
+    margin: 0 0 1rem;
+    font-size: 1rem;
+    color: var(--color-text-light);
+
+    :host-context(body.dark) & { color: var(--color-text-dark); }
+  }
+
+  .btn-save {
+    width: 100%;
+    margin-top: 1rem;
+  }
+}
+
+.preview-thumbnail {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+
+  :host-context(body.dark) & { border-color: rgba(255, 255, 255, 0.1); }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+.alt-field {
+  display: block;
+
+  span {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #555;
+    margin-bottom: 0.25rem;
+
+    :host-context(body.dark) & { color: #aaa; }
+  }
+
+  input {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    background: transparent;
+    color: var(--color-text-light);
+
+    :host-context(body.dark) & {
+      border-color: #444;
+      color: var(--color-text-dark);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-link);
+    }
+  }
+}
+
 // --- Responsive ---
 
 @media (max-width: 768px) {
@@ -396,4 +608,12 @@ tr:hover td {
   table { font-size: 0.8rem; }
 
   td { max-width: 120px; }
+
+  .editor-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .photo-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
 }

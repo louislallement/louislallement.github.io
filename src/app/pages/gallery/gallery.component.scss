@@ -58,12 +58,12 @@
   padding: 2rem;
 }
 
+// --- CSS Columns masonry layout ---
+
 .masonry-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+  columns: 3;
+  column-gap: 1.5rem;
   width: 100%;
-  align-items: start;
 }
 
 // --- Photo item with blur-up loading ---
@@ -74,8 +74,10 @@
   border-radius: var(--border-radius);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  aspect-ratio: 3 / 2;
+  break-inside: avoid;
+  margin-bottom: 1.5rem;
   animation: staggerFadeIn 0.5s ease both;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 
   // Shimmer placeholder
   &::before {
@@ -116,6 +118,13 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+// --- Filter transition animation ---
+
+.filter-changing .photo-item {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
 // LQIP — tiny blurred preview
 img.lqip {
   position: absolute;
@@ -137,11 +146,9 @@ img.lqip {
 
 // Full resolution image
 img.full {
-  position: absolute;
-  inset: 0;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  display: block;
   opacity: 0;
   z-index: 3;
   transition: opacity 0.6s ease, transform 0.3s ease;
@@ -163,6 +170,51 @@ img.full {
   align-items: center;
   justify-content: center;
   min-height: 200px;
+}
+
+// --- Custom cursor ---
+
+.custom-cursor {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.15s ease;
+
+  &.visible {
+    opacity: 1;
+  }
+
+  :host-context(body.dark) & {
+    background-color: rgba(255, 255, 255, 0.7);
+    color: #000;
+  }
+}
+
+// Hide custom cursor and restore default cursor on mobile
+@media (max-width: 768px) {
+  .custom-cursor {
+    display: none;
+  }
+}
+
+// Custom cursor: hide default cursor on desktop only
+@media (min-width: 769px) {
+  .masonry-grid {
+    cursor: none;
+  }
 }
 
 // --- Animations ---
@@ -196,9 +248,8 @@ img.full {
 }
 
 .skeleton-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+  columns: 3;
+  column-gap: 1.5rem;
 }
 
 .skeleton-item {
@@ -207,6 +258,8 @@ img.full {
   background: linear-gradient(90deg, #e8ecf1 25%, #f0f3f7 50%, #e8ecf1 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s ease-in-out infinite;
+  break-inside: avoid;
+  margin-bottom: 1.5rem;
 
   :host-context(body.dark) & {
     background: linear-gradient(90deg, #1a2535 25%, #223044 50%, #1a2535 75%);
@@ -216,13 +269,13 @@ img.full {
 
 @media (max-width: 1024px) {
   .skeleton-grid {
-    grid-template-columns: repeat(2, 1fr);
+    columns: 2;
   }
 }
 
 @media (max-width: 480px) {
   .skeleton-grid {
-    grid-template-columns: 1fr;
+    columns: 1;
   }
 }
 
@@ -277,15 +330,19 @@ img.full {
 
 @media (max-width: 1024px) {
   .masonry-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem;
+    columns: 2;
+    column-gap: 1.25rem;
   }
 }
 
 @media (max-width: 768px) {
   .masonry-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+    columns: 2;
+    column-gap: 1rem;
+  }
+
+  .photo-item {
+    margin-bottom: 1rem;
   }
 
   #portfolio-photo {
@@ -295,8 +352,12 @@ img.full {
 
 @media (max-width: 480px) {
   .masonry-grid {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
+    columns: 1;
+    column-gap: 0;
+  }
+
+  .photo-item {
+    margin-bottom: 0.75rem;
   }
 
   .secondary-nav-container {

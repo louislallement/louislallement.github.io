@@ -38,3 +38,10 @@ footer {
     filter: invert(1) drop-shadow(0 0 6px var(--color-link));
   }
 }
+
+.credits {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: #999;
+  letter-spacing: 0.02em;
+}

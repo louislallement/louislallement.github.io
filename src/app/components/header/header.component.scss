@@ -7,11 +7,16 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  transition: background-color 0.3s ease, border-color 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
 
   :host-context(body.dark) & {
     background-color: rgba(18, 27, 40, 0.95);
     border-bottom-color: rgba(255, 255, 255, 0.1);
+  }
+
+  &.scrolled {
+    padding: 0.6rem 2rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
   }
 }
 
@@ -31,10 +36,14 @@
   text-transform: uppercase;
   color: var(--color-text-light);
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, font-size 0.3s ease;
 
   :host-context(body.dark) & {
     color: var(--color-text-dark);
+  }
+
+  .scrolled & {
+    font-size: 1.2rem;
   }
 
   &:hover {
@@ -201,6 +210,10 @@
 
   .brand-name {
     font-size: 1.2rem;
+  }
+
+  .scrolled .brand-name {
+    font-size: 1rem;
   }
 }
 

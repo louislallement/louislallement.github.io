@@ -1,14 +1,16 @@
-import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, signal, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map, switchMap } from 'rxjs';
 import { Photo, PhotoCategory } from '../../models/photo.model';
 import { PhotoService } from '../../services/photo.service';
 import { LightboxComponent } from '@app/components/lightbox/lightbox.component';
+import { ScrollAnimateDirective } from '@app/directives/scroll-animate.directive';
 
 @Component({
   selector: 'app-gallery',
-  imports: [RouterModule, LightboxComponent],
+  imports: [RouterModule, LightboxComponent, ScrollAnimateDirective],
   templateUrl: './gallery.component.html',
   styleUrls: ['./gallery.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -16,6 +18,7 @@ import { LightboxComponent } from '@app/components/lightbox/lightbox.component';
 export class GalleryComponent {
   private photoService = inject(PhotoService);
   private route = inject(ActivatedRoute);
+  private platformId = inject(PLATFORM_ID);
 
   filters: PhotoCategory[] = ['all', 'mariage', 'portrait', 'paysage'];
 
@@ -35,6 +38,14 @@ export class GalleryComponent {
   loadedImages = signal<Set<string>>(new Set());
   selectedPhoto = signal<Photo | null>(null);
 
+  // Feature 2: Animated filter transitions
+  filterChanging = signal(false);
+
+  // Feature 3: Custom cursor
+  cursorX = signal(0);
+  cursorY = signal(0);
+  showCursor = signal(false);
+
   selectedIndex = computed(() => {
     const photo = this.selectedPhoto();
     if (!photo) return -1;
@@ -45,6 +56,14 @@ export class GalleryComponent {
     effect(() => {
       this.activeFilter();
       this.loadedImages.set(new Set());
+
+      // Trigger filter transition animation
+      this.filterChanging.set(true);
+      if (isPlatformBrowser(this.platformId)) {
+        setTimeout(() => this.filterChanging.set(false), 300);
+      } else {
+        this.filterChanging.set(false);
+      }
     });
   }
 
@@ -81,5 +100,19 @@ export class GalleryComponent {
       'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjVmNWY1Ii8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkltYWdlIG5vbiBkaXNwb25pYmxlPC90ZXh0Pgo8L3N2Zz4K';
     target.alt = 'Image non disponible';
     target.classList.add('image-error');
+  }
+
+  // Feature 3: Custom cursor event handlers
+  onGridMouseMove(event: MouseEvent): void {
+    this.cursorX.set(event.clientX);
+    this.cursorY.set(event.clientY);
+  }
+
+  onGridMouseEnter(): void {
+    this.showCursor.set(true);
+  }
+
+  onGridMouseLeave(): void {
+    this.showCursor.set(false);
   }
 }

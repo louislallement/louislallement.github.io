@@ -31,111 +31,162 @@
     <div class="tabs">
       <button class="tab" [class.active]="activeTab() === 'reels'" (click)="switchTab('reels')">Reels Instagram</button>
       <button class="tab" [class.active]="activeTab() === 'articles'" (click)="switchTab('articles')">Articles</button>
+      <button class="tab" [class.active]="activeTab() === 'photos'" (click)="switchTab('photos')">Photos</button>
     </div>
 
-    <div class="toolbar">
-      <button class="btn-add" (click)="startAdd()" [disabled]="saving()">+ Ajouter</button>
-    </div>
+    <!-- ==================== REELS & ARTICLES ==================== -->
+    @if (activeTab() !== 'photos') {
+      <div class="toolbar">
+        <button class="btn-add" (click)="startAdd()" [disabled]="saving()">+ Ajouter</button>
+      </div>
 
-    <!-- New row form -->
-    @if (newRow(); as row) {
-      <div class="edit-form">
-        <h3>Nouveau {{ activeTab() === 'reels' ? 'reel' : 'article' }}</h3>
-        @for (header of (activeTab() === 'reels' ? reelHeaders() : articleHeaders()); track header; let i = $index) {
-          <label>
-            <span>{{ header }}</span>
-            <input [value]="row.values[i] || ''" (input)="row.values[i] = $any($event.target).value" />
-          </label>
-        }
-        <div class="form-actions">
-          <button class="btn-save" (click)="saveNew()" [disabled]="saving()">
-            {{ saving() ? 'Enregistrement...' : 'Enregistrer' }}
-          </button>
-          <button class="btn-cancel" (click)="cancelEdit()">Annuler</button>
+      @if (newRow(); as row) {
+        <div class="edit-form">
+          <h3>Nouveau {{ activeTab() === 'reels' ? 'reel' : 'article' }}</h3>
+          @for (header of (activeTab() === 'reels' ? reelHeaders() : articleHeaders()); track header; let i = $index) {
+            <label>
+              <span>{{ header }}</span>
+              <input [value]="row.values[i] || ''" (input)="row.values[i] = $any($event.target).value" />
+            </label>
+          }
+          <div class="form-actions">
+            <button class="btn-save" (click)="saveNew()" [disabled]="saving()">
+              {{ saving() ? 'Enregistrement...' : 'Enregistrer' }}
+            </button>
+            <button class="btn-cancel" (click)="cancelEdit()">Annuler</button>
+          </div>
         </div>
+      }
+
+      @if (editingRow(); as row) {
+        <div class="edit-form">
+          <h3>Modifier (ligne {{ row.rowIndex }})</h3>
+          @for (header of (activeTab() === 'reels' ? reelHeaders() : articleHeaders()); track header; let i = $index) {
+            <label>
+              <span>{{ header }}</span>
+              <input [value]="row.values[i] || ''" (input)="row.values[i] = $any($event.target).value" />
+            </label>
+          }
+          <div class="form-actions">
+            <button class="btn-save" (click)="saveEdit()" [disabled]="saving()">
+              {{ saving() ? 'Enregistrement...' : 'Enregistrer' }}
+            </button>
+            <button class="btn-cancel" (click)="cancelEdit()">Annuler</button>
+          </div>
+        </div>
+      }
+
+      <div class="table-container">
+        @if (activeTab() === 'reels') {
+          @if (reelRows().length === 0) {
+            <p class="empty-state">Aucun reel. Cliquez sur "+ Ajouter" pour commencer.</p>
+          } @else {
+            <table>
+              <thead>
+                <tr>
+                  @for (h of reelHeaders(); track h) { <th>{{ h }}</th> }
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (row of reelRows(); track row.rowIndex) {
+                  <tr>
+                    @for (val of row.values; track $index) { <td [title]="val">{{ val }}</td> }
+                    <td class="actions-cell">
+                      <button class="btn-edit" (click)="startEdit(row)">Modifier</button>
+                      <button class="btn-delete" (click)="deleteRow(row)">Supprimer</button>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          }
+        }
+
+        @if (activeTab() === 'articles') {
+          @if (articleRows().length === 0) {
+            <p class="empty-state">Aucun article. Cliquez sur "+ Ajouter" pour commencer.</p>
+          } @else {
+            <table>
+              <thead>
+                <tr>
+                  @for (h of articleHeaders(); track h) { <th>{{ h }}</th> }
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (row of articleRows(); track row.rowIndex) {
+                  <tr>
+                    @for (val of row.values; track $index) { <td [title]="val">{{ val }}</td> }
+                    <td class="actions-cell">
+                      <button class="btn-edit" (click)="startEdit(row)">Modifier</button>
+                      <button class="btn-delete" (click)="deleteRow(row)">Supprimer</button>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          }
+        }
       </div>
     }
 
-    <!-- Edit row form -->
-    @if (editingRow(); as row) {
-      <div class="edit-form">
-        <h3>Modifier (ligne {{ row.rowIndex }})</h3>
-        @for (header of (activeTab() === 'reels' ? reelHeaders() : articleHeaders()); track header; let i = $index) {
-          <label>
-            <span>{{ header }}</span>
-            <input [value]="row.values[i] || ''" (input)="row.values[i] = $any($event.target).value" />
-          </label>
-        }
-        <div class="form-actions">
-          <button class="btn-save" (click)="saveEdit()" [disabled]="saving()">
-            {{ saving() ? 'Enregistrement...' : 'Enregistrer' }}
-          </button>
-          <button class="btn-cancel" (click)="cancelEdit()">Annuler</button>
+    <!-- ==================== PHOTOS FOCAL POINT ==================== -->
+    @if (activeTab() === 'photos') {
+      @if (selectedPhoto(); as photo) {
+        <!-- Editor view -->
+        <div class="focal-editor">
+          <button class="btn-back" (click)="selectedPhoto.set(null)">&larr; Retour aux photos</button>
+
+          <div class="editor-layout">
+            <div class="editor-main">
+              <h3>Cliquez sur le point focal de l'image</h3>
+              <div class="focal-image-container" (click)="onImageClick($event)">
+                <img [src]="photo.src" [alt]="photo.alt" class="focal-image" referrerpolicy="no-referrer" draggable="false" />
+                <div class="focal-marker"
+                     [style.left.%]="focalPoint().x"
+                     [style.top.%]="focalPoint().y">
+                </div>
+              </div>
+              <p class="focal-coords">Position : {{ focalPoint().x }}% {{ focalPoint().y }}%</p>
+            </div>
+
+            <div class="editor-sidebar">
+              <h3>Apercu vignette</h3>
+              <div class="preview-thumbnail">
+                <img [src]="photo.src" [alt]="photo.alt"
+                     [style.object-position]="previewPosition()"
+                     referrerpolicy="no-referrer" />
+              </div>
+
+              <label class="alt-field">
+                <span>Texte alternatif (SEO)</span>
+                <input [ngModel]="photoAlt()" (ngModelChange)="photoAlt.set($event)" />
+              </label>
+
+              <button class="btn-save" (click)="saveFocalPoint()" [disabled]="saving()">
+                {{ saving() ? 'Enregistrement...' : 'Enregistrer' }}
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
+      } @else {
+        <!-- Photo grid -->
+        <p class="photo-grid-hint">Selectionnez une photo pour recentrer sa vignette</p>
+        @if (allPhotos().length === 0) {
+          <p class="empty-state">Chargement des photos...</p>
+        } @else {
+          <div class="photo-grid">
+            @for (photo of allPhotos(); track photo.src) {
+              <div class="photo-grid-item" (click)="selectPhoto(photo)">
+                <img [src]="photo.src" [alt]="photo.alt" [style.object-position]="photo.focus"
+                     referrerpolicy="no-referrer" loading="lazy" />
+                <span class="photo-name">{{ photo.alt }}</span>
+              </div>
+            }
+          </div>
+        }
+      }
     }
-
-    <!-- Data table -->
-    <div class="table-container">
-      @if (activeTab() === 'reels') {
-        @if (reelRows().length === 0) {
-          <p class="empty-state">Aucun reel. Cliquez sur "+ Ajouter" pour commencer.</p>
-        } @else {
-          <table>
-            <thead>
-              <tr>
-                @for (h of reelHeaders(); track h) {
-                  <th>{{ h }}</th>
-                }
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              @for (row of reelRows(); track row.rowIndex) {
-                <tr>
-                  @for (val of row.values; track $index) {
-                    <td [title]="val">{{ val }}</td>
-                  }
-                  <td class="actions-cell">
-                    <button class="btn-edit" (click)="startEdit(row)">Modifier</button>
-                    <button class="btn-delete" (click)="deleteRow(row)">Supprimer</button>
-                  </td>
-                </tr>
-              }
-            </tbody>
-          </table>
-        }
-      }
-
-      @if (activeTab() === 'articles') {
-        @if (articleRows().length === 0) {
-          <p class="empty-state">Aucun article. Cliquez sur "+ Ajouter" pour commencer.</p>
-        } @else {
-          <table>
-            <thead>
-              <tr>
-                @for (h of articleHeaders(); track h) {
-                  <th>{{ h }}</th>
-                }
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              @for (row of articleRows(); track row.rowIndex) {
-                <tr>
-                  @for (val of row.values; track $index) {
-                    <td [title]="val">{{ val }}</td>
-                  }
-                  <td class="actions-cell">
-                    <button class="btn-edit" (click)="startEdit(row)">Modifier</button>
-                    <button class="btn-delete" (click)="deleteRow(row)">Supprimer</button>
-                  </td>
-                </tr>
-              }
-            </tbody>
-          </table>
-        }
-      }
-    </div>
   </div>
 }

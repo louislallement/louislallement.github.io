@@ -6,7 +6,7 @@
 
   <div class="content-grid">
     <!-- Colonne Instagram Reels -->
-    <div class="column instagram-column">
+    <div class="column instagram-column" appScrollAnimate>
       <div class="column-header">
         <h2><span aria-hidden="true">📱</span> Reels Instagram</h2>
         <p>Mes dernières créations vidéo</p>
@@ -24,8 +24,8 @@
             </div>
           }
         }
-        @for (reel of instagramReels(); track reel.id) {
-          <div class="reel-item">
+        @for (reel of instagramReels(); track reel.id; let i = $index) {
+          <div class="reel-item" [style.animation-delay]="i * 100 + 'ms'">
             <div class="instagram-embed">
               @if (isPlaying(reel)) {
                 <iframe
@@ -40,7 +40,7 @@
                 </iframe>
               } @else {
                 <button class="reel-poster" (click)="playReel(reel)" aria-label="Lire la vidéo : {{ reel.title }}">
-                  <img [src]="reel.thumbnail" [alt]="reel.title || 'Reel Instagram'" />
+                  <img [src]="reel.thumbnail" [alt]="reel.title || 'Reel Instagram'" loading="lazy" />
                   <div class="play-overlay">
                     <div class="play-button">
                       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -75,7 +75,7 @@
     </div>
 
     <!-- Colonne Articles de Presse -->
-    <div class="column news-column">
+    <div class="column news-column" appScrollAnimate>
       <div class="column-header">
         <h2><span aria-hidden="true">📰</span> Articles de Presse</h2>
         <p>Mes publications journalistiques</p>
@@ -94,11 +94,11 @@
             </div>
           }
         }
-        @for (article of newsArticles(); track article.id) {
-          <div class="article-item">
+        @for (article of newsArticles(); track article.id; let i = $index) {
+          <div class="article-item" [style.animation-delay]="i * 100 + 'ms'">
             @if (article.thumbnail) {
               <div class="preview-image">
-                <img [src]="article.thumbnail" [alt]="article.title">
+                <img [src]="article.thumbnail" [alt]="article.title" loading="lazy">
               </div>
             }
             <div class="article-content">

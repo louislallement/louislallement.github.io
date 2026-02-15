@@ -4,10 +4,11 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { DatePipe } from '@angular/common';
 import { InstagramReel } from '../../models/journalist.model';
 import { JournalistService } from '../../services/journalist.service';
+import { ScrollAnimateDirective } from '@app/directives/scroll-animate.directive';
 
 @Component({
   selector: 'app-journalist',
-  imports: [DatePipe],
+  imports: [DatePipe, ScrollAnimateDirective],
   templateUrl: './journalist.component.html',
   styleUrls: ['./journalist.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
