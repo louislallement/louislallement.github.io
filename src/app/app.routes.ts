@@ -1,16 +1,41 @@
 import { Routes } from '@angular/router';
-import { GalleryComponent } from './pages/gallery/gallery.component';
-import { AboutComponent } from './components/about/about.component';
-import { ContactComponent } from './components/contact/contact.component';
-import { JournalistComponent } from './pages/journalist/journalist.component';
 
 export const routes: Routes = [
-  { path: '', component: GalleryComponent },
-  { path: 'gallery', component: GalleryComponent },
-  { path: 'gallery/:category', component: GalleryComponent },
-  { path: 'journaliste', component: JournalistComponent },
-  { path: 'a-propos', component: AboutComponent },
-  { path: 'contact', component: ContactComponent },
-  // Redirection pour les chemins inconnus
-  { path: '**', redirectTo: '', pathMatch: 'full' }
+  {
+    path: '',
+    title: 'Louis Lallement — Photographe & Journaliste',
+    loadComponent: () =>
+      import('./pages/gallery/gallery.component').then((m) => m.GalleryComponent),
+  },
+  {
+    path: 'gallery',
+    title: 'Galerie | Louis Lallement',
+    loadComponent: () =>
+      import('./pages/gallery/gallery.component').then((m) => m.GalleryComponent),
+  },
+  {
+    path: 'gallery/:category',
+    title: 'Galerie | Louis Lallement',
+    loadComponent: () =>
+      import('./pages/gallery/gallery.component').then((m) => m.GalleryComponent),
+  },
+  {
+    path: 'journaliste',
+    title: 'Journaliste | Louis Lallement',
+    loadComponent: () =>
+      import('./pages/journalist/journalist.component').then((m) => m.JournalistComponent),
+  },
+  {
+    path: 'a-propos',
+    title: 'À Propos | Louis Lallement',
+    loadComponent: () =>
+      import('./components/about/about.component').then((m) => m.AboutComponent),
+  },
+  {
+    path: 'contact',
+    title: 'Contact | Louis Lallement',
+    loadComponent: () =>
+      import('./components/contact/contact.component').then((m) => m.ContactComponent),
+  },
+  { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

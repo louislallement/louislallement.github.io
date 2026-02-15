@@ -1,25 +1,44 @@
-<div class="lightbox-overlay" (click)="close.emit()">
-  <button class="close-btn" (click)="close.emit(); $event.stopPropagation()" aria-label="Fermer">&times;</button>
-  
-  <!-- Contrôles de zoom -->
+<div class="lightbox-overlay" (click)="closeEvent.emit()"
+     (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event)">
+  <button #closeBtnRef class="close-btn" (click)="closeEvent.emit(); $event.stopPropagation()" aria-label="Fermer la visionneuse">&times;</button>
+
   <div class="zoom-controls" (click)="$event.stopPropagation()">
     <button class="zoom-btn" (click)="zoomIn()" aria-label="Zoomer">+</button>
     <button class="zoom-btn" (click)="zoomOut()" aria-label="Dézoomer">−</button>
     <button class="zoom-btn" (click)="resetZoom()" aria-label="Taille normale">⌂</button>
   </div>
-  
+
+  @if (counter) {
+    <div class="photo-counter" aria-live="polite">{{ counter }}</div>
+  }
+
+  @if (hasPrev) {
+    <button class="nav-btn nav-prev" (click)="prev(); $event.stopPropagation()" aria-label="Photo précédente">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+    </button>
+  }
+
+  @if (hasNext) {
+    <button class="nav-btn nav-next" (click)="next(); $event.stopPropagation()" aria-label="Photo suivante">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+    </button>
+  }
+
   <div class="lightbox-content">
-    <div class="loading-spinner" *ngIf="isLoading">
-      <div class="spinner"></div>
-      <p>Chargement de l'image...</p>
-    </div>
-    <img [src]="imageUrl" 
-         alt="Photo en grand format" 
-         (click)="toggleZoom()"
+    @if (isLoading()) {
+      <div class="loading-spinner">
+        <div class="spinner"></div>
+        <p>Chargement de l'image...</p>
+      </div>
+    }
+    <img [src]="displayUrl"
+         [alt]="altText()"
+         (click)="toggleZoom(); $event.stopPropagation()"
          (load)="onImageLoad()"
          (error)="onImageError()"
          [class.zoomed]="isZoomed"
          [style.transform]="getTransform()"
-         [style.display]="isLoading ? 'none' : 'block'">
+         [style.display]="isLoading() ? 'none' : 'block'"
+         referrerpolicy="no-referrer">
   </div>
 </div>

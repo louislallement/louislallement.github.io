@@ -25,3 +25,16 @@ footer {
 .socials a:hover img {
   filter: var(--icon-filter-hover, drop-shadow(0 0 6px var(--color-link)));
 }
+
+// Le SVG X utilise fill noir — inverser en dark mode
+.socials a img.x-logo {
+  :host-context(body.dark) & {
+    filter: invert(1);
+  }
+}
+
+.socials a:hover img.x-logo {
+  :host-context(body.dark) & {
+    filter: invert(1) drop-shadow(0 0 6px var(--color-link));
+  }
+}

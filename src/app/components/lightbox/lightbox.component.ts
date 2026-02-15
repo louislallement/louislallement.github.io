@@ -1,120 +1,183 @@
-import { Component, EventEmitter, HostListener, Input, Output, OnChanges } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  OnChanges,
+  input,
+  output,
+  signal,
+  viewChild,
+} from '@angular/core';
 
 @Component({
   selector: 'app-lightbox',
-  standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './lightbox.component.html',
-  styleUrl: './lightbox.component.scss'
+  styleUrl: './lightbox.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '(document:keydown)': 'onKeyDown($event)',
+    role: 'dialog',
+    'aria-modal': 'true',
+    'aria-label': 'Visionneuse de photos',
+  },
 })
 export class LightboxComponent implements OnChanges {
-  @Input() imageUrl: string | null = null;
-  @Input() fallbackUrl: string | null = null;
-  @Output() close = new EventEmitter<void>();
-  
-  isLoading = true;
+  imageUrl = input<string | null>(null);
+  fallbackUrl = input<string | null>(null);
+  altText = input<string>('Photo en grand format');
+  photos = input<{ lightboxSrc: string; src: string; alt: string }[]>([]);
+  currentIndex = input(0);
+
+  closeEvent = output<void>();
+  navigateEvent = output<number>();
+
+  isLoading = signal(true);
   hasTriedFallback = false;
-  
-  // Propriétés pour le zoom
+
   zoomLevel = 1;
   isZoomed = false;
   readonly minZoom = 0.5;
   readonly maxZoom = 3;
   readonly zoomStep = 0.25;
 
-  ngOnChanges(): void {
-    // Réinitialiser l'état de chargement quand l'URL change
-    if (this.imageUrl) {
-      console.log('Lightbox - Chargement de l\'image:', this.imageUrl);
-      this.isLoading = true;
-      this.hasTriedFallback = false;
-      this.resetZoom(); // Réinitialiser le zoom pour chaque nouvelle image
+  private closeBtn = viewChild<ElementRef>('closeBtnRef');
+
+  private touchStartX = 0;
+  private touchStartY = 0;
+  private readonly SWIPE_THRESHOLD = 50;
+
+  onTouchStart(event: TouchEvent): void {
+    this.touchStartX = event.touches[0].clientX;
+    this.touchStartY = event.touches[0].clientY;
+  }
+
+  onTouchEnd(event: TouchEvent): void {
+    if (this.isZoomed) return;
+    const dx = event.changedTouches[0].clientX - this.touchStartX;
+    const dy = event.changedTouches[0].clientY - this.touchStartY;
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > this.SWIPE_THRESHOLD) {
+      if (dx > 0) {
+        this.prev();
+      } else {
+        this.next();
+      }
     }
   }
 
-  // Permet de fermer la modale avec la touche "Échap"
-  @HostListener('document:keydown.escape', ['$event'])
-  onEscapeKey(event: any) {
-    this.close.emit();
+  ngOnChanges(): void {
+    if (this.imageUrl()) {
+      this.isLoading.set(true);
+      this.hasTriedFallback = false;
+      this.resetZoom();
+    }
+    // Focus trap : mettre le focus sur le bouton fermer à l'ouverture
+    setTimeout(() => this.closeBtn()?.nativeElement?.focus());
   }
 
   onImageLoad(): void {
-    console.log('Lightbox - Image chargée avec succès:', this.imageUrl);
-    this.isLoading = false;
+    this.isLoading.set(false);
   }
 
   onImageError(): void {
-    console.error('Lightbox - Erreur de chargement de l\'image:', this.imageUrl);
-    
-    // Essayer l'URL de fallback si disponible et pas encore essayée
-    if (this.fallbackUrl && !this.hasTriedFallback) {
-      console.log('Lightbox - Tentative avec l\'URL de fallback:', this.fallbackUrl);
-      this.imageUrl = this.fallbackUrl;
+    if (this.fallbackUrl() && !this.hasTriedFallback) {
       this.hasTriedFallback = true;
-      this.isLoading = true;
+      this.isLoading.set(true);
     } else {
-      this.isLoading = false;
+      this.isLoading.set(false);
     }
   }
 
-  // Méthodes de zoom
+  get displayUrl(): string | null {
+    if (this.hasTriedFallback && this.fallbackUrl()) {
+      return this.fallbackUrl();
+    }
+    return this.imageUrl();
+  }
+
+  get hasPrev(): boolean {
+    return this.photos().length > 1 && this.currentIndex() > 0;
+  }
+
+  get hasNext(): boolean {
+    return this.photos().length > 1 && this.currentIndex() < this.photos().length - 1;
+  }
+
+  get counter(): string {
+    const total = this.photos().length;
+    return total > 1 ? `${this.currentIndex() + 1} / ${total}` : '';
+  }
+
+  prev(): void {
+    if (this.hasPrev) {
+      this.navigateEvent.emit(this.currentIndex() - 1);
+    }
+  }
+
+  next(): void {
+    if (this.hasNext) {
+      this.navigateEvent.emit(this.currentIndex() + 1);
+    }
+  }
+
   zoomIn(): void {
-    console.log('Zoom In appelé, niveau actuel:', this.zoomLevel);
     if (this.zoomLevel < this.maxZoom) {
       this.zoomLevel = Math.min(this.zoomLevel + this.zoomStep, this.maxZoom);
       this.updateZoomState();
-      console.log('Nouveau niveau de zoom:', this.zoomLevel);
     }
   }
 
   zoomOut(): void {
-    console.log('Zoom Out appelé, niveau actuel:', this.zoomLevel);
     if (this.zoomLevel > this.minZoom) {
       this.zoomLevel = Math.max(this.zoomLevel - this.zoomStep, this.minZoom);
       this.updateZoomState();
-      console.log('Nouveau niveau de zoom:', this.zoomLevel);
     }
   }
 
   resetZoom(): void {
-    console.log('Reset Zoom appelé');
     this.zoomLevel = 1;
     this.updateZoomState();
-    console.log('Zoom réinitialisé à:', this.zoomLevel);
   }
 
   toggleZoom(): void {
-    if (this.zoomLevel === 1) {
-      this.zoomLevel = 2; // Zoom par défaut au double
-    } else {
-      this.zoomLevel = 1; // Retour à la taille normale
-    }
+    this.zoomLevel = this.zoomLevel === 1 ? 2 : 1;
     this.updateZoomState();
+  }
+
+  getTransform(): string {
+    return `scale(${this.zoomLevel})`;
+  }
+
+  onKeyDown(event: KeyboardEvent): void {
+    switch (event.key) {
+      case 'Escape':
+        this.closeEvent.emit();
+        break;
+      case 'ArrowLeft':
+        event.preventDefault();
+        this.prev();
+        break;
+      case 'ArrowRight':
+        event.preventDefault();
+        this.next();
+        break;
+      case '+':
+      case '=':
+        event.preventDefault();
+        this.zoomIn();
+        break;
+      case '-':
+        event.preventDefault();
+        this.zoomOut();
+        break;
+      case '0':
+        event.preventDefault();
+        this.resetZoom();
+        break;
+    }
   }
 
   private updateZoomState(): void {
     this.isZoomed = this.zoomLevel !== 1;
-  }
-
-  getTransform(): string {
-    const transform = `scale(${this.zoomLevel})`;
-    console.log('getTransform appelé:', transform);
-    return transform;
-  }
-
-  // Raccourcis clavier pour le zoom
-  @HostListener('document:keydown', ['$event'])
-  onKeyDown(event: KeyboardEvent): void {
-    if (event.key === '+' || event.key === '=') {
-      event.preventDefault();
-      this.zoomIn();
-    } else if (event.key === '-') {
-      event.preventDefault();
-      this.zoomOut();
-    } else if (event.key === '0') {
-      event.preventDefault();
-      this.resetZoom();
-    }
   }
 }

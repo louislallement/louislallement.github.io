@@ -7,69 +7,68 @@
   </section>
 
   <section id="contact">
-    <form (ngSubmit)="onSubmit()" #contactFormRef="ngForm">
-      <!-- Messages de validation -->
-      <div class="validation-errors" *ngIf="validationErrors.length > 0">
-        <ul>
-          <li *ngFor="let error of validationErrors">{{ error }}</li>
-        </ul>
-      </div>
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+      @if (submitMessage) {
+        <div class="submit-message" [class.success]="submitSuccess" [class.error]="!submitSuccess">
+          {{ submitMessage }}
+        </div>
+      }
 
-      <!-- Message de succès/erreur -->
-      <div class="submit-message" 
-           [class.success]="submitSuccess" 
-           [class.error]="!submitSuccess && submitMessage"
-           *ngIf="submitMessage">
-        {{ submitMessage }}
-      </div>
-
-      <!-- Champ Nom -->
       <div class="form-group">
-        <input 
-          type="text" 
-          name="name"
-          [(ngModel)]="contactForm.name"
-          (input)="onInputChange()"
-          placeholder="Votre nom" 
-          required 
-          [disabled]="isSubmitting"
-          class="form-input">
+        <label for="contact-name">Nom</label>
+        <input
+          id="contact-name"
+          type="text"
+          formControlName="name"
+          placeholder="Votre nom"
+          [attr.disabled]="isSubmitting ? '' : null"
+          class="form-input"
+          aria-required="true">
+        @if (contactForm.get('name')?.invalid && contactForm.get('name')?.touched) {
+          <span class="field-error" role="alert">Le nom doit contenir au moins 2 caractères</span>
+        }
       </div>
 
-      <!-- Champ Email -->
       <div class="form-group">
-        <input 
-          type="email" 
-          name="email"
-          [(ngModel)]="contactForm.email"
-          (input)="onInputChange()"
-          placeholder="Votre email" 
-          required 
-          [disabled]="isSubmitting"
-          class="form-input">
+        <label for="contact-email">Email</label>
+        <input
+          id="contact-email"
+          type="email"
+          formControlName="email"
+          placeholder="Votre email"
+          [attr.disabled]="isSubmitting ? '' : null"
+          class="form-input"
+          aria-required="true">
+        @if (contactForm.get('email')?.invalid && contactForm.get('email')?.touched) {
+          <span class="field-error" role="alert">Veuillez saisir une adresse email valide</span>
+        }
       </div>
 
-      <!-- Champ Message -->
       <div class="form-group">
-        <textarea 
-          name="message"
-          [(ngModel)]="contactForm.message"
-          (input)="onInputChange()"
-          placeholder="Votre message" 
-          rows="6" 
-          required 
-          [disabled]="isSubmitting"
-          class="form-textarea"></textarea>
+        <label for="contact-message">Message</label>
+        <textarea
+          id="contact-message"
+          formControlName="message"
+          placeholder="Votre message"
+          rows="6"
+          [attr.disabled]="isSubmitting ? '' : null"
+          class="form-textarea"
+          aria-required="true"></textarea>
+        @if (contactForm.get('message')?.invalid && contactForm.get('message')?.touched) {
+          <span class="field-error" role="alert">Le message doit contenir au moins 10 caractères</span>
+        }
       </div>
 
-      <!-- Bouton d'envoi -->
-      <button 
-        type="submit" 
-        [disabled]="isSubmitting"
+      <button
+        type="submit"
+        [disabled]="isSubmitting || contactForm.invalid"
         class="submit-btn"
         [class.loading]="isSubmitting">
-        <span *ngIf="!isSubmitting">Envoyer le message</span>
-        <span *ngIf="isSubmitting">Envoi en cours...</span>
+        @if (isSubmitting) {
+          <span>Envoi en cours...</span>
+        } @else {
+          <span>Envoyer le message</span>
+        }
       </button>
     </form>
   </section>

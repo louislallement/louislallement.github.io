@@ -1,83 +1,51 @@
-import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { InstagramReel, NewsArticle } from '../../models/journalist.model';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { DatePipe } from '@angular/common';
+import { InstagramReel } from '../../models/journalist.model';
 import { JournalistService } from '../../services/journalist.service';
 
 @Component({
   selector: 'app-journalist',
-  standalone: true,
-  imports: [CommonModule],
+  imports: [DatePipe],
   templateUrl: './journalist.component.html',
   styleUrls: ['./journalist.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class JournalistComponent implements OnInit, AfterViewInit {
+export class JournalistComponent {
   private journalistService = inject(JournalistService);
+  private sanitizer = inject(DomSanitizer);
 
-  instagramReels$!: Observable<InstagramReel[]>;
-  newsArticles$!: Observable<NewsArticle[]>;
-  
-  @ViewChild('instagramContainer', { static: false }) instagramContainer!: ElementRef;
+  instagramReels = toSignal(this.journalistService.getInstagramReels(), { initialValue: [] });
+  newsArticles = toSignal(this.journalistService.getNewsArticles(), { initialValue: [] });
 
-  ngOnInit(): void {
-    this.loadData();
-  }
+  playingReels = signal<Set<string>>(new Set());
 
-  ngAfterViewInit(): void {
-    // Plus besoin de charger le script Instagram avec les iframes
-  }
-
-  private loadInstagramScript(): void {
-    // Méthode supprimée - plus nécessaire avec les iframes
-  }
-
-  private loadData(): void {
-    this.instagramReels$ = this.journalistService.getInstagramReels();
-    this.newsArticles$ = this.journalistService.getNewsArticles();
-    
-    // Souscrire aux données Instagram pour injecter le contenu
-    this.instagramReels$.subscribe(reels => {
-      setTimeout(() => this.injectInstagramEmbeds(reels), 100);
+  playReel(reel: InstagramReel): void {
+    this.playingReels.update((set) => {
+      const next = new Set(set);
+      next.add(reel.id);
+      return next;
     });
   }
 
-  private injectInstagramEmbeds(reels: InstagramReel[]): void {
-    reels.forEach((reel, index) => {
-      const container = document.getElementById(`instagram-reel-${index}`);
-      if (container) {
-        container.innerHTML = `
-          <iframe 
-            src="${reel.embedUrl}" 
-            width="320" 
-            height="568" 
-            frameborder="0" 
-            scrolling="no" 
-            allowtransparency="true"
-            style="border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); max-width: 100%;">
-          </iframe>
-        `;
-      }
-    });
+  isPlaying(reel: InstagramReel): boolean {
+    return this.playingReels().has(reel.id);
+  }
+
+  getSafeEmbedUrl(reel: InstagramReel): SafeResourceUrl {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(reel.embedUrl || '');
   }
 
   openInstagramReel(reel: InstagramReel): void {
     window.open(reel.url, '_blank');
   }
 
-  openNewsArticle(article: NewsArticle): void {
-    console.log('Clic sur "Lire l\'article" pour:', article.url);
-    window.open(article.url, '_blank');
+  openNewsArticle(url: string): void {
+    window.open(url, '_blank');
   }
 
-  openPreview(article: NewsArticle): void {
-    console.log('Clic sur "Prévisualisation" pour:', article.url);
-    console.log('previewUrl disponible:', article.previewUrl);
-    if (article.previewUrl) {
-      window.open(article.previewUrl, '_blank');
-    } else {
-      // Fallback vers l'article original
-      console.log('Fallback vers l\'article original');
-      this.openNewsArticle(article);
-    }
+  openPreview(previewUrl: string | undefined, articleUrl: string): void {
+    window.open(previewUrl || articleUrl, '_blank');
   }
 }

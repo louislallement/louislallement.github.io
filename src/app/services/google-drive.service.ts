@@ -1,10 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Injectable, inject } from '@angular/core';
+import { Observable, map, catchError, of } from 'rxjs';
+import { environment } from '../../environments/environment';
 
-// !! NE JAMAIS METTRE UNE CLÉ D'API DIRECTEMENT DANS LE CODE !!
-// Utilisez les variables d'environnement ou un backend sécurisé.
-const API_KEY = 'AIzaSyAWCXImM4SW4nK8UoJK4dnjgagraoezwX8'; // TODO: Remplacez par votre nouvelle clé et déplacez-la hors du code
 const API_URL = 'https://www.googleapis.com/drive/v3/files';
 
 export interface GoogleDriveFile {
@@ -25,21 +23,16 @@ export interface GoogleDriveFileList {
   providedIn: 'root',
 })
 export class GoogleDriveService {
-  constructor(private http: HttpClient) {}
+  private http = inject(HttpClient);
 
   getFilesInFolder(folderId: string): Observable<GoogleDriveFile[]> {
     const query = `'${folderId}' in parents and mimeType contains 'image/'`;
-    // Ajouter plus de champs pour avoir toutes les informations nécessaires
     const fields = 'files(id,name,webContentLink,thumbnailLink,webViewLink,size,mimeType)';
-    const url = `${API_URL}?key=${API_KEY}&q=${encodeURIComponent(query)}&fields=${fields}`;
-    
-    console.log('Google Drive API URL:', url);
-    
+    const url = `${API_URL}?key=${environment.googleDriveApiKey}&q=${encodeURIComponent(query)}&fields=${fields}`;
+
     return this.http.get<GoogleDriveFileList>(url).pipe(
-      map((response) => {
-        console.log('Google Drive API Response:', response);
-        return response.files || [];
-      })
+      map((response) => response.files || []),
+      catchError(() => of([]))
     );
   }
 }

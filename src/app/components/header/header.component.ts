@@ -1,22 +1,32 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
-import { RouterModule } from '@angular/router';
-import { PhotoCategory } from '../../models/photo.model';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
+import { filter } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-header',
-  standalone: true,
   imports: [RouterModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
-  // On injecte le service pour l'utiliser dans le template
   themeService = inject(ThemeService);
+  private router = inject(Router);
 
-  // On déplace les filtres ici pour les afficher dans le header
-  filters: PhotoCategory[] = ['all', 'mariage', 'portrait', 'paysage'];
+  menuOpen = signal(false);
 
-  // Pour le menu mobile
-  isMenuOpen = false;
+  constructor() {
+    this.router.events
+      .pipe(
+        filter((e) => e instanceof NavigationEnd),
+        takeUntilDestroyed(),
+      )
+      .subscribe(() => this.menuOpen.set(false));
+  }
+
+  toggleMenu(): void {
+    this.menuOpen.update((v) => !v);
+  }
 }

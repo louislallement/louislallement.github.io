@@ -8,92 +8,136 @@
     <!-- Colonne Instagram Reels -->
     <div class="column instagram-column">
       <div class="column-header">
-        <h2>📱 Reels Instagram</h2>
+        <h2><span aria-hidden="true">📱</span> Reels Instagram</h2>
         <p>Mes dernières créations vidéo</p>
       </div>
-      
-      <div class="items-container" #instagramContainer>
-        <div class="reel-item" *ngFor="let reel of instagramReels$ | async; let i = index">
-          <div class="instagram-embed" [id]="'instagram-reel-' + i">
-            <!-- Le contenu Instagram sera injecté ici par JavaScript -->
-          </div>
-          <div class="reel-content">
-            <h3>{{ reel.title || 'Reel Instagram' }}</h3>
-            <p *ngIf="reel.description">{{ reel.description }}</p>
-            <div class="reel-meta">
-              <span class="date" *ngIf="reel.date">{{ reel.date | date:'dd/MM/yyyy' }}</span>
-              <span class="platform">Instagram</span>
+
+      <div class="items-container">
+        @for (reel of instagramReels(); track reel.id) {
+          <div class="reel-item">
+            <div class="instagram-embed">
+              @if (isPlaying(reel)) {
+                <iframe
+                  [src]="getSafeEmbedUrl(reel)"
+                  width="320"
+                  height="568"
+                  frameborder="0"
+                  scrolling="no"
+                  allowtransparency="true"
+                  allow="autoplay; encrypted-media"
+                  title="Instagram Reel - {{ reel.title }}">
+                </iframe>
+              } @else {
+                <button class="reel-poster" (click)="playReel(reel)" aria-label="Lire la vidéo : {{ reel.title }}">
+                  <img [src]="reel.thumbnail" [alt]="reel.title || 'Reel Instagram'" />
+                  <div class="play-overlay">
+                    <div class="play-button">
+                      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
+                    </div>
+                    <span class="play-label">Lire la vidéo</span>
+                  </div>
+                </button>
+              }
             </div>
-            <div class="reel-actions">
-              <button class="btn btn-primary" (click)="openInstagramReel(reel)">
-                Voir sur Instagram
-              </button>
+            <div class="reel-content">
+              <h3>{{ reel.title || 'Reel Instagram' }}</h3>
+              @if (reel.description) {
+                <p>{{ reel.description }}</p>
+              }
+              <div class="reel-meta">
+                @if (reel.date) {
+                  <span class="date">{{ reel.date | date:'dd/MM/yyyy' }}</span>
+                }
+                <span class="platform">Instagram</span>
+              </div>
+              <div class="reel-actions">
+                <button class="btn btn-primary" (click)="openInstagramReel(reel)">
+                  Voir sur Instagram
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        }
       </div>
     </div>
 
     <!-- Colonne Articles de Presse -->
     <div class="column news-column">
       <div class="column-header">
-        <h2>📰 Articles de Presse</h2>
+        <h2><span aria-hidden="true">📰</span> Articles de Presse</h2>
         <p>Mes publications journalistiques</p>
       </div>
-      
+
       <div class="items-container">
-        <div class="article-item" *ngFor="let article of newsArticles$ | async">
-          <!-- Prévisualisation riche avec métadonnées Open Graph -->
-          <div class="article-preview" *ngIf="article.metadata">
-            <div class="preview-image" *ngIf="article.metadata.image">
-              <img [src]="article.metadata.image" 
-                   [alt]="article.metadata.title || article.title"
-                   (error)="$event.target.src='assets/images/article-placeholder.svg'">
-            </div>
-            <div class="preview-content">
-              <div class="preview-header">
-                <span class="preview-source">{{ article.metadata.siteName || article.source }}</span>
-                <span class="preview-date" *ngIf="article.metadata.publishedTime">
-                  {{ article.metadata.publishedTime | date:'dd/MM/yyyy' }}
-                </span>
+        @for (article of newsArticles(); track article.id) {
+          <div class="article-item">
+            @if (article.metadata) {
+              <div class="article-preview">
+                @if (article.metadata.image) {
+                  <div class="preview-image">
+                    <img [src]="article.metadata.image"
+                         [alt]="article.metadata.title || article.title"
+                         (error)="$event.target.src='assets/images/article-placeholder.svg'">
+                  </div>
+                }
+                <div class="preview-content">
+                  <div class="preview-header">
+                    <span class="preview-source">{{ article.metadata.siteName || article.source }}</span>
+                    @if (article.metadata.publishedTime) {
+                      <span class="preview-date">
+                        {{ article.metadata.publishedTime | date:'dd/MM/yyyy' }}
+                      </span>
+                    }
+                  </div>
+                  <h3 class="preview-title">{{ article.metadata.title || article.title }}</h3>
+                  @if (article.metadata.description) {
+                    <p class="preview-description">
+                      {{ article.metadata.description }}
+                    </p>
+                  }
+                  @if (article.metadata.author) {
+                    <div class="preview-author">
+                      <span class="author-label">Par :</span>
+                      <span class="author-name">{{ article.metadata.author }}</span>
+                    </div>
+                  }
+                </div>
               </div>
-              <h3 class="preview-title">{{ article.metadata.title || article.title }}</h3>
-              <p class="preview-description" *ngIf="article.metadata.description">
-                {{ article.metadata.description }}
-              </p>
-              <div class="preview-author" *ngIf="article.metadata.author">
-                <span class="author-label">Par :</span>
-                <span class="author-name">{{ article.metadata.author }}</span>
+            }
+
+            @if (!article.metadata) {
+              <div class="article-fallback">
+                <div class="article-thumbnail">
+                  <img [src]="article.thumbnail" [alt]="article.title"
+                       (error)="$event.target.src='assets/images/article-placeholder.svg'">
+                </div>
+                <div class="article-content">
+                  <h3>{{ article.title }}</h3>
+                  @if (article.description) {
+                    <p>{{ article.description }}</p>
+                  }
+                  <div class="article-meta">
+                    <span class="source">{{ article.source }}</span>
+                    @if (article.date) {
+                      <span class="date">{{ article.date | date:'dd/MM/yyyy' }}</span>
+                    }
+                  </div>
+                </div>
               </div>
+            }
+
+            <div class="article-actions">
+              <button class="btn btn-primary" (click)="openNewsArticle(article.url)">
+                Lire l'article
+              </button>
+              <button class="btn btn-secondary" (click)="openPreview(article.previewUrl, article.url)">
+                Prévisualisation
+              </button>
             </div>
           </div>
-          
-          <!-- Fallback si pas de métadonnées -->
-          <div class="article-fallback" *ngIf="!article.metadata">
-            <div class="article-thumbnail">
-              <img [src]="article.thumbnail" [alt]="article.title" 
-                   (error)="$event.target.src='assets/images/article-placeholder.svg'">
-            </div>
-            <div class="article-content">
-              <h3>{{ article.title }}</h3>
-              <p *ngIf="article.description">{{ article.description }}</p>
-              <div class="article-meta">
-                <span class="source">{{ article.source }}</span>
-                <span class="date" *ngIf="article.date">{{ article.date | date:'dd/MM/yyyy' }}</span>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Actions -->
-          <div class="article-actions">
-            <button class="btn btn-primary" (click)="openNewsArticle(article)">
-              Lire l'article
-            </button>
-            <button class="btn btn-secondary" (click)="openPreview(article)">
-              Prévisualisation
-            </button>
-          </div>
-        </div>
+        }
       </div>
     </div>
   </div>

@@ -35,22 +35,24 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
+                  "maximumWarning": "10kB",
+                  "maximumError": "16kB"
                 }
               ],
               "outputHashing": "all",
-              "server": "src/main.server.ts",
-              "outputMode": "server",
-              "ssr": {
-                "entry": "src/server.ts"
-              }
+              "outputMode": "static"
             },
             "development": {
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true,
-              "outputMode": "static"
+              "outputMode": "static",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"

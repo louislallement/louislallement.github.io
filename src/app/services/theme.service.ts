@@ -1,5 +1,5 @@
-import { DOCUMENT } from '@angular/common';
-import { effect, Inject, Injectable, signal } from '@angular/core';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { effect, inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 
 type Theme = 'light' | 'dark';
 
@@ -7,15 +7,18 @@ type Theme = 'light' | 'dark';
   providedIn: 'root',
 })
 export class ThemeService {
+  private document = inject(DOCUMENT);
+  private isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
+
   theme = signal<Theme>('light');
 
-  constructor(@Inject(DOCUMENT) private document: Document) {
-    // Au démarrage, on vérifie si un thème est sauvegardé ou si le système préfère le mode sombre
-    const savedTheme = localStorage.getItem('theme') as Theme;
-    const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
-    this.theme.set(savedTheme || (prefersDark ? 'dark' : 'light'));
+  constructor() {
+    if (this.isBrowser) {
+      const savedTheme = localStorage.getItem('theme') as Theme;
+      const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
+      this.theme.set(savedTheme || (prefersDark ? 'dark' : 'light'));
+    }
 
-    // Cet "effet" s'exécutera à chaque fois que le signal `theme` change.
     effect(() => {
       const currentTheme = this.theme();
       if (currentTheme === 'dark') {
@@ -23,12 +26,13 @@ export class ThemeService {
       } else {
         this.document.body.classList.remove('dark');
       }
-      localStorage.setItem('theme', currentTheme);
+      if (this.isBrowser) {
+        localStorage.setItem('theme', currentTheme);
+      }
     });
   }
 
   toggleTheme() {
-    // On met simplement à jour le signal, l'effet s'occupe du reste.
     this.theme.update((current) => (current === 'light' ? 'dark' : 'light'));
   }
 }

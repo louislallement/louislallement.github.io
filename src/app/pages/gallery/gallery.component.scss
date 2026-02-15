@@ -1,14 +1,18 @@
 .secondary-nav {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   padding: 0.75rem 2rem;
   position: sticky;
-  // Se colle sous le header principal qui a un z-index de 1000
-  top: 81px; /* Hauteur approximative du header principal */
+  top: 81px;
   z-index: 999;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+
+  :host-context(body.dark) & {
+    background-color: rgba(18, 27, 40, 0.95);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+  }
 }
 
 .secondary-nav-container {
@@ -21,26 +25,34 @@
 }
 
 .filter-btn {
-  font-family: var(--font-sans-serif);
-  font-weight: 400; /* Regular */
+  font-family: var(--font-family);
+  font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-size: 0.8rem;
-  color: var(--texte-secondaire);
+  color: #555;
   text-decoration: none;
   padding: 0.5rem 0.75rem;
   border-radius: var(--border-radius);
   transition: background-color 0.3s ease, color 0.3s ease;
+
+  :host-context(body.dark) & {
+    color: #aaa;
+  }
 }
 
 .filter-btn:hover,
 .filter-btn.active {
-  color: var(--texte-principal);
-  background-color: var(--beige-sable);
+  color: var(--color-text-light);
+  background-color: rgba(0, 0, 0, 0.05);
+
+  :host-context(body.dark) & {
+    color: var(--color-text-dark);
+    background-color: rgba(255, 255, 255, 0.1);
+  }
 }
 
 #portfolio-photo {
-  padding-top: 0; /* On retire le padding du haut qui est maintenant géré par le margin de la nav secondaire */
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
@@ -54,32 +66,93 @@
   align-items: start;
 }
 
+// --- Photo item with blur-up loading ---
+
 .photo-item {
   position: relative;
   overflow: hidden;
   border-radius: var(--border-radius);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
-  break-inside: avoid;
-  margin-bottom: 1.5rem;
+  aspect-ratio: 3 / 2;
+  animation: staggerFadeIn 0.5s ease both;
+
+  // Shimmer placeholder
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      #e8ecf1 25%,
+      #f0f3f7 50%,
+      #e8ecf1 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+    z-index: 1;
+    transition: opacity 0.4s ease;
+
+    :host-context(body.dark) & {
+      background: linear-gradient(
+        90deg,
+        #1a2535 25%,
+        #223044 50%,
+        #1a2535 75%
+      );
+      background-size: 200% 100%;
+    }
+  }
+
+  &.loaded::before {
+    opacity: 0;
+    pointer-events: none;
+  }
 }
 
 .photo-item:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.photo-item img {
+// LQIP — tiny blurred preview
+img.lqip {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: auto;
-  display: block;
+  height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  filter: blur(20px);
+  transform: scale(1.1);
+  z-index: 2;
+  transition: opacity 0.6s ease;
   border-radius: var(--border-radius);
 }
 
-.photo-item:hover img {
+.photo-item.loaded img.lqip {
+  opacity: 0;
+  pointer-events: none;
+}
+
+// Full resolution image
+img.full {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  z-index: 3;
+  transition: opacity 0.6s ease, transform 0.3s ease;
+  border-radius: var(--border-radius);
+
+  &.loaded {
+    opacity: 1;
+  }
+}
+
+.photo-item:hover img.full {
   transform: scale(1.05);
 }
 
@@ -92,7 +165,116 @@
   min-height: 200px;
 }
 
-/* Responsive design */
+// --- Animations ---
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes staggerFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// --- Skeleton loading state ---
+
+.gallery-empty {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.skeleton-item {
+  aspect-ratio: 3 / 2;
+  border-radius: var(--border-radius);
+  background: linear-gradient(90deg, #e8ecf1 25%, #f0f3f7 50%, #e8ecf1 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+
+  :host-context(body.dark) & {
+    background: linear-gradient(90deg, #1a2535 25%, #223044 50%, #1a2535 75%);
+    background-size: 200% 100%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .skeleton-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .skeleton-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+// --- Gallery CTA ---
+
+.gallery-cta {
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+
+  .cta-text {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    color: var(--color-text-light);
+    margin-bottom: 1.25rem;
+
+    :host-context(body.dark) & {
+      color: var(--color-text-dark);
+    }
+  }
+
+  .cta-btn {
+    display: inline-block;
+    padding: 0.85rem 2rem;
+    background: #000;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+
+    :host-context(body.dark) & {
+      background: #ddd;
+      color: #000;
+    }
+
+    &:hover {
+      background: #333;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+      :host-context(body.dark) & {
+        background: #fff;
+      }
+    }
+  }
+}
+
+// --- Responsive ---
+
 @media (max-width: 1024px) {
   .masonry-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -105,7 +287,7 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
-  
+
   #portfolio-photo {
     padding: 1rem;
   }
@@ -116,11 +298,11 @@
     grid-template-columns: 1fr;
     gap: 0.75rem;
   }
-  
+
   .secondary-nav-container {
     gap: 1rem;
   }
-  
+
   .filter-btn {
     font-size: 0.75rem;
     padding: 0.4rem 0.6rem;

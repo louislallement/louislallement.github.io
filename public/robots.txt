@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://louislallement.github.io/sitemap.xml

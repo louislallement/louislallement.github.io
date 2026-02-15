@@ -1,4 +1,4 @@
-<nav class="secondary-nav">
+<nav class="secondary-nav" role="navigation" aria-label="Filtres de catégorie">
   <div class="secondary-nav-container">
     <a class="filter-btn" routerLink="/gallery" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Tous</a>
     <a class="filter-btn" routerLink="/gallery/mariage" routerLinkActive="active">Mariage</a>
@@ -8,14 +8,45 @@
 </nav>
 
 <section id="portfolio-photo">
-  <!-- La galerie est générée dynamiquement -->
-  <div class="masonry-grid">
-    <div class="photo-item" *ngFor="let photo of photos$ | async">
-      <img [src]="photo.src" [alt]="photo.alt" (click)="openLightbox(photo)" 
-           (error)="onImageError($event)" (load)="onImageLoad($event)" />
+  @if (photos().length === 0) {
+    <div class="gallery-empty">
+      <div class="skeleton-grid">
+        @for (i of [1,2,3,4,5,6]; track i) {
+          <div class="skeleton-item"></div>
+        }
+      </div>
     </div>
-  </div>
+  } @else {
+    <div class="masonry-grid">
+      @for (photo of photos(); track photo.src; let i = $index) {
+        <div class="photo-item" [class.loaded]="isLoaded(photo.src)" [style.animation-delay]="i * 60 + 'ms'"
+             (contextmenu)="$event.preventDefault()">
+          <img class="lqip" [src]="photo.lqipSrc" [alt]="photo.alt" referrerpolicy="no-referrer" />
+          <img class="full" [src]="photo.src" [alt]="photo.alt" [class.loaded]="isLoaded(photo.src)"
+               (click)="openLightbox(photo)" (load)="onImageLoaded(photo.src)"
+               (error)="onImageError($event)" loading="lazy" referrerpolicy="no-referrer"
+               draggable="false" />
+        </div>
+      }
+    </div>
+  }
 </section>
 
-<!-- La lightbox s'affichera ici si une photo est sélectionnée -->
-<app-lightbox *ngIf="selectedPhotoUrl" [imageUrl]="selectedPhotoUrl" [fallbackUrl]="selectedPhoto?.src || null" (close)="closeLightbox()"></app-lightbox>
+@if (photos().length > 0) {
+  <section class="gallery-cta">
+    <p class="cta-text">Vous aimez ce que vous voyez ?</p>
+    <a routerLink="/contact" class="cta-btn">Parlons de votre projet</a>
+  </section>
+}
+
+@if (selectedPhoto(); as photo) {
+  <app-lightbox
+    [imageUrl]="photo.lightboxSrc"
+    [fallbackUrl]="photo.src"
+    [altText]="photo.alt"
+    [photos]="photos()"
+    [currentIndex]="selectedIndex()"
+    (closeEvent)="closeLightbox()"
+    (navigateEvent)="navigateLightbox($event)">
+  </app-lightbox>
+}

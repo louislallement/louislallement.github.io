@@ -1,13 +1,33 @@
 <header class="site-header">
   <div class="header-container">
     <a routerLink="/" class="brand-name">Louis Lallement</a>
-    <nav class="main-nav">
-      <ul>
-        <li><a routerLink="/gallery" routerLinkActive="active">Galerie</a></li>
-        <li><a routerLink="/journaliste" routerLinkActive="active">Journaliste</a></li>
-        <li><a routerLink="/a-propos" routerLinkActive="active">À Propos</a></li>
-        <li><a routerLink="/contact" routerLinkActive="active">Contact</a></li>
+
+    <button class="menu-toggle" (click)="toggleMenu()" [class.open]="menuOpen()"
+            [attr.aria-expanded]="menuOpen()" aria-controls="main-nav-list" aria-label="Menu de navigation">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+
+    <nav class="main-nav" [class.open]="menuOpen()" aria-label="Navigation principale">
+      <ul id="main-nav-list">
+        <li><a routerLink="/gallery" routerLinkActive="active" #rlaGallery="routerLinkActive" [attr.aria-current]="rlaGallery.isActive ? 'page' : null">Galerie</a></li>
+        <li><a routerLink="/journaliste" routerLinkActive="active" #rlaJourno="routerLinkActive" [attr.aria-current]="rlaJourno.isActive ? 'page' : null">Journaliste</a></li>
+        <li><a routerLink="/a-propos" routerLinkActive="active" #rlaAbout="routerLinkActive" [attr.aria-current]="rlaAbout.isActive ? 'page' : null">À Propos</a></li>
+        <li><a routerLink="/contact" routerLinkActive="active" #rlaContact="routerLinkActive" [attr.aria-current]="rlaContact.isActive ? 'page' : null">Contact</a></li>
       </ul>
     </nav>
+
+    <button class="theme-toggle" (click)="themeService.toggleTheme()" [attr.aria-label]="themeService.theme() === 'dark' ? 'Passer en mode clair' : 'Passer en mode sombre'">
+      @if (themeService.theme() === 'dark') {
+        <span aria-hidden="true">&#9788;</span>
+      } @else {
+        <span aria-hidden="true">&#9790;</span>
+      }
+    </button>
   </div>
 </header>
+
+@if (menuOpen()) {
+  <div class="menu-backdrop" (click)="menuOpen.set(false)"></div>
+}
