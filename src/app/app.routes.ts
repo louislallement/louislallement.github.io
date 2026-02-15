@@ -38,6 +38,12 @@ export const routes: Routes = [
       import('./components/contact/contact.component').then((m) => m.ContactComponent),
   },
   {
+    path: 'admin',
+    title: 'Administration | Louis Lallement',
+    loadComponent: () =>
+      import('./pages/admin/admin.component').then((m) => m.AdminComponent),
+  },
+  {
     path: '**',
     title: 'Page introuvable | Louis Lallement',
     loadComponent: () =>

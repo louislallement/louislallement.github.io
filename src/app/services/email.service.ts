@@ -20,9 +20,9 @@ export interface EmailResponse {
 // 2. Creer un "Email Template" avec les variables {{from_name}}, {{from_email}}, {{message}}
 // 3. Copier la Public Key depuis Account > API Keys
 // ====================================================================
-const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';
-const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
-const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
+const EMAILJS_SERVICE_ID = 'service_vqs6hqm';
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID'; // À compléter
+const EMAILJS_PUBLIC_KEY = 'zRpvGG_P0ES162dY4';
 
 @Injectable({
   providedIn: 'root',

@@ -1,5 +1,3 @@
-import { OpenGraphMetadata } from './opengraph.model';
-
 export interface InstagramReel {
   id: string;
   url: string;
@@ -18,9 +16,6 @@ export interface NewsArticle {
   source: string;
   thumbnail?: string;
   date?: string;
-  previewUrl?: string;
-  metadata?: OpenGraphMetadata;
-  loading?: boolean;
 }
 
 export interface JournalistData {

@@ -1,75 +1,86 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, forkJoin, map, of, switchMap, catchError } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { InstagramReel, NewsArticle, JournalistData } from '../models/journalist.model';
-import { OpenGraphService } from './opengraph.service';
+import { GoogleSheetsService } from './google-sheets.service';
+
+interface ReelRow {
+  id: string;
+  url: string;
+  title: string;
+  description: string;
+  thumbnail: string;
+  date: string;
+}
+
+interface ArticleRow {
+  id: string;
+  url: string;
+  title: string;
+  description: string;
+  source: string;
+  thumbnail: string;
+  date: string;
+}
 
 @Injectable({
   providedIn: 'root',
 })
 export class JournalistService {
-  private http = inject(HttpClient);
-  private openGraphService = inject(OpenGraphService);
-
-  private readonly INSTAGRAM_DATA_URL = 'assets/data/instagram-reels.json';
-  private readonly NEWS_DATA_URL = 'assets/data/news-articles.json';
+  private sheets = inject(GoogleSheetsService);
 
   getJournalistData(): Observable<JournalistData> {
-    return forkJoin({
-      instagramReels: this.getInstagramReels(),
-      newsArticles: this.getNewsArticles()
-    });
+    return this.getInstagramReels().pipe(
+      map((instagramReels) => ({
+        instagramReels,
+        newsArticles: [] as NewsArticle[],
+      })),
+    );
   }
 
   getInstagramReels(): Observable<InstagramReel[]> {
-    return this.http.get<InstagramReel[]>(this.INSTAGRAM_DATA_URL).pipe(
-      map(reels => reels.map(reel => this.processInstagramReel(reel)))
+    return this.sheets.readSheet<ReelRow>('Reels').pipe(
+      map((rows) =>
+        rows
+          .filter((row) => row.url)
+          .map((row) => this.processInstagramReel(row)),
+      ),
     );
   }
 
   getNewsArticles(): Observable<NewsArticle[]> {
-    return this.http.get<NewsArticle[]>(this.NEWS_DATA_URL).pipe(
-      switchMap(articles => {
-        const articlesWithMetadata$ = articles.map(article =>
-          this.openGraphService.createArticlePreview(article.url).pipe(
-            map(preview => ({
-              ...article,
-              metadata: preview.metadata,
-              loading: false,
-              title: preview.metadata.title || article.title,
-              description: preview.metadata.description || article.description,
-              thumbnail: preview.metadata.image || article.thumbnail,
-              source: preview.metadata.siteName || article.source
-            })),
-            catchError(() => of({
-              ...article,
-              loading: false,
-              metadata: undefined
-            }))
-          )
-        );
-
-        return forkJoin(articlesWithMetadata$) as Observable<NewsArticle[]>;
-      })
+    return this.sheets.readSheet<ArticleRow>('Articles').pipe(
+      map((rows) =>
+        rows
+          .filter((row) => row.url)
+          .map((row) => ({
+            id: row.id || row.url,
+            url: row.url,
+            title: row.title || 'Article',
+            description: row.description || '',
+            source: row.source || '',
+            thumbnail: row.thumbnail || '',
+            date: row.date || '',
+          })),
+      ),
     );
   }
 
-  private processInstagramReel(reel: InstagramReel): InstagramReel {
+  private processInstagramReel(row: ReelRow): InstagramReel {
+    const id = row.id || this.extractInstagramId(row.url);
     return {
-      ...reel,
-      id: reel.id || this.extractInstagramId(reel.url),
-      thumbnail: reel.thumbnail || this.generateInstagramThumbnail(reel.url),
-      embedUrl: this.generateInstagramEmbedUrl(reel.url)
+      id,
+      url: row.url,
+      title: row.title || 'Reel Instagram',
+      description: row.description || '',
+      thumbnail: row.thumbnail || 'assets/images/instagram-placeholder.svg',
+      date: row.date || '',
+      embedUrl: this.generateInstagramEmbedUrl(row.url),
     };
   }
 
   private extractInstagramId(url: string): string {
     const match = url.match(/\/reel\/([^\/\?]+)/);
     return match ? match[1] : url;
-  }
-
-  private generateInstagramThumbnail(_url: string): string {
-    return 'assets/images/instagram-placeholder.svg';
   }
 
   private generateInstagramEmbedUrl(url: string): string {

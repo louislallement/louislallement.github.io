@@ -44,8 +44,4 @@ export class JournalistComponent {
   openNewsArticle(url: string): void {
     window.open(url, '_blank');
   }
-
-  openPreview(previewUrl: string | undefined, articleUrl: string): void {
-    window.open(previewUrl || articleUrl, '_blank');
-  }
 }
