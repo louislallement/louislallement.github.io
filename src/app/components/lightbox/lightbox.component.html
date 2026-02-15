@@ -1,0 +1,25 @@
+<div class="lightbox-overlay" (click)="close.emit()">
+  <button class="close-btn" (click)="close.emit(); $event.stopPropagation()" aria-label="Fermer">&times;</button>
+  
+  <!-- Contrôles de zoom -->
+  <div class="zoom-controls" (click)="$event.stopPropagation()">
+    <button class="zoom-btn" (click)="zoomIn()" aria-label="Zoomer">+</button>
+    <button class="zoom-btn" (click)="zoomOut()" aria-label="Dézoomer">−</button>
+    <button class="zoom-btn" (click)="resetZoom()" aria-label="Taille normale">⌂</button>
+  </div>
+  
+  <div class="lightbox-content">
+    <div class="loading-spinner" *ngIf="isLoading">
+      <div class="spinner"></div>
+      <p>Chargement de l'image...</p>
+    </div>
+    <img [src]="imageUrl" 
+         alt="Photo en grand format" 
+         (click)="toggleZoom()"
+         (load)="onImageLoad()"
+         (error)="onImageError()"
+         [class.zoomed]="isZoomed"
+         [style.transform]="getTransform()"
+         [style.display]="isLoading ? 'none' : 'block'">
+  </div>
+</div>

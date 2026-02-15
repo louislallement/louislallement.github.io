@@ -1,0 +1,100 @@
+<div class="journalist-page">
+  <div class="page-header">
+    <h1>Journaliste</h1>
+    <p>En parallèle de mon activité de photographe, je suis également journaliste. Vous trouverez ici une sélection de mes articles et reportages.</p>
+  </div>
+
+  <div class="content-grid">
+    <!-- Colonne Instagram Reels -->
+    <div class="column instagram-column">
+      <div class="column-header">
+        <h2>📱 Reels Instagram</h2>
+        <p>Mes dernières créations vidéo</p>
+      </div>
+      
+      <div class="items-container" #instagramContainer>
+        <div class="reel-item" *ngFor="let reel of instagramReels$ | async; let i = index">
+          <div class="instagram-embed" [id]="'instagram-reel-' + i">
+            <!-- Le contenu Instagram sera injecté ici par JavaScript -->
+          </div>
+          <div class="reel-content">
+            <h3>{{ reel.title || 'Reel Instagram' }}</h3>
+            <p *ngIf="reel.description">{{ reel.description }}</p>
+            <div class="reel-meta">
+              <span class="date" *ngIf="reel.date">{{ reel.date | date:'dd/MM/yyyy' }}</span>
+              <span class="platform">Instagram</span>
+            </div>
+            <div class="reel-actions">
+              <button class="btn btn-primary" (click)="openInstagramReel(reel)">
+                Voir sur Instagram
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Colonne Articles de Presse -->
+    <div class="column news-column">
+      <div class="column-header">
+        <h2>📰 Articles de Presse</h2>
+        <p>Mes publications journalistiques</p>
+      </div>
+      
+      <div class="items-container">
+        <div class="article-item" *ngFor="let article of newsArticles$ | async">
+          <!-- Prévisualisation riche avec métadonnées Open Graph -->
+          <div class="article-preview" *ngIf="article.metadata">
+            <div class="preview-image" *ngIf="article.metadata.image">
+              <img [src]="article.metadata.image" 
+                   [alt]="article.metadata.title || article.title"
+                   (error)="$event.target.src='assets/images/article-placeholder.svg'">
+            </div>
+            <div class="preview-content">
+              <div class="preview-header">
+                <span class="preview-source">{{ article.metadata.siteName || article.source }}</span>
+                <span class="preview-date" *ngIf="article.metadata.publishedTime">
+                  {{ article.metadata.publishedTime | date:'dd/MM/yyyy' }}
+                </span>
+              </div>
+              <h3 class="preview-title">{{ article.metadata.title || article.title }}</h3>
+              <p class="preview-description" *ngIf="article.metadata.description">
+                {{ article.metadata.description }}
+              </p>
+              <div class="preview-author" *ngIf="article.metadata.author">
+                <span class="author-label">Par :</span>
+                <span class="author-name">{{ article.metadata.author }}</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Fallback si pas de métadonnées -->
+          <div class="article-fallback" *ngIf="!article.metadata">
+            <div class="article-thumbnail">
+              <img [src]="article.thumbnail" [alt]="article.title" 
+                   (error)="$event.target.src='assets/images/article-placeholder.svg'">
+            </div>
+            <div class="article-content">
+              <h3>{{ article.title }}</h3>
+              <p *ngIf="article.description">{{ article.description }}</p>
+              <div class="article-meta">
+                <span class="source">{{ article.source }}</span>
+                <span class="date" *ngIf="article.date">{{ article.date | date:'dd/MM/yyyy' }}</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Actions -->
+          <div class="article-actions">
+            <button class="btn btn-primary" (click)="openNewsArticle(article)">
+              Lire l'article
+            </button>
+            <button class="btn btn-secondary" (click)="openPreview(article)">
+              Prévisualisation
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

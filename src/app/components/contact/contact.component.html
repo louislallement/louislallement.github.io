@@ -1,0 +1,76 @@
+<div class="page-container">
+  <section class="text-content">
+    <h1>Contact</h1>
+    <p class="intro-text">
+      Pour toute demande d'information, pour discuter de votre projet de mariage ou simplement pour me dire bonjour, n'hésitez pas à utiliser le formulaire ci-dessous. Je vous répondrai dans les plus brefs délais.
+    </p>
+  </section>
+
+  <section id="contact">
+    <form (ngSubmit)="onSubmit()" #contactFormRef="ngForm">
+      <!-- Messages de validation -->
+      <div class="validation-errors" *ngIf="validationErrors.length > 0">
+        <ul>
+          <li *ngFor="let error of validationErrors">{{ error }}</li>
+        </ul>
+      </div>
+
+      <!-- Message de succès/erreur -->
+      <div class="submit-message" 
+           [class.success]="submitSuccess" 
+           [class.error]="!submitSuccess && submitMessage"
+           *ngIf="submitMessage">
+        {{ submitMessage }}
+      </div>
+
+      <!-- Champ Nom -->
+      <div class="form-group">
+        <input 
+          type="text" 
+          name="name"
+          [(ngModel)]="contactForm.name"
+          (input)="onInputChange()"
+          placeholder="Votre nom" 
+          required 
+          [disabled]="isSubmitting"
+          class="form-input">
+      </div>
+
+      <!-- Champ Email -->
+      <div class="form-group">
+        <input 
+          type="email" 
+          name="email"
+          [(ngModel)]="contactForm.email"
+          (input)="onInputChange()"
+          placeholder="Votre email" 
+          required 
+          [disabled]="isSubmitting"
+          class="form-input">
+      </div>
+
+      <!-- Champ Message -->
+      <div class="form-group">
+        <textarea 
+          name="message"
+          [(ngModel)]="contactForm.message"
+          (input)="onInputChange()"
+          placeholder="Votre message" 
+          rows="6" 
+          required 
+          [disabled]="isSubmitting"
+          class="form-textarea"></textarea>
+      </div>
+
+      <!-- Bouton d'envoi -->
+      <button 
+        type="submit" 
+        [disabled]="isSubmitting"
+        class="submit-btn"
+        [class.loading]="isSubmitting">
+        <span *ngIf="!isSubmitting">Envoyer le message</span>
+        <span *ngIf="isSubmitting">Envoi en cours...</span>
+      </button>
+    </form>
+  </section>
+</div>

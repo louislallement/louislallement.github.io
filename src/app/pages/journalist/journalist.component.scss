@@ -1,0 +1,441 @@
+.journalist-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  
+  h1 {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: var(--texte-principal);
+    margin-bottom: 1rem;
+  }
+  
+  p {
+    font-size: 1.1rem;
+    color: var(--texte-secondaire);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.column {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.column-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  
+  h2 {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: var(--texte-principal);
+    margin-bottom: 0.5rem;
+  }
+  
+  p {
+    color: var(--texte-secondaire);
+    font-size: 0.9rem;
+  }
+}
+
+.items-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+// Styles pour les Reels Instagram
+.reel-item {
+  background: white;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.instagram-embed {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: #f8f9fa;
+  padding: 1rem;
+  min-height: 400px;
+  
+  // Styles pour les iframes Instagram
+  iframe {
+    border-radius: 8px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+  }
+  
+  // Fallback si l'iframe ne se charge pas
+  &:empty::after {
+    content: "Chargement de la vidéo Instagram...";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-style: italic;
+    height: 200px;
+  }
+}
+
+.reel-content {
+  padding: 1rem;
+  
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--texte-principal);
+    margin-bottom: 0.5rem;
+  }
+  
+  p {
+    color: var(--texte-secondaire);
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .reel-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: var(--texte-secondaire);
+    margin-bottom: 1rem;
+    
+    .platform {
+      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+      color: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 12px;
+      font-weight: 500;
+    }
+  }
+  
+  .reel-actions {
+    display: flex;
+    gap: 0.75rem;
+    
+    .btn {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      
+      &.btn-primary {
+        background: #000;
+        color: white;
+        border: 1px solid #000;
+        
+        &:hover {
+          background: #333;
+          border-color: #333;
+          transform: translateY(-1px);
+        }
+      }
+    }
+  }
+}
+
+// Styles pour les Articles de Presse avec prévisualisations Open Graph
+.article-item {
+  background: white;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  }
+}
+
+// Prévisualisation riche avec métadonnées Open Graph
+.article-preview {
+  display: flex;
+  flex-direction: column;
+  
+  .preview-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    
+    &:hover img {
+      transform: scale(1.05);
+    }
+  }
+  
+  .preview-content {
+    padding: 1.5rem;
+    
+    // Si pas d'image, ajuster le padding du haut
+    &:first-child {
+      padding-top: 1.5rem;
+    }
+    
+    .preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      font-size: 0.8rem;
+      
+      .preview-source {
+        background: #e3f2fd;
+        color: #1976d2;
+        padding: 0.25rem 0.75rem;
+        border-radius: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      
+      .preview-date {
+        color: var(--texte-secondaire);
+        font-weight: 500;
+      }
+    }
+    
+    .preview-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--texte-principal);
+      margin-bottom: 0.75rem;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    .preview-description {
+      color: var(--texte-secondaire);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    .preview-author {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      
+      .author-label {
+        color: var(--texte-secondaire);
+        font-weight: 500;
+      }
+      
+      .author-name {
+        color: var(--texte-principal);
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+// Fallback pour les articles sans métadonnées
+.article-fallback {
+  display: flex;
+  flex-direction: column;
+  
+  .article-thumbnail {
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  
+  .article-content {
+    padding: 1.5rem;
+    
+    h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--texte-principal);
+      margin-bottom: 0.75rem;
+      line-height: 1.4;
+    }
+    
+    p {
+      color: var(--texte-secondaire);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+    
+    .article-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      font-size: 0.8rem;
+      color: var(--texte-secondaire);
+      
+      .source {
+        font-weight: 600;
+        color: var(--texte-principal);
+      }
+    }
+  }
+}
+
+// Actions communes pour tous les articles
+.article-actions {
+  padding: 0 1.5rem 1.5rem;
+  display: flex;
+  gap: 0.75rem;
+  
+  .btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    
+    &.btn-primary {
+      background: #000;
+      color: white;
+      border: 1px solid #000;
+      
+      &:hover {
+        background: #333;
+        border-color: #333;
+        transform: translateY(-1px);
+      }
+    }
+    
+    &.btn-secondary {
+      background: transparent;
+      color: #000;
+      border: 1px solid #000;
+      
+      &:hover {
+        background: #000;
+        color: white;
+        transform: translateY(-1px);
+      }
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 1024px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .journalist-page {
+    padding: 1rem;
+  }
+  
+  .instagram-embed {
+    min-height: 350px;
+    
+    iframe {
+      width: 280px;
+      height: 497px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .page-header h1 {
+    font-size: 2rem;
+  }
+  
+  .column {
+    padding: 1.5rem;
+  }
+  
+  .instagram-embed {
+    min-height: 300px;
+    
+    iframe {
+      width: 250px;
+      height: 444px;
+    }
+  }
+  
+  .article-actions {
+    flex-direction: column;
+    
+    .btn {
+      width: 100%;
+      text-align: center;
+    }
+  }
+  
+  .reel-actions {
+    flex-direction: column;
+    
+    .btn {
+      width: 100%;
+      text-align: center;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .instagram-embed {
+    min-height: 250px;
+    padding: 0.5rem;
+    
+    iframe {
+      width: 200px;
+      height: 355px;
+    }
+  }
+}

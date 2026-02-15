@@ -1,0 +1,32 @@
+.page-container {
+  max-width: 900px;
+  margin: 4rem auto;
+  padding: 0 2rem;
+}
+
+.text-content h1 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.content-body {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+
+  .profile-picture {
+    flex: 0 0 250px;
+    width: 250px;
+    height: auto;
+    border-radius: var(--border-radius);
+  }
+
+  p {
+    line-height: 1.8;
+    font-size: 1rem;
+    color: var(--texte-secondaire);
+  }
+}

@@ -1,0 +1,27 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+footer {
+  text-align: center;
+  padding: 2rem 1rem 1.5rem;
+  margin-top: 4rem;
+  border-top: 1px solid rgba(136, 136, 136, 0.5);
+  color: var(--text-color);
+}
+
+.socials {
+  margin-bottom: 0.7rem;
+}
+
+.socials a img {
+  width: 32px;
+  height: 32px;
+  filter: var(--icon-filter, none);
+  transition: filter 0.3s;
+}
+
+.socials a:hover img {
+  filter: var(--icon-filter-hover, drop-shadow(0 0 6px var(--color-link)));
+}

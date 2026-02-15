@@ -1,0 +1,128 @@
+.secondary-nav {
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 0.75rem 2rem;
+  position: sticky;
+  // Se colle sous le header principal qui a un z-index de 1000
+  top: 81px; /* Hauteur approximative du header principal */
+  z-index: 999;
+  transition: background-color 0.3s ease;
+}
+
+.secondary-nav-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.filter-btn {
+  font-family: var(--font-sans-serif);
+  font-weight: 400; /* Regular */
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.8rem;
+  color: var(--texte-secondaire);
+  text-decoration: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--border-radius);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  color: var(--texte-principal);
+  background-color: var(--beige-sable);
+}
+
+#portfolio-photo {
+  padding-top: 0; /* On retire le padding du haut qui est maintenant géré par le margin de la nav secondaire */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.masonry-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+  align-items: start;
+}
+
+.photo-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  break-inside: avoid;
+  margin-bottom: 1.5rem;
+}
+
+.photo-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.photo-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  border-radius: var(--border-radius);
+}
+
+.photo-item:hover img {
+  transform: scale(1.05);
+}
+
+.image-error {
+  background-color: #f5f5f5;
+  border: 2px dashed #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .masonry-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .masonry-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  #portfolio-photo {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .masonry-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  .secondary-nav-container {
+    gap: 1rem;
+  }
+  
+  .filter-btn {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.6rem;
+  }
+}

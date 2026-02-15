@@ -1,0 +1,41 @@
+# Nom du workflow qui apparaîtra dans l'onglet "Actions" de GitHub
+name: Build and Deploy to GitHub Pages
+
+on:
+  # Déclenche le workflow à chaque push sur la branche 'refactoCode'
+  push:
+    branches:
+      - refactoCode
+
+jobs:
+  build-and-deploy:
+    # Utilise la dernière version d'Ubuntu pour exécuter le job
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Récupère le code de votre dépôt
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # 2. Installe Node.js (spécifiez la version que vous utilisez)
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      # 3. Installe les dépendances du projet
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Construit (compile) l'application Angular pour la production
+      # Le base-href doit correspondre au nom de votre dépôt GitHub
+      - name: Build
+        run: ng build --configuration production --base-href /louislallement.github.io/
+
+      # 5. Déploie les fichiers compilés (du dossier dist/) vers la branche 'gh-pages'
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist/louislallement-github-io/browser # Le chemin de build pour les nouvelles versions d'Angular

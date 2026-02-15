@@ -1,0 +1,67 @@
+.site-header {
+  background-color: var(--fond-principal);
+  border-bottom: 1px solid var(--beige-sable);
+  padding: 1.2rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  transition: background-color 0.3s ease;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: background-color 0.3s ease;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.brand-name {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 400; /* Regular */
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--texte-principal);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.brand-name:hover {
+  color: var(--texte-secondaire);
+}
+
+.main-nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.main-nav a {
+  font-family: var(--font-sans-serif);
+  font-weight: 400; /* Regular */
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.85rem;
+  color: var(--texte-secondaire);
+  text-decoration: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--border-radius);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+  color: var(--texte-principal);
+  background-color: var(--beige-sable); /* Le fond gris/beige au survol */
+}

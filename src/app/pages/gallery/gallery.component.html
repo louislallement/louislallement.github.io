@@ -1,0 +1,21 @@
+<nav class="secondary-nav">
+  <div class="secondary-nav-container">
+    <a class="filter-btn" routerLink="/gallery" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Tous</a>
+    <a class="filter-btn" routerLink="/gallery/mariage" routerLinkActive="active">Mariage</a>
+    <a class="filter-btn" routerLink="/gallery/portrait" routerLinkActive="active">Portrait</a>
+    <a class="filter-btn" routerLink="/gallery/paysage" routerLinkActive="active">Paysage</a>
+  </div>
+</nav>
+
+<section id="portfolio-photo">
+  <!-- La galerie est générée dynamiquement -->
+  <div class="masonry-grid">
+    <div class="photo-item" *ngFor="let photo of photos$ | async">
+      <img [src]="photo.src" [alt]="photo.alt" (click)="openLightbox(photo)" 
+           (error)="onImageError($event)" (load)="onImageLoad($event)" />
+    </div>
+  </div>
+</section>
+
+<!-- La lightbox s'affichera ici si une photo est sélectionnée -->
+<app-lightbox *ngIf="selectedPhotoUrl" [imageUrl]="selectedPhotoUrl" [fallbackUrl]="selectedPhoto?.src || null" (close)="closeLightbox()"></app-lightbox>
