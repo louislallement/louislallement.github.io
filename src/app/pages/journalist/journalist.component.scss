@@ -455,6 +455,58 @@
   }
 }
 
+// --- Skeleton loading ---
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton-card {
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  :host-context(body.dark) & {
+    background: rgba(30, 40, 58, 0.9);
+  }
+}
+
+.skeleton-media,
+.skeleton-line {
+  background: linear-gradient(90deg, #e8ecf1 25%, #f0f3f7 50%, #e8ecf1 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+
+  :host-context(body.dark) & {
+    background: linear-gradient(90deg, #1a2535 25%, #223044 50%, #1a2535 75%);
+    background-size: 200% 100%;
+  }
+}
+
+.skeleton-media {
+  height: 300px;
+
+  &.short { height: 200px; }
+}
+
+.skeleton-body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.skeleton-line {
+  height: 1rem;
+  border-radius: 4px;
+
+  &.wide { width: 80%; }
+  &.medium { width: 60%; }
+  &.narrow { width: 40%; }
+}
+
 // --- Responsive ---
 
 @media (max-width: 1024px) {

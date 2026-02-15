@@ -13,6 +13,17 @@
       </div>
 
       <div class="items-container">
+        @if (instagramReels().length === 0) {
+          @for (i of [1, 2]; track i) {
+            <div class="skeleton-card">
+              <div class="skeleton-media"></div>
+              <div class="skeleton-body">
+                <div class="skeleton-line wide"></div>
+                <div class="skeleton-line medium"></div>
+              </div>
+            </div>
+          }
+        }
         @for (reel of instagramReels(); track reel.id) {
           <div class="reel-item">
             <div class="instagram-embed">
@@ -71,6 +82,18 @@
       </div>
 
       <div class="items-container">
+        @if (newsArticles().length === 0) {
+          @for (i of [1, 2, 3]; track i) {
+            <div class="skeleton-card">
+              <div class="skeleton-media short"></div>
+              <div class="skeleton-body">
+                <div class="skeleton-line wide"></div>
+                <div class="skeleton-line medium"></div>
+                <div class="skeleton-line narrow"></div>
+              </div>
+            </div>
+          }
+        }
         @for (article of newsArticles(); track article.id) {
           <div class="article-item">
             @if (article.metadata) {

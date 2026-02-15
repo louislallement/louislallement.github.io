@@ -37,5 +37,10 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./components/contact/contact.component').then((m) => m.ContactComponent),
   },
-  { path: '**', redirectTo: '', pathMatch: 'full' },
+  {
+    path: '**',
+    title: 'Page introuvable | Louis Lallement',
+    loadComponent: () =>
+      import('./pages/not-found/not-found.component').then((m) => m.NotFoundComponent),
+  },
 ];

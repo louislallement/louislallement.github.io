@@ -46,24 +46,6 @@ body.dark {
   color: var(--color-text-dark);
 }
 
-/* Skip to content (accessibility) */
-
-.skip-link {
-  position: absolute;
-  top: -100%;
-  left: 0;
-  z-index: 10000;
-  padding: 0.75rem 1.5rem;
-  background: var(--color-link);
-  color: white;
-  text-decoration: none;
-  font-weight: 600;
-
-  &:focus {
-    top: 0;
-  }
-}
-
 h1 {
   font-size: 4rem;
   font-weight: 900;
@@ -210,6 +192,26 @@ footer .socials a img {
 
 footer .socials a:hover img {
   filter: drop-shadow(0 0 6px var(--color-link));
+}
+
+/* View Transitions */
+
+::view-transition-old(root) {
+  animation: fade-out 0.2s ease-in;
+}
+
+::view-transition-new(root) {
+  animation: fade-in 0.3s ease-out;
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* Fade-in animations */
