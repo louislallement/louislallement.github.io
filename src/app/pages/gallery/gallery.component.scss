@@ -1,13 +1,13 @@
 .secondary-nav {
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: rgba(var(--color-surface-light), 0.95);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   padding: 0.75rem 2rem;
   position: sticky;
-  top: 81px;
+  top: var(--header-height, 60px);
   z-index: 999;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  transition: background-color 0.3s ease, border-color 0.3s ease, top 0.3s ease;
 
   :host-context(body.dark) & {
     background-color: rgba(18, 27, 40, 0.95);
@@ -86,9 +86,9 @@
     inset: 0;
     background: linear-gradient(
       90deg,
-      #e8ecf1 25%,
-      #f0f3f7 50%,
-      #e8ecf1 75%
+      #ebe5db 25%,
+      #f2ece3 50%,
+      #ebe5db 75%
     );
     background-size: 200% 100%;
     animation: shimmer 1.5s ease-in-out infinite;
@@ -255,7 +255,7 @@ img.full {
 .skeleton-item {
   aspect-ratio: 3 / 2;
   border-radius: var(--border-radius);
-  background: linear-gradient(90deg, #e8ecf1 25%, #f0f3f7 50%, #e8ecf1 75%);
+  background: linear-gradient(90deg, #ebe5db 25%, #f2ece3 50%, #ebe5db 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s ease-in-out infinite;
   break-inside: avoid;

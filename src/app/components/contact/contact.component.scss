@@ -31,7 +31,7 @@
 
 // Styles du formulaire
 #contact {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(var(--color-surface-light), 0.8);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: var(--border-radius);

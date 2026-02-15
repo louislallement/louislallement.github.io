@@ -1,9 +1,10 @@
 :root {
-  --color-bg-light: #f7f9fb;
+  --color-bg-light: #f5f0e8;
   --color-bg-dark: #121b28;
+  --color-surface-light: 245, 240, 232;
   --color-text-light: #222;
   --color-text-dark: #ddd;
-  --color-tile-bg-light: rgba(255 255 255 / 0.9);
+  --color-tile-bg-light: rgba(var(--color-surface-light) / 0.9);
   --color-tile-bg-dark: rgba(24 32 48 / 0.85);
   --color-link: #1768ac;
   --color-link-hover: #0e4a71;
@@ -33,7 +34,7 @@ body.dark {
 body {
   margin: 0;
   font-family: var(--font-family);
-  background: #ffffff;
+  background: var(--color-bg-light);
   color: var(--color-text-light);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
@@ -292,7 +293,7 @@ footer .socials a:hover img {
 /* Print styles */
 @media print {
   body {
-    background: white !important;
+    background: #f5f0e8 !important;
     color: black !important;
     font-size: 12pt;
   }
