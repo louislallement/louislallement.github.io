@@ -2,6 +2,7 @@
   max-width: 1400px;
   margin: 0 auto;
   padding: 2rem;
+  overflow-x: hidden;
 }
 
 .page-header {
@@ -40,6 +41,7 @@
   border-radius: var(--border-radius);
   padding: 2rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 
   :host-context(body.dark) & {
     background: rgba(24, 32, 48, 0.85);
@@ -182,6 +184,9 @@
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     max-width: 100%;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 320 / 568;
     margin: 0 auto;
   }
 }
@@ -563,7 +568,7 @@
   .instagram-embed,
   .reel-poster { min-height: 280px; }
 
-  .instagram-embed iframe { width: 100%; max-width: 300px; height: 480px; }
+  .instagram-embed iframe { width: 100%; max-width: 100%; }
 
   .article-actions,
   .reel-actions {
@@ -587,7 +592,7 @@
   .instagram-embed,
   .reel-poster { min-height: 220px; }
 
-  .instagram-embed iframe { max-width: 250px; height: 400px; }
+  .instagram-embed iframe { max-width: 100%; }
 
   .play-button {
     width: 56px;
