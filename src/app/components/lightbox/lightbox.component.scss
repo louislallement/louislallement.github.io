@@ -3,7 +3,7 @@
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   z-index: 2000;
   display: flex;
   justify-content: center;
@@ -235,37 +235,27 @@
 
 // Responsive
 @media (max-width: 768px) {
-  .nav-btn {
-    width: 40px;
-    height: 40px;
-
-    svg {
-      width: 24px;
-      height: 24px;
-    }
-  }
-
-  .nav-prev {
-    left: 8px;
-  }
-
-  .nav-next {
-    right: 8px;
-  }
-
-  .lightbox-content img {
-    max-width: 95vw;
-    max-height: 85vh;
+  .close-btn {
+    top: 12px;
+    right: 12px;
+    font-size: 2.5rem;
+    min-width: 44px;
+    min-height: 44px;
   }
 
   .zoom-controls {
-    gap: 4px;
+    top: 12px;
+    left: 12px;
+    gap: 3px;
     padding: 3px;
+    max-width: calc(100vw - 80px);
+    overflow-x: auto;
   }
 
   .zoom-btn {
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
     font-size: 0.85rem;
 
     svg {
@@ -276,5 +266,57 @@
 
   .controls-separator {
     height: 20px;
+  }
+
+  .nav-btn {
+    width: 44px;
+    height: 44px;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .nav-prev {
+    left: 4px;
+  }
+
+  .nav-next {
+    right: 4px;
+  }
+
+  .lightbox-content img {
+    max-width: 96vw;
+    max-height: 80dvh;
+    border-radius: 4px;
+  }
+
+  .photo-counter {
+    bottom: 16px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .zoom-controls {
+    // Hide zoom on very small screens - use pinch gesture
+    display: none;
+  }
+
+  .nav-btn {
+    width: 40px;
+    height: 40px;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .lightbox-content img {
+    max-width: 100vw;
+    max-height: 80dvh;
+    border-radius: 0;
   }
 }

@@ -15,6 +15,14 @@ footer {
   margin-bottom: 0.7rem;
 }
 
+.socials a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+}
+
 .socials a img {
   width: 32px;
   height: 32px;
@@ -44,4 +52,16 @@ footer {
   font-size: 0.75rem;
   color: #999;
   letter-spacing: 0.02em;
+}
+
+@media (max-width: 768px) {
+  footer {
+    margin-top: 2rem;
+    padding: 1.5rem 1rem 1rem;
+  }
+
+  .socials a img {
+    width: 28px;
+    height: 28px;
+  }
 }

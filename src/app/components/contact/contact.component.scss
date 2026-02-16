@@ -253,11 +253,16 @@ form {
 // Responsive
 @media (max-width: 768px) {
   .page-container {
-    padding: 0 1rem;
+    margin: 2rem auto;
+    padding: 0 1.25rem;
   }
 
   .text-content h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
+  }
+
+  .intro-text {
+    margin-bottom: 2rem;
   }
 
   #contact {
@@ -266,5 +271,27 @@ form {
 
   .submit-btn {
     align-self: stretch;
+    min-height: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-container {
+    margin: 1.5rem auto;
+    padding: 0 1rem;
+  }
+
+  .text-content h1 {
+    font-size: 1.8rem;
+  }
+
+  #contact {
+    padding: 1.25rem;
+    border-radius: 1rem;
+  }
+
+  .form-input,
+  .form-textarea {
+    font-size: 16px; // prevents iOS zoom on focus
   }
 }

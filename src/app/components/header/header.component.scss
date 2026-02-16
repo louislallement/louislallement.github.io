@@ -160,23 +160,37 @@
 // --- Mobile ---
 
 @media (max-width: 768px) {
+  .site-header {
+    padding: 0.8rem 1rem;
+
+    &.scrolled {
+      padding: 0.5rem 1rem;
+    }
+  }
+
   .menu-toggle {
     display: flex;
+    padding: 0.6rem;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
   }
 
   .main-nav {
     position: fixed;
     top: 0;
-    right: -280px;
-    width: 280px;
-    height: 100vh;
+    right: -75vw;
+    width: 75vw;
+    max-width: 280px;
+    height: 100dvh;
     background: rgba(var(--color-surface-light), 0.98);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     transition: right 0.3s ease;
-    padding: 5rem 2rem 2rem;
+    padding: 4rem 1.5rem 2rem;
 
     :host-context(body.dark) & {
       background: rgba(18, 27, 40, 0.98);
@@ -189,13 +203,14 @@
 
     ul {
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 0.25rem;
     }
 
     a {
       display: block;
       font-size: 1rem;
-      padding: 0.75rem 1rem;
+      padding: 0.85rem 1rem;
+      min-height: 44px;
     }
   }
 
@@ -209,11 +224,19 @@
   }
 
   .brand-name {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 
   .scrolled .brand-name {
-    font-size: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .theme-toggle {
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
