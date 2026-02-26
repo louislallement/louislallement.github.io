@@ -37,9 +37,14 @@ body {
   background: var(--color-bg-light);
   color: var(--color-text-light);
   min-height: 100vh;
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background 0.4s ease, color 0.4s ease;
+
+  &.menu-open {
+    overflow: hidden;
+  }
 }
 
 body.dark {

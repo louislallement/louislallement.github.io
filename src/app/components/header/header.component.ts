@@ -1,4 +1,4 @@
-import { afterNextRender, ChangeDetectionStrategy, Component, ElementRef, inject, signal } from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, Component, effect, ElementRef, inject, Renderer2, signal } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter } from 'rxjs';
@@ -15,6 +15,7 @@ export class HeaderComponent {
   themeService = inject(ThemeService);
   private router = inject(Router);
   private el = inject(ElementRef);
+  private renderer = inject(Renderer2);
 
   menuOpen = signal(false);
   scrolled = signal(false);
@@ -26,6 +27,14 @@ export class HeaderComponent {
         takeUntilDestroyed(),
       )
       .subscribe(() => this.menuOpen.set(false));
+
+    effect(() => {
+      if (this.menuOpen()) {
+        this.renderer.addClass(document.body, 'menu-open');
+      } else {
+        this.renderer.removeClass(document.body, 'menu-open');
+      }
+    });
 
     afterNextRender(() => {
       const updateHeaderHeight = () => {
